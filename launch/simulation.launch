@@ -41,10 +41,29 @@
   <group if="$(arg gui)">
     <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen"/>
   </group>
-  
+
+  <!-- Spawn Human Models -->
    <param name="human_description1" textfile="$(find exp_final)/urdf/human.urdf" />
       
   <node name="urdf_spawner_human1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
         args="-urdf -model human1 -param human_description1 -x -6 -y 8.5 -z 0.34 -R 0 -P 0 -Y -0.75"/>
+  
+  <!-- Spawn Robot Model --> 
+  <arg name="ns1" value="robot"/>
+  <param name="$(arg ns1)/robot_description" 
+	 command="$(find xacro)/xacro --inorder $(find exp_final)/urdf/robot.xacro" />
 
+   <group ns="$(arg ns1)">
+  	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	  args="-urdf -model $(arg ns1) -param robot_description -x -5 -y 7 -z 0.05 -Y 3.14 "/>
+    
+    <!-- Spawn the Head controller -->
+    <rosparam file="$(find exp_final)/config/head_config.yaml" command="load" ns="/robot" />
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="--namespace=/robot
+        joint_state_controller
+        joint_head_controller
+        --shutdown-timeout 3">
+    </node>
+   </group>
+  
 </launch>
