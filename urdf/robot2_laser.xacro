@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot2_laser_xacro">
-<!-- <xacro:include filename="$(find robot_description)/urdf/robot2_laser.gazebo"/> --> 
-<xacro:include filename="$(find planning)/urdf/robot2_laser.gazebo"/>
+<xacro:include filename="$(find exp_final)/urdf/robot2_laser.gazebo"/>
 					
-	<xacro:property name="length_wheel" value="0.02" />
-	<xacro:property name="radius_wheel" value="0.05" />
+	<xacro:property name="length_wheel" value="0.04" />
+	<xacro:property name="radius_wheel" value="0.1" />
 
 	<xacro:macro name="default_inertial" params="mass">
                <inertial>
@@ -57,27 +56,27 @@
     <!-- body -->
     <collision name="collision_chassis">
       <geometry>
-        <box size="0.25 0.15 0.035"/>
+        <box size="0.5 0.3 0.07"/>
       </geometry>
     </collision>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.25 0.15 0.035"/>
+        <box size="0.5 0.3 0.07"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <!-- caster front -->
     <collision name="caster_front_collision">
-      <origin rpy=" 0 0 0" xyz="0.175 0 -0.025"/>
+      <origin rpy=" 0 0 0" xyz="0.35 0 -0.05"/>
       <geometry>
-        <sphere radius="0.025"/>
+        <sphere radius="0.05"/>
       </geometry>
     </collision>
     <visual name="caster_front_visual">
-      <origin rpy=" 0 0 0" xyz="0.1 0 -0.025"/>
+      <origin rpy=" 0 0 0" xyz="0.2 0 -0.05"/>
       <geometry>
-        <sphere radius="0.025"/>
+        <sphere radius="0.05"/>
       </geometry>
     </visual>
   </link>
@@ -108,9 +107,8 @@
     </visual>
   </link>
 
-
   <joint name="joint_right_wheel" type="continuous">
-    <origin rpy="0 0 0" xyz="-0.025 0.075 0"/>
+    <origin rpy="0 0 0" xyz="-0.05 0.15 0"/>
     <child link="link_right_wheel"/>
     <parent link="link_chassis"/>
     <axis rpy="0 0 0" xyz="0 1 0"/>
@@ -118,27 +116,72 @@
     <joint_properties damping="1.0" friction="1.0"/>
   </joint>
   
-  
   <joint name="joint_left_wheel" type="continuous">
-    <origin rpy="0 0 0" xyz="-0.025 -0.075 0"/>
+    <origin rpy="0 0 0" xyz="-0.05 -0.15 0"/>
     <child link="link_left_wheel"/>
     <parent link="link_chassis"/>
     <axis rpy="0 0 0" xyz="0 1 0"/>
     <limit effort="10000" velocity="1000"/>
     <joint_properties damping="1.0" friction="1.0"/>
   </joint>
-  
+
+<!-- ########################## Roteating Neck ########################## -->
+<link name="neck_link">
+  <!-- pose and inertial -->
+  <inertial>
+    <mass value="1e-5" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+  </inertial>
+  <!-- body -->
+  <collision name="collision_neck">
+    <geometry>
+      <cylinder length="0.015" radius="0.1"/>
+    </geometry>
+  </collision>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <cylinder length="0.015" radius="0.1"/>
+    </geometry>
+    <material name="white"/>
+  </visual>
+  </link>
+
+  <!-- Joint Neck -->
+  <joint name="neck_joint" type="revolute">
+    <axis xyz="0 0 1" />
+    <origin xyz="0.175 0 0.0425" rpy="0 0 0"/>
+    <parent link="link_chassis"/>
+    <child link="neck_link"/>
+    <limit lower="-0.785" upper="0.785" effort="10" velocity="3" />
+  </joint>
+
+<!-- Set trasmission for the neck -->
+
+<transmission name="neck_joint_trans">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="neck_joint">
+		<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="motor1">
+		<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+		<mechanicalInterface>1</mechanicalInterface>
+	</actuator>
+</transmission>
+
+  <!-- ########################## Sensors ##########################-->
   <link name="hokuyo_link">
 	    <collision>
-	      <origin xyz="0 0 0.00125" rpy="0 0 0"/>
+	      <origin xyz="0 0 0" rpy="0 0 0"/>
 	      <geometry>
-		<box size="0.025 0.025 0.025"/>
+		<box size="0.05 0.05 0.05"/>
 	      </geometry>
 	    </collision>
 	    <visual>
-	      <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+	      <origin xyz="0 0 0" rpy="0 0 0"/>
 	      <geometry>
-		<box size="0.025 0.025 0.025"/>
+		<box size="0.05 0.05 0.05"/>
 	      </geometry>
 	      <material name="red">
 		<color rgba="1 0 0 1"/>
@@ -153,11 +196,39 @@
   
   <joint name="hokuyo_joint" type="fixed">
 	    <axis xyz="0 1 0" />
-	    <origin xyz="0.14 0 0.025" rpy="0 0 0"/>
+	    <origin xyz="0.26 0 0" rpy="0 0 0"/>
 	    <parent link="link_chassis"/>
 	    <child link="hokuyo_link"/> 
 	 </joint>
+<!-- Camera -->
+<link name="camera_link">
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+<box size="0.1 0.1 0.1"/>
+    </geometry>
+  </collision>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+<box size="0.1 0.1 0.1"/>
+    </geometry>
+    <material name="red">
+<color rgba="1 0 0 1"/>
+    </material>
+  </visual>
+  <inertial>
+    <mass value="1e-5" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+  </inertial> 
+</link>
 
-
+<joint name="camera_joint" type="fixed">
+  <axis xyz="0 1 0" />
+  <origin xyz="0.175 0 0.1" rpy="0 0 0"/>
+  <parent link="link_chassis"/>
+  <child link="camera_link"/> 
+</joint>
 
 </robot>

@@ -52,7 +52,7 @@
   <arg name="model" default="$(find exp_final)/urdf/robot2_laser.xacro" />
 
   <!-- Load the URDF into the ROS Parameter Server-->
-  <param name="robot_description" textfile="$(find exp_final)/urdf/robot2_laser.urdf"/>
+  <param name="robot_description"  command="$(find xacro)/xacro  --inorder $(arg model)" />
 
   <!-- Start Rviz -->  
   <param name="use_gui" value="False"/>
@@ -62,6 +62,6 @@
 
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-	args="-urdf -model robot1 -param robot_description -x 2.5 -y 2.75 -z 0.05 -Y -1.57"/> 
+	args="-urdf -model robot1 -param robot_description -x -5.0 -y 8 -z 0.05 -Y -1.57"/> 
   
 </launch>
