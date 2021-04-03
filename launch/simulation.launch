@@ -47,23 +47,21 @@
       
   <node name="urdf_spawner_human1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
         args="-urdf -model human1 -param human_description1 -x -6 -y 8.5 -z 0.34 -R 0 -P 0 -Y -0.75"/>
-  
-  <!-- Spawn Robot Model --> 
-  <arg name="ns1" value="robot"/>
-  <param name="$(arg ns1)/robot_description" 
-	 command="$(find xacro)/xacro --inorder $(find exp_final)/urdf/robot.xacro" />
 
-   <group ns="$(arg ns1)">
-  	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-	  args="-urdf -model $(arg ns1) -param robot_description -x -5 -y 7 -z 0.05 -Y 3.14 "/>
-    
-    <!-- Spawn the Head controller -->
-    <rosparam file="$(find exp_final)/config/head_config.yaml" command="load" ns="/robot" />
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="--namespace=/robot
-        joint_state_controller
-        joint_head_controller
-        --shutdown-timeout 3">
-    </node>
-   </group>
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="model" default="$(find exp_final)/urdf/robot2_laser.xacro" />
+
+  <!-- Load the URDF into the ROS Parameter Server-->
+  <param name="robot_description" textfile="$(find exp_final)/urdf/robot2_laser.urdf"/>
+
+  <!-- Start Rviz -->  
+  <param name="use_gui" value="False"/>
+   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exp_final)/config/sim2.rviz" />
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model robot1 -param robot_description -x 2.5 -y 2.75 -z 0.05 -Y -1.57"/> 
   
 </launch>
