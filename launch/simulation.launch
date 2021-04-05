@@ -64,4 +64,6 @@
    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
 	args="-urdf -model robot1 -param robot_description -x -5.0 -y 8 -z 0.05 -Y -1.57"/> 
   
+  <include file="$(find exp_final)/launch/gmapping.launch" pass_all_args="true"/>
+  
 </launch>
