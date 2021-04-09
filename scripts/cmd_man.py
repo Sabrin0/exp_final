@@ -30,17 +30,17 @@ import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from std_msgs.msg import String, Float64
 #from exp_final import *
-#from exp_assignment2.msg import BallState
+from exp_final.msg import BallState
 from geometry_msgs.msg import Twist, Point, Pose
 from nav_msgs.msg import Odometry
 
 ## Define home x position
 # @param x_home The fixed home coordinate x 
-x_home = 5
+#x_home = 5
 
 ## Define home y position 
 # @param x_home The fixed home coordinate x
-y_home = 8
+#y_home = 8
 
 ## Initial state of the ball status
 ## @param BallDetected, bool flag for the ball detection
@@ -48,6 +48,26 @@ BallDetected = False
 
 ## @parama BallCheck, bool flag for the ball check  
 BallCheck = False
+
+class targetPosition:
+
+    x_home = -5
+    y_home = 8
+    
+    randomPosition = [ 
+        [0, 0],
+        [2, 3],
+        [-2, -1]
+    ]
+
+    def randomPos(self):
+        P = random.randint(0, 2)
+        x_target = self.randomPosition[P][0]
+        y_target = self.randomPosition[P][1]
+
+        return x_target, y_target
+
+
 
 ## Action client for the action server dedicated to the movment
 #client = actionlib.SimpleActionClient('/robot/reaching_goal_robot', exp_assignment2.msg.PlanningAction)
@@ -125,8 +145,8 @@ class Normal(smach.State):
         """!@brief Initialization of the functioin        
         """
         smach.State.__init__(self, 
-                             #outcomes=['GoToNormal','GoToSleep','GoToPlay'])
-                             outcomes=['GoToNormal', 'GoToSleep'])
+                             outcomes=['GoToNormal','GoToSleep','GoToPlay'])
+                             #outcomes=['GoToNormal', 'GoToSleep'])
         self.rate = rospy.Rate(1) 
         self.counter = 0
     
@@ -143,14 +163,17 @@ class Normal(smach.State):
         self.counter = 1
         #goal = exp_assignment2.msg.PlanningGoal()
         goal = MoveBaseGoal()
+        GoTo = targetPosition()
+        
 
         while not rospy.is_shutdown():  
             rospy.loginfo('Executing state NORMAL')
-            
+            x_target, y_target = GoTo.randomPos()
+
             ## If the Ball is Detcted, go to PLAY
             # @return GoToPlay
-            #if (BallDetected == True) and (BallCheck == True):
-            #    return 'GoToPlay'
+            if (BallDetected == True) and (BallCheck == True):
+                return 'GoToPlay'
 
             ## After some NORMAL state iteration, go to SLEEP mode
             # @return GoToSleep
@@ -160,8 +183,8 @@ class Normal(smach.State):
             ## Setting the random goal position
             goal.target_pose.header.frame_id = "map"
             goal.target_pose.header.stamp = rospy.Time.now()
-            goal.target_pose.pose.position.x = -1
-            goal.target_pose.pose.position.y = 1
+            goal.target_pose.pose.position.x = x_target
+            goal.target_pose.pose.position.y = y_target
             goal.target_pose.pose.orientation.w = 1.0
             #goal.target_pose.pose.orientation.w = 1.0
             rospy.loginfo('i m going to x: %d y: %d',goal.target_pose.pose.position.x,goal.target_pose.pose.position.y)
@@ -198,25 +221,64 @@ class Sleep(smach.State):
         @return GoToNormal
         """
 
-        global x_home
-        global y_home
+        GoTo = targetPosition()
 
         rospy.loginfo(rospy.get_caller_id() + 'Executing state SLEEP ')
         ## Setting the goal home position
         goal = MoveBaseGoal()
         goal.target_pose.header.frame_id = "map"
         goal.target_pose.header.stamp = rospy.Time.now()
-        goal.target_pose.pose.position.x = x_home
-        goal.target_pose.pose.position.y = y_home
+        goal.target_pose.pose.position.x = GoTo.x_home
+        goal.target_pose.pose.position.y = GoTo.y_home
         goal.target_pose.pose.orientation.w = 1.0
         
-        rospy.loginfo(rospy.get_caller_id() + 'Back home x: %d y: %d',x_home,y_home)
+        rospy.loginfo(rospy.get_caller_id() + 'Back home x: %d y: %d',GoTo.x_home, GoTo.y_home)
         client.send_goal(goal)           
         client.wait_for_result()
         rospy.loginfo('i m arrived, now i will take a nap')
         time.sleep(3)
         self.rate.sleep()
         return 'GoToNormal'
+
+class Play(smach.State):
+    """!@brief Define Play state """
+
+    def __init__(self):
+        """!@brief Initialization of the functioin        
+        """
+        
+        smach.State.__init__(self, 
+                            outcomes=['GoToNormal','GoToPlay'])
+ 
+        self.rate = rospy.Rate(200)  # Loop at 50 Hz
+
+    def execute(self, userdata):
+        """!@brief Play state execution
+
+        It moves the robots to the ball while it's detected.
+        Once arrived next to the ball, the robort starts to check around.
+        """
+        rospy.loginfo("Executing state PLAY")
+
+        global currentRadius, BallDetected, BallCheck
+
+        ## While loop to remain in the state until some conditions are missed
+        while True:
+            
+            ## Start moving the head if the robot is near to the ball
+            # @param currentRadious float passsed
+            if (currentRadius > 90):
+                #rospy.loginfo('muovo la testa')
+                head_control()
+            
+            ## Back to state normal if the ball is missed
+            # @param BAllDetected bool 
+            if (BallDetected == False):
+                BallCheck = False
+                rospy.loginfo('WOOF! Ball missed :(')
+                return 'GoToNormal'
+
+            time.sleep(3) 
         
 
 def main():
@@ -236,11 +298,16 @@ def main():
         ## Add states to the container
         smach.StateMachine.add('NORMAL', Normal(), 
                                transitions={'GoToSleep':'SLEEP', 
-                                            'GoToNormal':'NORMAL'})
+                                            'GoToNormal':'NORMAL',
+                                            'GoToPlay':'PLAY'})
 
         smach.StateMachine.add('SLEEP', Sleep(), 
                                transitions={'GoToSleep':'SLEEP', 
                                             'GoToNormal':'NORMAL'})
+
+        smach.StateMachine.add('PLAY', Play(),
+                                transitions={'GoToNormal':'NORMAL',
+                                             'GoToPlay':'PLAY'})
 
 
     ## Create and start the introspection server for visualization
