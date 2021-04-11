@@ -37,15 +37,13 @@ VERBOSE = False
 
 def BallDetection(gray, hsv, ballFound):
     
-
-    
     # detect circle
     circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, gray.shape[0],
                                 param1=50, param2=30,
                                 minRadius=0, maxRadius=0)
     
     # initialize color labeler
-    cl = ColorLabeler()
+    #cl = ColorLabeler()
 
     # exctract radius and center of the circle
     if circles is not None:
@@ -66,6 +64,7 @@ def BallDetection(gray, hsv, ballFound):
         lowerBound = None
         upperBound = None
         ballFound = False
+        color = None
         print('Ball Not Found')
 
     cv2.imshow("detected circles", gray)
@@ -74,7 +73,7 @@ def BallDetection(gray, hsv, ballFound):
     if lowerBound is not None and upperBound is not None:
         ballFound = True
     
-    return lowerBound, upperBound, ballFound
+    return lowerBound, upperBound, ballFound, color
 
 
 class image_feature:
@@ -116,11 +115,12 @@ class image_feature:
         hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
         gray = cv2.cvtColor(blurred, cv2.COLOR_BGR2GRAY)
         ### inserire preprocessing ###
-        lowerBound, upperBound, ballFound = BallDetection(gray, hsv, ballFound)
+        lowerBound, upperBound, ballFound, ballColor = BallDetection(gray, hsv, ballFound)
 
         #print('##### lower, upper and found: ', lowerBound, upperBound, ballFound)
         # Se ballFound = true -> caccia la palla
-        if ballFound:
+        # Se ballColor = false -> palla non ancora trovata quinid procedere 
+        if ballFound and not cl.ball[ballColor]:
             mask = cv2.inRange(hsv, lowerBound, upperBound)
             mask = cv2.erode(mask, None, iterations=2)
             mask = cv2.dilate(mask, None, iterations=2)
@@ -156,7 +156,13 @@ class image_feature:
                     msg_BallState = BallState()
                     msg_BallState.BallDetected = True
                     msg_BallState.currentRadius = radius
+                    #msg_BallState.ballColor = ballColor
+                    
                     self.BallDet_pub.publish(msg_BallState)
+
+                    if (radius > 95):
+                        cl.ball[ballColor] = True
+                        print('BallColor:', ballColor, 'reached so flag:', cl.ball[ballColor])
                 
                 else:
                     vel = Twist()
@@ -179,6 +185,7 @@ class image_feature:
 
 def main(args):
     '''Initializes and cleanup ros node'''
+    
     ic = image_feature()
     try:
         rospy.spin()
@@ -188,4 +195,6 @@ def main(args):
 
 
 if __name__ == '__main__':
+    rospy.loginfo('INIT COLOR LABELER')
+    cl = ColorLabeler()
     main(sys.argv)

@@ -49,6 +49,21 @@ BallDetected = False
 ## @parama BallCheck, bool flag for the ball check  
 BallCheck = False
 
+## Ball Color
+ballColor = None
+
+## Room class:
+class room:
+    def init(self, **entries):
+        self.dict.update(entries)
+
+room1 = room(name = "entrance", color = "blue", location = None)
+room2 = room(name = "closet", color = "red", location = None)
+room3 = room(name = "living room", color = "green", location = None)
+room4 = room(name = "kitchen", color = "yellow", location = None)
+room5 = room(name = "bathroom", color = "magenta", location = None)
+room6 = room(name = "bedrom", color = "black", location = None)
+
 class targetPosition:
 
     x_home = -5
@@ -128,14 +143,20 @@ def callback_check(data):
     @param BallCheck Bool
     @param currentradious Float64
     """
-    global BallDetected, BallCheck, currentRadius
+    global BallDetected, BallCheck, currentRadius, ballColor
     BallDetected = data.BallDetected
     currentRadius = data.currentRadius
+    ballColor = data.ballColor
 
     if (BallDetected == True) and (BallCheck == False):
         BallCheck = True
         rospy.loginfo("Ball Detected! Start tracking ")
         client.cancel_all_goals()
+
+def callback_odom(data):
+
+    x = data.pose.pose.position.x
+    y = data.pose.pose.position.y
 
 
 class Normal(smach.State):
@@ -173,6 +194,7 @@ class Normal(smach.State):
             ## If the Ball is Detcted, go to PLAY
             # @return GoToPlay
             if (BallDetected == True) and (BallCheck == True):
+                rospy.loginfo('Tracking the ball')
                 return 'GoToPlay'
 
             ## After some NORMAL state iteration, go to SLEEP mode
@@ -268,8 +290,9 @@ class Play(smach.State):
             ## Start moving the head if the robot is near to the ball
             # @param currentRadious float passsed
             if (currentRadius > 90):
-                #rospy.loginfo('muovo la testa')
-                head_control()
+                # rospy.loginfo('muovo la testa')
+                # head_control()
+                # Save ball coordiantes
             
             ## Back to state normal if the ball is missed
             # @param BAllDetected bool 
@@ -286,8 +309,11 @@ def main():
     ## Initialization of the node
     rospy.init_node('smach_state_machine')
     ## Subscribing to Ball State topic
-    #rospy.Subscriber('/robot/BallState', BallState, callback_check)
+    rospy.Subscriber('/BallState', BallState, callback_check)
     client.wait_for_server()
+    
+    #Subscribe to odometry topic
+    rospy.Subscriber("odom", Odometry, callback_odom)
     
     ## Create a SMACH state machine
     sm = smach.StateMachine(outcomes=['container_interface'])

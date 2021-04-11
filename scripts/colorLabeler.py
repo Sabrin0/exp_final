@@ -25,6 +25,17 @@ import rospy
 
 class ColorLabeler:
     def __init__(self):
+        # flag for ball detection, if true the ball is ignored 
+
+        self.ball = {
+            "red": False,
+            "green": False,
+            "blue": False,
+            "black": False,
+            "yellow": False,
+            "magenta": False
+        }
+
         # Mean Color Dictionary RGB
         colors = OrderedDict({
             #"avBlack" : (25, 25, 2.5),
@@ -116,6 +127,7 @@ class ColorLabeler:
     
     def generateBoundaries(self, color):
         # colorspace BGR
+        
         if color == "black":
             lowerBound = np.array([0, 0, 0])
             upperBound = np.array([5, 50, 50])
