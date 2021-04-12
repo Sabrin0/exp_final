@@ -70,8 +70,8 @@ def BallDetection(gray, hsv, ballFound):
         color = None
         print('Ball Not Found')
 
-    cv2.imshow("detected circles", gray)
-    cv2.waitKey(2)
+    #cv2.imshow("detected circles", gray)
+    #cv2.waitKey(2)
 
     if lowerBound is not None and upperBound is not None:
         ballFound = True
@@ -145,7 +145,7 @@ class image_feature:
                 center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
 
                 ## only proceed if the radius meets a minimum size
-                if (radius > 10):
+                if (radius > 5): #10
 
                     # draw the circle and centroid on the frame,
                     # then update the list of tracked points
@@ -154,7 +154,7 @@ class image_feature:
                     cv2.circle(image_np, center, 5, (0, 0, 255), -1)
 
                     vel = Twist()
-                    vel.angular.z = -0.002*(center[0]-400)
+                    vel.angular.z = -0.008*(center[0]-400) #0.002
                     vel.linear.x = -0.01*(radius-100)
                     self.vel_pub.publish(vel)
                     rospy.loginfo("Tracking the ball %d", radius)
@@ -169,7 +169,7 @@ class image_feature:
                         
                         cl.ball[ballColor] = True
                         print('BallColor:', ballColor, 'reached so flag:', cl.ball[ballColor])
-                        rospy.sleep(5)
+                        #rospy.sleep(5)
                 
                 else:
                     vel = Twist()

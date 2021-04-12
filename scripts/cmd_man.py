@@ -48,7 +48,7 @@ BallDetected = False
 
 ## @parama BallCheck, bool flag for the ball check  
 BallCheck = False
-
+currentRadius = 0
 ## Ball Color
 ballColor = None
 
@@ -71,13 +71,16 @@ class targetPosition:
     y_home = 8
     
     randomPosition = [ 
-        [0, 0],
-        [2, 3],
-        [-2, -1]
+        [0, 7],
+        [-6, 1],
+        [3, 2],
+        [-6, -3],
+        [4, -3],
+        [5, -7]
     ]
 
     def randomPos(self):
-        P = random.randint(0, 2)
+        P = random.randint(0, 5)
         x_target = self.randomPosition[P][0]
         y_target = self.randomPosition[P][1]
 
@@ -95,6 +98,11 @@ def decision():
     """
     return random.choice(['GoToNormal','GoToSleep'])
 
+def callback_odom(data):
+    global pos_x, pos_y
+    pos_x = data.pose.pose.position.x
+    pos_y = data.pose.pose.position.y
+
 def callback_check(data):
     """!@brief Documentation for the function callback_check()
     
@@ -106,20 +114,26 @@ def callback_check(data):
     @param BallCheck Bool
     @param currentradious Float64
     """
-    global BallDetected, BallCheck, currentRadius, ballColor
+    global BallDetected, BallCheck, currentRadius, ballColor, pos_x, pos_y
     BallDetected = data.BallDetected
     currentRadius = data.currentRadius
     ballColor = data.ballColor
 
     if (BallDetected == True) and (BallCheck == False):
         BallCheck = True
-        rospy.loginfo("Ball Detected! Start tracking ")
+        #rospy.loginfo("Ball Detected! Start tracking ")
         #client.cancel_all_goals()
 
-def callback_odom(data):
-    global pos_x, pos_y
-    pos_x = data.pose.pose.position.x
-    pos_y = data.pose.pose.position.y
+    print('### BallDetected: ', BallDetected, "BallCheck: ", BallCheck, 'CurrentR: ', currentRadius )
+    if (BallDetected == True) and (BallCheck == True) and currentRadius > 70:
+        
+        #rospy.loginfo('Tracking the Ball')
+        
+        rospy.loginfo('Save ball postion')
+        #rospy.sleep(5)
+        room.color[ballColor]['location'] = [pos_x, pos_y]
+        print('Name:', room.color[ballColor]['name'], ' Location: ', room.color[ballColor]['location'])
+
 
          
 class Normal(smach.State):
@@ -152,17 +166,12 @@ class Normal(smach.State):
 
         while not rospy.is_shutdown():  
             rospy.loginfo('Executing state NORMAL')
-            #x_target, y_target = GoTo.randomPos()
-            x_target = 0
-            y_target = 8
+            x_target, y_target = GoTo.randomPos()
+            #x_target = 0
+            #y_target = 7
             ## If the Ball is Detcted, go to PLAY
             # @return GoToPlay
-            if (BallDetected == True) and (BallCheck == True) and currentRadius > 95:
-                rospy.loginfo('Save ball postion')
-                room.color[ballColor]['location'] = [pos_x, pos_y]
-                print('Name:', room.color[ballColor]['name'], ' Location: ', room.color[ballColor]['location'])
-                time.sleep(5)
-
+            
             ## After some NORMAL state iteration, go to SLEEP mode
             # @return GoToSleep
             if self.counter == 2:
@@ -176,15 +185,22 @@ class Normal(smach.State):
             goal.target_pose.pose.orientation.w = 1.0
             #goal.target_pose.pose.orientation.w = 1.0
             rospy.loginfo('i m going to x: %d y: %d',goal.target_pose.pose.position.x,goal.target_pose.pose.position.y)
-            client.send_goal(goal)           
-            wait = client.wait_for_result()
+            client.send_goal(goal)
+            wait = client.wait_for_result()           
+            #client.wait_for_result()
+            #rospy.loginfo('I m arrived')
+            #time.sleep(2)
+            #self.rate.sleep()
+            #self.counter += 1
+
+        #return 'GoToSleep'
             if not wait:
                 rospy.logerr("Action server not available!")
                 rospy.signal_shutdown("Action server not available!")
             else:
                 rospy.loginfo('I m arrived')
-                #time.sleep(2)
-                #self.rate.sleep()
+                time.sleep(2)
+                self.rate.sleep()
                 self.counter += 1
                 return 'GoToSleep'
 
