@@ -24,6 +24,9 @@ import cv2
 ## Ros libraries
 import roslib
 import rospy
+import actionlib
+## ROS messages
+from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 
 
 ## Ros Messages
@@ -121,6 +124,8 @@ class image_feature:
         # Se ballFound = true -> caccia la palla
         # Se ballColor = false -> palla non ancora trovata quinid procedere 
         if ballFound and not cl.ball[ballColor]:
+            #rospy.loginfo('GOAL CANCELLED')
+            #client.cancel_all_goals()
             mask = cv2.inRange(hsv, lowerBound, upperBound)
             mask = cv2.erode(mask, None, iterations=2)
             mask = cv2.dilate(mask, None, iterations=2)
@@ -152,17 +157,19 @@ class image_feature:
                     vel.angular.z = -0.002*(center[0]-400)
                     vel.linear.x = -0.01*(radius-100)
                     self.vel_pub.publish(vel)
-                    rospy.loginfo("Mi avvicino %d", radius)
+                    rospy.loginfo("Tracking the ball %d", radius)
                     msg_BallState = BallState()
                     msg_BallState.BallDetected = True
                     msg_BallState.currentRadius = radius
-                    #msg_BallState.ballColor = ballColor
+                    msg_BallState.ballColor = ballColor
                     
                     self.BallDet_pub.publish(msg_BallState)
 
                     if (radius > 95):
+                        
                         cl.ball[ballColor] = True
                         print('BallColor:', ballColor, 'reached so flag:', cl.ball[ballColor])
+                        rospy.sleep(5)
                 
                 else:
                     vel = Twist()
@@ -195,6 +202,6 @@ def main(args):
 
 
 if __name__ == '__main__':
-    rospy.loginfo('INIT COLOR LABELER')
+    client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
     cl = ColorLabeler()
     main(sys.argv)

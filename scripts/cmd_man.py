@@ -53,16 +53,17 @@ BallCheck = False
 ballColor = None
 
 ## Room class:
-class room:
-    def init(self, **entries):
-        self.dict.update(entries)
+class blueprint:
+    def __init__(self):
 
-room1 = room(name = "entrance", color = "blue", location = None)
-room2 = room(name = "closet", color = "red", location = None)
-room3 = room(name = "living room", color = "green", location = None)
-room4 = room(name = "kitchen", color = "yellow", location = None)
-room5 = room(name = "bathroom", color = "magenta", location = None)
-room6 = room(name = "bedrom", color = "black", location = None)
+        self.color = {
+            'blue': {'name':'entrance', 'location': None},
+            'red': {'name':'closet', 'location': None},
+            'green': {'name':'living room', 'location': None},
+            'yellow': {'name':'kitchen', 'location': None},
+            'magenta': {'name':'bathroom', 'location': None},
+            'black': {'name':'bedroom', 'location': None},
+        }
 
 class targetPosition:
 
@@ -83,7 +84,6 @@ class targetPosition:
         return x_target, y_target
 
 
-
 ## Action client for the action server dedicated to the movment
 #client = actionlib.SimpleActionClient('/robot/reaching_goal_robot', exp_assignment2.msg.PlanningAction)
 client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
@@ -94,43 +94,6 @@ def decision():
      It returns random state between GoTonormal or GoToSleep
     """
     return random.choice(['GoToNormal','GoToSleep'])
-
-# Pub that moves head 
-
-def head_control():
-    """!@brief Documentation for the function head_control()
-
-    This function, by publishing on the two topics, allows the head movement and stops the robot 
-    """
-    pub_stop = rospy.Publisher("/robot/cmd_vel", Twist, queue_size=1)                                   
-    pub_head = rospy.Publisher('/robot/joint_head_controller/command', Float64, queue_size=1)
-    rate = rospy.Rate(1)
-    ctrl_c = False
-      
-    while not ctrl_c:
-        ## Check the connection in ordet to be sure to publish
-        connections = pub_head.get_num_connections()
-        if connections > 0:
-            rospy.loginfo('wooof!')
-
-            ## Stop the robot, by publishing in the related topic
-            stop = Twist()
-            stop.angular.z = 0
-            stop.linear.x = 0
-            pub_stop.publish(stop)
-            
-            ## Move the robot head, by publishing in the related topic 
-            for i in [-math.pi/4, 0 , math.pi/4, 0]:
-                
-                position_head = i
-                #rospy.loginfo('looking around at %d',position_head)
-                pub_head.publish(position_head)
-                time.sleep(3)
-                ctrl_c = True
-            time.sleep(5)
-        else:
-            # If the connection is 0 sleep and restart the loop
-            rate.sleep()
 
 def callback_check(data):
     """!@brief Documentation for the function callback_check()
@@ -151,14 +114,14 @@ def callback_check(data):
     if (BallDetected == True) and (BallCheck == False):
         BallCheck = True
         rospy.loginfo("Ball Detected! Start tracking ")
-        client.cancel_all_goals()
+        #client.cancel_all_goals()
 
 def callback_odom(data):
+    global pos_x, pos_y
+    pos_x = data.pose.pose.position.x
+    pos_y = data.pose.pose.position.y
 
-    x = data.pose.pose.position.x
-    y = data.pose.pose.position.y
-
-
+         
 class Normal(smach.State):
     """!@brief Define normal state """
 
@@ -178,7 +141,7 @@ class Normal(smach.State):
         If the ball is detected the goal is cancelled
         """
 
-        global BallDetected
+        global BallDetected, BallCheck, currentRadius, pos_x, pos_y, ballColor
         
         #self.counter = random.randint(1,2)
         self.counter = 1
@@ -189,13 +152,16 @@ class Normal(smach.State):
 
         while not rospy.is_shutdown():  
             rospy.loginfo('Executing state NORMAL')
-            x_target, y_target = GoTo.randomPos()
-
+            #x_target, y_target = GoTo.randomPos()
+            x_target = 0
+            y_target = 8
             ## If the Ball is Detcted, go to PLAY
             # @return GoToPlay
-            if (BallDetected == True) and (BallCheck == True):
-                rospy.loginfo('Tracking the ball')
-                return 'GoToPlay'
+            if (BallDetected == True) and (BallCheck == True) and currentRadius > 95:
+                rospy.loginfo('Save ball postion')
+                room.color[ballColor]['location'] = [pos_x, pos_y]
+                print('Name:', room.color[ballColor]['name'], ' Location: ', room.color[ballColor]['location'])
+                time.sleep(5)
 
             ## After some NORMAL state iteration, go to SLEEP mode
             # @return GoToSleep
@@ -217,8 +183,8 @@ class Normal(smach.State):
                 rospy.signal_shutdown("Action server not available!")
             else:
                 rospy.loginfo('I m arrived')
-                time.sleep(2)
-                self.rate.sleep()
+                #time.sleep(2)
+                #self.rate.sleep()
                 self.counter += 1
                 return 'GoToSleep'
 
@@ -286,22 +252,23 @@ class Play(smach.State):
 
         ## While loop to remain in the state until some conditions are missed
         while True:
-            
+
+            return 'GoToNormal'
             ## Start moving the head if the robot is near to the ball
             # @param currentRadious float passsed
-            if (currentRadius > 90):
+            #if (currentRadius > 90):
                 # rospy.loginfo('muovo la testa')
                 # head_control()
                 # Save ball coordiantes
             
             ## Back to state normal if the ball is missed
             # @param BAllDetected bool 
-            if (BallDetected == False):
-                BallCheck = False
-                rospy.loginfo('WOOF! Ball missed :(')
-                return 'GoToNormal'
+            #if (BallDetected == False):
+            #    BallCheck = False
+           #     rospy.loginfo('WOOF! Ball missed :(')
+           #     return 'GoToNormal'
 
-            time.sleep(3) 
+            #time.sleep(3) 
         
 
 def main():
@@ -349,4 +316,5 @@ def main():
 
 
 if __name__ == '__main__':
+    room = blueprint()
     main()

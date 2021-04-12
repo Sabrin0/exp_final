@@ -53,6 +53,7 @@ class callback:
 
     def callbackBall(self, dataBall):
         ballDetected = dataBall.BallDetected
+        ballColor = dataBall.ballColor
         rospy.loginfo('Ball State:', ballDetected)
         if ballDetected:
             result.client.cancel_all_goals()
