@@ -1,0 +1,2 @@
+bool play
+string color
