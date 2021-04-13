@@ -30,7 +30,7 @@ import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from std_msgs.msg import String, Float64
 #from exp_final import *
-from exp_final.msg import BallState
+from exp_final.msg import BallState, user
 from geometry_msgs.msg import Twist, Point, Pose
 from nav_msgs.msg import Odometry
 
@@ -51,6 +51,9 @@ BallCheck = False
 currentRadius = 0
 ## Ball Color
 ballColor = None
+
+play = False
+GoTo_room = None
 
 ## Room class:
 class blueprint:
@@ -134,6 +137,15 @@ def callback_check(data):
         room.color[ballColor]['location'] = [pos_x, pos_y]
         print('Name:', room.color[ballColor]['name'], ' Location: ', room.color[ballColor]['location'])
 
+def callback_user(data):
+    global play, GoTo_room
+    play = data.play
+    GoTo_room = data.color
+    print('play:', play, 'color:', GoTo_room)
+    if play:
+        rospy.loginfo('I heard the user calling me.')
+        client.cancel_all_goals()
+
 
          
 class Normal(smach.State):
@@ -155,7 +167,7 @@ class Normal(smach.State):
         If the ball is detected the goal is cancelled
         """
 
-        global BallDetected, BallCheck, currentRadius, pos_x, pos_y, ballColor
+        global BallDetected, BallCheck, currentRadius, pos_x, pos_y, play
         
         #self.counter = random.randint(1,2)
         self.counter = 1
@@ -166,14 +178,17 @@ class Normal(smach.State):
 
         while not rospy.is_shutdown():  
             rospy.loginfo('Executing state NORMAL')
-            x_target, y_target = GoTo.randomPos()
-            #x_target = 0
-            #y_target = 7
+            #x_target, y_target = GoTo.randomPos()
+            x_target = 0
+            y_target = 7
             ## If the Ball is Detcted, go to PLAY
             # @return GoToPlay
             
             ## After some NORMAL state iteration, go to SLEEP mode
             # @return GoToSleep
+            if play:
+                return 'GoToPlay'
+
             if self.counter == 2:
                 return 'GoToSleep'
             
@@ -202,7 +217,8 @@ class Normal(smach.State):
                 time.sleep(2)
                 self.rate.sleep()
                 self.counter += 1
-                return 'GoToSleep'
+        
+        return 'GoToSleep'
 
 class Sleep(smach.State):
     """!@brief Define Sleep state """
@@ -235,8 +251,6 @@ class Sleep(smach.State):
         goal.target_pose.pose.position.x = GoTo.x_home
         goal.target_pose.pose.position.y = GoTo.y_home
         goal.target_pose.pose.orientation.w = 1.0
-        
-        rospy.loginfo(rospy.get_caller_id() + 'Back home x: %d y: %d',GoTo.x_home, GoTo.y_home)
         client.send_goal(goal)           
         client.wait_for_result()
         rospy.loginfo('i m arrived, now i will take a nap')
@@ -264,12 +278,57 @@ class Play(smach.State):
         """
         rospy.loginfo("Executing state PLAY")
 
-        global currentRadius, BallDetected, BallCheck
-
+        global play, GoTo_room
+        counter = 0
         ## While loop to remain in the state until some conditions are missed
-        while True:
+        while not rospy.is_shutdown():
+            #first go back to the user
+            GoTo = targetPosition()
+            goal = MoveBaseGoal()
+            goal.target_pose.header.frame_id = "map"
+            goal.target_pose.header.stamp = rospy.Time.now()
+            goal.target_pose.pose.position.x = GoTo.x_home
+            goal.target_pose.pose.position.y = GoTo.y_home
+            goal.target_pose.pose.orientation.w = 1.0                  
+            client.send_goal(goal)           
+            wait = client.wait_for_result()
+            rospy.loginfo('Back to the user...')
 
-            return 'GoToNormal'
+            if not wait:
+                    rospy.logerr("Action server not available!")
+                    rospy.signal_shutdown("Action server not available!")
+            else:
+                rospy.loginfo('I m arrived at home')
+                time.sleep(2)
+                self.rate.sleep()
+            
+            ## After some iteration go to state normal
+            if counter == random.randint(2,4):
+                return 'GoToNormal'
+
+            ## Now check if the location is known
+            if room.color[GoTo_room]['location'] is not None:
+                goal.target_pose.header.frame_id = "map"
+                goal.target_pose.header.stamp = rospy.Time.now()
+                goal.target_pose.pose.position.x = room.color[GoTo_room]['location'][0]
+                goal.target_pose.pose.position.y = room.color[GoTo_room]['location'][0]
+                goal.target_pose.pose.orientation.w = 1.0                  
+                client.send_goal(goal)
+                rospy.loginfo('Go to the room %s:',room.color[GoTo_room]['name'] )         
+                wait = client.wait_for_result()
+                if not wait:
+                        rospy.logerr("Action server not available!")
+                        rospy.signal_shutdown("Action server not available!")
+                else:
+                    rospy.loginfo('I m arrived at %s:', room.color[GoTo_room]['name'])
+                    time.sleep(2)
+                    counter += 1
+        
+            else:
+                rospy.loginfo('######## ROOM UNKNOWN')
+                return 'GoToNormal'
+        
+        return 'GoToNormal'
             ## Start moving the head if the robot is near to the ball
             # @param currentRadious float passsed
             #if (currentRadius > 90):
@@ -297,7 +356,10 @@ def main():
     
     #Subscribe to odometry topic
     rospy.Subscriber("odom", Odometry, callback_odom)
-    
+
+    #subscribe to user topic 
+    rospy.Subscriber('/userCommand', user, callback_user)
+
     ## Create a SMACH state machine
     sm = smach.StateMachine(outcomes=['container_interface'])
     sm.userdata.sm_counter = 0

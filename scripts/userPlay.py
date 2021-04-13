@@ -14,7 +14,7 @@ class console_manager():
         self.color = ["blue", "red", "green", "yellow", "magenta", "black"]
        
         # initialize node as publisher
-        self.play_pub = rospy.Publisher("userCommand", user, queue_size=10)
+        self.play_pub = rospy.Publisher('/userCommand', user, queue_size=1)
         rospy.init_node('userPlay')
 
         print(r"""
