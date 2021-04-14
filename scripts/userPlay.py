@@ -36,6 +36,7 @@ class console_manager():
 
         if command == "play":
             self.msg_play.play = True
+            self.msg_play.color = ""
             self.play_pub.publish(self.msg_play)
             rospy.loginfo("Play sent")
             #aprint('pubblico play su topic --> passo allo stato play e cancello goal correnti')
@@ -43,6 +44,7 @@ class console_manager():
         else:
             print('Command not found.')
             self.msg_play.play = False
+            #self.msg_play.color = None
             self.play_pub.publish(self.msg_play)
     
             return self.backUser()
@@ -61,7 +63,7 @@ class console_manager():
 
         color = raw_input('Color: ')
         if color in self.color:
-            #self.msg_play.play = False
+            self.msg_play.play = False
             self.msg_play.color = color
             self.play_pub.publish(self.msg_play)
             rospy.loginfo("color sent")
@@ -70,7 +72,9 @@ class console_manager():
 
 if __name__ == "__main__":
 
+    # initialize class console_manager()
     play = console_manager()
+
     while not rospy.is_shutdown():
         play.backUser()
     #try: 

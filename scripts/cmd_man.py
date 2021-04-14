@@ -88,6 +88,30 @@ class targetPosition:
         y_target = self.randomPosition[P][1]
 
         return x_target, y_target
+    
+    def GoTo(self, x_target, y_target):
+        client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
+        client.wait_for_server()
+        goal = MoveBaseGoal()
+        goal.target_pose.header.frame_id = "map"
+        goal.target_pose.header.stamp = rospy.Time.now()
+        goal.target_pose.pose.position.x = x_target
+        goal.target_pose.pose.position.y = y_target
+        goal.target_pose.pose.orientation.w = 2.0
+        #goal.target_pose.pose.orientation.w = 1.0
+        if x_target == self.x_home:
+            rospy.loginfo('Back home')
+        else:
+            rospy.loginfo('i m going to x: %d y: %d',goal.target_pose.pose.position.x,goal.target_pose.pose.position.y)
+        client.send_goal(goal)
+        print('I am moving...')
+        wait = client.wait_for_result()           
+
+        if not wait:
+            rospy.logerr("Action server not available!")
+            rospy.signal_shutdown("Action server not available!")
+        else:
+            return client.get_result()
 
 
 ## Action client for the action server dedicated to the movment
@@ -169,55 +193,36 @@ class Normal(smach.State):
 
         global BallDetected, BallCheck, currentRadius, pos_x, pos_y, play
         
+        rospy.loginfo('Executing state NORMAL')
         #self.counter = random.randint(1,2)
         self.counter = 1
         #goal = exp_assignment2.msg.PlanningGoal()
-        goal = MoveBaseGoal()
-        GoTo = targetPosition()
+        #goal = MoveBaseGoal()
+        #GoTo = targetPosition()
         
 
         while not rospy.is_shutdown():  
-            rospy.loginfo('Executing state NORMAL')
+            
             #x_target, y_target = GoTo.randomPos()
-            x_target = 0
-            y_target = 7
             ## If the Ball is Detcted, go to PLAY
             # @return GoToPlay
-            
+            x_target, y_target = movement.randomPos()
             ## After some NORMAL state iteration, go to SLEEP mode
             # @return GoToSleep
             if play:
+                rospy.loginfo('RITORNO <PLAY>')
                 return 'GoToPlay'
-
-            if self.counter == 2:
+                
+            elif self.counter == 2:
                 return 'GoToSleep'
-            
-            ## Setting the random goal position
-            goal.target_pose.header.frame_id = "map"
-            goal.target_pose.header.stamp = rospy.Time.now()
-            goal.target_pose.pose.position.x = x_target
-            goal.target_pose.pose.position.y = y_target
-            goal.target_pose.pose.orientation.w = 1.0
-            #goal.target_pose.pose.orientation.w = 1.0
-            rospy.loginfo('i m going to x: %d y: %d',goal.target_pose.pose.position.x,goal.target_pose.pose.position.y)
-            client.send_goal(goal)
-            wait = client.wait_for_result()           
-            #client.wait_for_result()
-            #rospy.loginfo('I m arrived')
-            #time.sleep(2)
-            #self.rate.sleep()
-            #self.counter += 1
-
-        #return 'GoToSleep'
-            if not wait:
-                rospy.logerr("Action server not available!")
-                rospy.signal_shutdown("Action server not available!")
             else:
-                rospy.loginfo('I m arrived')
-                time.sleep(2)
-                self.rate.sleep()
-                self.counter += 1
-        
+                result = movement.GoTo(x_target,y_target)
+                if result:
+                    
+                    rospy.loginfo('I am arrived')
+                    self.counter += 1
+
+        rospy.loginfo('############ finito loop normal ritorno sleep')
         return 'GoToSleep'
 
 class Sleep(smach.State):
@@ -241,22 +246,16 @@ class Sleep(smach.State):
         @return GoToNormal
         """
 
-        GoTo = targetPosition()
-
-        rospy.loginfo(rospy.get_caller_id() + 'Executing state SLEEP ')
+        #GoTo = targetPosition()
+        rospy.loginfo('--------------------- ')
+        rospy.loginfo('Executing state SLEEP ')
         ## Setting the goal home position
-        goal = MoveBaseGoal()
-        goal.target_pose.header.frame_id = "map"
-        goal.target_pose.header.stamp = rospy.Time.now()
-        goal.target_pose.pose.position.x = GoTo.x_home
-        goal.target_pose.pose.position.y = GoTo.y_home
-        goal.target_pose.pose.orientation.w = 1.0
-        client.send_goal(goal)           
-        client.wait_for_result()
-        rospy.loginfo('i m arrived, now i will take a nap')
-        time.sleep(3)
-        self.rate.sleep()
-        return 'GoToNormal'
+        result = movement.GoTo(movement.x_home,movement.y_home)
+        if result: 
+            rospy.loginfo('i m arrived at home, now i will take a nap')
+            time.sleep(3)
+            self.rate.sleep()
+            return 'GoToNormal'
 
 class Play(smach.State):
     """!@brief Define Play state """
@@ -276,53 +275,45 @@ class Play(smach.State):
         It moves the robots to the ball while it's detected.
         Once arrived next to the ball, the robort starts to check around.
         """
+        rospy.loginfo("--------------------")
         rospy.loginfo("Executing state PLAY")
 
         global play, GoTo_room
-        counter = 0
+        self.counter = 0
         ## While loop to remain in the state until some conditions are missed
         while not rospy.is_shutdown():
             #first go back to the user
-            GoTo = targetPosition()
-            goal = MoveBaseGoal()
-            goal.target_pose.header.frame_id = "map"
-            goal.target_pose.header.stamp = rospy.Time.now()
-            goal.target_pose.pose.position.x = GoTo.x_home
-            goal.target_pose.pose.position.y = GoTo.y_home
-            goal.target_pose.pose.orientation.w = 1.0                  
-            client.send_goal(goal)           
-            wait = client.wait_for_result()
-            rospy.loginfo('Back to the user...')
-
-            if not wait:
-                    rospy.logerr("Action server not available!")
-                    rospy.signal_shutdown("Action server not available!")
-            else:
-                rospy.loginfo('I m arrived at home')
-                time.sleep(2)
+            result = movement.GoTo(movement.x_home,movement.y_home)
+            if result: 
+                rospy.loginfo('i m arrived to the user')
+                time.sleep(3)
                 self.rate.sleep()
-            
+                #self.counter += 1
+
             ## After some iteration go to state normal
-            if counter == random.randint(2,4):
+            if self.counter == random.randint(2,4):
                 return 'GoToNormal'
 
+            ## waiting for user command, after 30 second back to normal:
+            start = time.time()
+            elapsed = 0
+            while (not GoTo_room and elapsed < 30):
+                elapsed = start -time.time()
+                time.sleep(1)
+                print("I am waiting for user command...")
+                if elapsed == 30:
+                    rospy.loginfo("Too late, back to state normal")
+                    return 'GoToNormal'
+            
             ## Now check if the location is known
             if room.color[GoTo_room]['location'] is not None:
-                goal.target_pose.header.frame_id = "map"
-                goal.target_pose.header.stamp = rospy.Time.now()
-                goal.target_pose.pose.position.x = room.color[GoTo_room]['location'][0]
-                goal.target_pose.pose.position.y = room.color[GoTo_room]['location'][0]
-                goal.target_pose.pose.orientation.w = 1.0                  
-                client.send_goal(goal)
-                rospy.loginfo('Go to the room %s:',room.color[GoTo_room]['name'] )         
-                wait = client.wait_for_result()
-                if not wait:
-                        rospy.logerr("Action server not available!")
-                        rospy.signal_shutdown("Action server not available!")
-                else:
+                result = movement.GoTo(room.color[GoTo_room]['location'][0],room.color[GoTo_room]['location'][1])
+                if result:
                     rospy.loginfo('I m arrived at %s:', room.color[GoTo_room]['name'])
+                    # per evitare loop  
+                    GoTo_room = "" 
                     time.sleep(2)
-                    counter += 1
+                    self.counter += 1
         
             else:
                 rospy.loginfo('######## ROOM UNKNOWN')
@@ -368,9 +359,9 @@ def main():
     with sm:
         ## Add states to the container
         smach.StateMachine.add('NORMAL', Normal(), 
-                               transitions={'GoToSleep':'SLEEP', 
-                                            'GoToNormal':'NORMAL',
-                                            'GoToPlay':'PLAY'})
+                               transitions={'GoToSleep':'SLEEP',
+                                            'GoToPlay':'PLAY',
+                                            'GoToNormal':'NORMAL'})
 
         smach.StateMachine.add('SLEEP', Sleep(), 
                                transitions={'GoToSleep':'SLEEP', 
@@ -395,4 +386,5 @@ def main():
 
 if __name__ == '__main__':
     room = blueprint()
+    movement = targetPosition()
     main()
