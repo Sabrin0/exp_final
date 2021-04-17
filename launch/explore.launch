@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <node pkg="explore_lite" type="explore" respawn="true" name="explore" output="screen">
+        <rosparam file="$(find exp_final)/config/exploration.yaml" command="load" />
+      </node> 
+    
+</launch>
