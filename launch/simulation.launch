@@ -62,8 +62,7 @@
 
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-	args="-urdf -model robot1 -param robot_description -x -5.0 -y 8 -z 0.05 -Y -1.57"/> 
-  
+	args="-urdf -model robot1 -param robot_description -x -5.0 -y 8 -z 0.05 -Y -1.57"/> <!-- -x -5.0 -y 8 -z 0.05--> <!-- -x 5.0 -y -8 -z 0.05 -->
   <include file="$(find exp_final)/launch/gmapping.launch"/>
   <include file="$(find exp_final)/launch/move_base.launch"/>
   

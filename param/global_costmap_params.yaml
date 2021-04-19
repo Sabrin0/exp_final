@@ -10,5 +10,5 @@ global_costmap:
    origin_x: -20.0 
    origin_y: -20.0
    inflation_layer:
-        inflation_radius: 1.0
+        inflation_radius: 1.0 # quanto se la sente di passare in ambienti stretti cit Fra 
         cost_scaling_factor: 20
