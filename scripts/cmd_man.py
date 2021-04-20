@@ -33,6 +33,8 @@ from std_msgs.msg import String, Float64
 from exp_final.msg import BallState, user
 from geometry_msgs.msg import Twist, Point, Pose
 from nav_msgs.msg import Odometry
+# import ros service
+from std_srvs.srv import *
 
 ## Define home x position
 # @param x_home The fixed home coordinate x 
@@ -52,7 +54,10 @@ currentRadius = 0
 ## Ball Color
 ballColor = None
 
+srv_client_wall_follower_ = None
+
 play = False
+playAvilable = False
 GoTo_room = None
 
 ## Room class:
@@ -162,11 +167,13 @@ def callback_check(data):
         print('Name:', room.color[ballColor]['name'], ' Location: ', room.color[ballColor]['location'])
 
 def callback_user(data):
-    global play, GoTo_room
+    global play, GoTo_room, playAvilable
     play = data.play
     GoTo_room = data.color
     print('play:', play, 'color:', GoTo_room)
-    if play:
+
+    if play and playAvilable:
+        playCheck = False
         rospy.loginfo('I heard the user calling me.')
         client.cancel_all_goals()
 
@@ -191,11 +198,12 @@ class Normal(smach.State):
         If the ball is detected the goal is cancelled
         """
 
-        global BallDetected, BallCheck, currentRadius, pos_x, pos_y, play
-        
+        global BallDetected, BallCheck, currentRadius, pos_x, pos_y, play, playAvilable
+
         rospy.loginfo('Executing state NORMAL')
         #self.counter = random.randint(1,2)
         self.counter = 1
+        playAvilable = True
         #goal = exp_assignment2.msg.PlanningGoal()
         #goal = MoveBaseGoal()
         #GoTo = targetPosition()
@@ -216,7 +224,7 @@ class Normal(smach.State):
             elif self.counter == 2:
                 return 'GoToSleep'
             else:
-                result = movement.GoTo(x_target,y_target)
+                result = movement.GoTo(0,7)
                 if result:
                     
                     rospy.loginfo('I am arrived')
@@ -265,7 +273,7 @@ class Play(smach.State):
         """
         
         smach.State.__init__(self, 
-                            outcomes=['GoToNormal','GoToPlay'])
+                            outcomes=['GoToNormal', 'GoToFind', 'GoToPlay'])
  
         self.rate = rospy.Rate(200)  # Loop at 50 Hz
 
@@ -312,12 +320,12 @@ class Play(smach.State):
                     rospy.loginfo('I m arrived at %s:', room.color[GoTo_room]['name'])
                     # per evitare loop  
                     GoTo_room = "" 
-                    time.sleep(2)
+                    time.sleep(1)
                     self.counter += 1
         
             else:
                 rospy.loginfo('######## ROOM UNKNOWN')
-                return 'GoToNormal'
+                return 'GoToFind'
         
         return 'GoToNormal'
             ## Start moving the head if the robot is near to the ball
@@ -336,6 +344,35 @@ class Play(smach.State):
 
             #time.sleep(3) 
         
+class Find(smach.State):
+    """!@brief Define Sleep state """
+    
+    def __init__(self):
+        """!@brief Initialization of the functioin        
+        """
+
+        smach.State.__init__(self, 
+                             outcomes=['GoToPlay','GoToFind'])
+                             
+        self.rate = rospy.Rate(200)  # Loop at 50 Hz
+        
+    def execute(self, userdata):
+        global GoTo_room, ballColor, srv_client_wall_follower_
+        srv_client_wall_follower_ = rospy.ServiceProxy(
+        '/wall_follower_switch', SetBool)
+        rospy.loginfo('--------------------- ')
+        rospy.loginfo('Executing state FIND ')
+        ## Setting the goal home position
+        
+        while room.color[GoTo_room]['location'] is None:
+            print('reaching the room: ', room.color[GoTo_room]['name'] )
+            resp = srv_client_wall_follower_(True)
+        
+        resp = srv_client_wall_follower_(False)
+        rospy.sleep(1)
+        return 'GoToPlay'
+
+            
 
 def main():
 
@@ -347,7 +384,7 @@ def main():
     
     #Subscribe to odometry topic
     rospy.Subscriber("odom", Odometry, callback_odom)
-
+    
     #subscribe to user topic 
     rospy.Subscriber('/userCommand', user, callback_user)
 
@@ -369,7 +406,13 @@ def main():
 
         smach.StateMachine.add('PLAY', Play(),
                                 transitions={'GoToNormal':'NORMAL',
+                                             'GoToFind':'FIND',
                                              'GoToPlay':'PLAY'})
+        
+        smach.StateMachine.add('FIND', Find(),
+                                transitions={
+                                    'GoToPlay':'PLAY',
+                                    'GoToFind':'FIND'})
 
 
     ## Create and start the introspection server for visualization

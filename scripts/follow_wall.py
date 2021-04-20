@@ -9,7 +9,7 @@ from std_srvs.srv import *
 
 import math
 
-#active_ = False
+active_ = False
 
 pub_ = None
 
@@ -68,8 +68,8 @@ def take_action():
     angular_z = 0
     state_description = ''
 
-    d0 = 0.5 #0.75 // 0.5
-    d = 0.75 #1.25 // 0.75 
+    d0 = 0.6 #0.75 // 0.5
+    d = 0.9 #1.25 // 0.75 
 
     if regions['front'] > d0 and regions['fleft'] > d and regions['fright'] > d:
         state_description = 'case 1 - nothing'
@@ -124,7 +124,7 @@ def follow_the_wall():
  
     msg = Twist()
     msg.angular.z = 0.2
-    msg.linear.x = 0.35  
+    msg.linear.x = 0.3  
     return msg
 
 # End of wall
@@ -148,28 +148,29 @@ def main():
     
     while not rospy.is_shutdown():
     #print('-------> active: ', active_)
-    #if not active_:
-    #    rate.sleep()
-    #    continue
+        if not active_:
+            rate.sleep()
+            print('server down')
+            continue
+        else:
+            msg = Twist()
 
-        msg = Twist()
+            if state_ == 0:
+                msg = find_wall()
 
-        if state_ == 0:
-            msg = find_wall()
+            elif state_ == 1:
+                msg = turn_left()
 
-        elif state_ == 1:
-            msg = turn_left()
-
-        elif state_ == 2:
-            msg = follow_the_wall()
+            elif state_ == 2:
+                msg = follow_the_wall()
         # End of Wall
         #elif state_ == 3:
         #    msg = end_wall()
-        else:
-            rospy.logerr('Unknown state!')
+            else:
+                rospy.logerr('Unknown state!')
             
         #print('--------> msg:' , msg)
-        pub_.publish(msg)
+            pub_.publish(msg)
         rate.sleep()
 
 
