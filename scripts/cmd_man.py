@@ -28,7 +28,7 @@ import rospy
 import actionlib
 ## ROS messages
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
-from std_msgs.msg import String, Float64
+from std_msgs.msg import String, Float64, Bool
 #from exp_final import *
 from exp_final.msg import BallState, user
 from geometry_msgs.msg import Twist, Point, Pose

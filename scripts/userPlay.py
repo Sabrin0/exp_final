@@ -7,14 +7,18 @@ import os
 import sys
 
 from exp_final.msg import user
+from std_msgs.msg import Bool
 
 class console_manager():
     def __init__(self):
+
         # check later if the color passed is ok
         self.color = ["blue", "red", "green", "yellow", "magenta", "black"]
-       
+        
+        self.continueGoTo = False
         # initialize node as publisher
         self.play_pub = rospy.Publisher('/userCommand', user, queue_size=1)
+        self.play_sub = rospy.Subscriber("/stillGoTo", Bool, self.callback, queue_size=1)
         rospy.init_node('userPlay')
 
         print(r"""
@@ -29,6 +33,11 @@ class console_manager():
                         Welcome! 
 
                 """)
+
+    def callback(self, data):
+        self.continueGoTo = data.data
+
+        rospy.loginfo('HEARD')
 
     def backUser(self):
         self.msg_play = user()
@@ -67,7 +76,8 @@ class console_manager():
             self.msg_play.color = color
             self.play_pub.publish(self.msg_play)
             rospy.loginfo("color sent")
-        else:        
+        else:
+            print('Command Unknown')        
             return self.GoTo()
 
 if __name__ == "__main__":
@@ -76,7 +86,12 @@ if __name__ == "__main__":
     play = console_manager()
 
     while not rospy.is_shutdown():
-        play.backUser()
+        rospy.loginfo('GoTo: %s', play.continueGoTo)
+        if not play.continueGoTo:
+            play.backUser()
+        else:
+            play.GoTo()
+        rospy.Rate(20)
     #try: 
     #    play.backUser()
     #    rospy.spin()
