@@ -66,4 +66,7 @@
   <include file="$(find exp_final)/launch/gmapping.launch"/>
   <include file="$(find exp_final)/launch/move_base.launch"/>
   
+  <!-- Start the server wall follower-->
+  <node pkg="exp_final" type="follow_wall.py" name="wall_follower_server"/>
+  
 </launch>

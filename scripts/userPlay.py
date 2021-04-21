@@ -7,7 +7,7 @@ import os
 import sys
 
 from exp_final.msg import user
-from std_msgs.msg import Bool
+from std_msgs.msg import Bool, String
 
 class console_manager():
     def __init__(self):
@@ -15,10 +15,10 @@ class console_manager():
         # check later if the color passed is ok
         self.color = ["blue", "red", "green", "yellow", "magenta", "black"]
         
-        self.continueGoTo = False
+        self.state = "normal"
         # initialize node as publisher
         self.play_pub = rospy.Publisher('/userCommand', user, queue_size=1)
-        self.play_sub = rospy.Subscriber("/stillGoTo", Bool, self.callback, queue_size=1)
+        self.play_sub = rospy.Subscriber("/stillGoTo", String, self.callback, queue_size=1)
         rospy.init_node('userPlay')
 
         print(r"""
@@ -31,12 +31,11 @@ class console_manager():
                /_/_____/____/_______|
 
                         Welcome! 
-
+ 
                 """)
 
     def callback(self, data):
-        self.continueGoTo = data.data
-
+        self.state = data.data
         rospy.loginfo('HEARD')
 
     def backUser(self):
@@ -48,8 +47,9 @@ class console_manager():
             self.msg_play.color = ""
             self.play_pub.publish(self.msg_play)
             rospy.loginfo("Play sent")
+            self.state = '' 
             #aprint('pubblico play su topic --> passo allo stato play e cancello goal correnti')
-            return self.GoTo()
+            #return self.GoTo()
         else:
             print('Command not found.')
             self.msg_play.play = False
@@ -76,6 +76,7 @@ class console_manager():
             self.msg_play.color = color
             self.play_pub.publish(self.msg_play)
             rospy.loginfo("color sent")
+            self.state = ''
         else:
             print('Command Unknown')        
             return self.GoTo()
@@ -86,11 +87,13 @@ if __name__ == "__main__":
     play = console_manager()
 
     while not rospy.is_shutdown():
-        rospy.loginfo('GoTo: %s', play.continueGoTo)
-        if not play.continueGoTo:
+        rospy.loginfo('State: %s', play.state)
+
+        if play.state == "normal":
             play.backUser()
-        else:
+        elif play.state == "goto":
             play.GoTo()
+
         rospy.Rate(20)
     #try: 
     #    play.backUser()
