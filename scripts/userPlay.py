@@ -18,7 +18,7 @@ class console_manager():
         self.state = "normal"
         # initialize node as publisher
         self.play_pub = rospy.Publisher('/userCommand', user, queue_size=1)
-        self.play_sub = rospy.Subscriber("/stillGoTo", String, self.callback, queue_size=1)
+        self.play_sub = rospy.Subscriber("/currentState", String, self.callback, queue_size=1)
         rospy.init_node('userPlay')
 
         print(r"""

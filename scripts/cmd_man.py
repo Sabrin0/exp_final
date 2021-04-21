@@ -73,6 +73,15 @@ class blueprint:
             'black': {'name':'bedroom', 'location': None},
         }
 
+class pubHandler:
+
+    def __init__(self):
+        self.statePub = rospy.Publisher("currentState", String, queue_size=1)
+    
+    def pubState(self, state):
+        self.statePub.publish(state)
+        
+
 class targetPosition:
 
     x_home = -5
@@ -204,6 +213,7 @@ class Normal(smach.State):
         #self.counter = random.randint(1,2)
         self.counter = 1
         playAvilable = True
+        pub.pubState('normal')
         #goal = exp_assignment2.msg.PlanningGoal()
         #goal = MoveBaseGoal()
         #GoTo = targetPosition()
@@ -278,7 +288,7 @@ class Play(smach.State):
         self.rate = rospy.Rate(200)  # Loop at 50 Hz
 
     def execute(self, userdata):
-        
+
         ## Publishin for the user console  
         pub_goto = rospy.Publisher('/stillGoTo', Bool, queue_size=1)
         """!@brief Play state execution
@@ -294,19 +304,19 @@ class Play(smach.State):
         ## While loop to remain in the state until some conditions are missed
         while not rospy.is_shutdown():
             
-            pub_goto.publish(Bool(False))
+            
             #first go back to the user
             result = movement.GoTo(movement.x_home,movement.y_home)
             if result: 
-                pub_goto.publish(Bool(True))
+                pub.pubState('goto')
                 rospy.loginfo('i m arrived to the user')
-                time.sleep(3)
+                time.sleep(1)
                 self.rate.sleep()
                 #self.counter += 1
 
             ## After some iteration go to state normal
             if self.counter == random.randint(2,4):
-                pub_goto.publish(Bool(False))
+                
                 return 'GoToNormal'
 
             ## waiting for user command, after 30 second back to normal:
@@ -318,14 +328,14 @@ class Play(smach.State):
                 print("I am waiting for user command...")
                 if elapsed == 30:
                     rospy.loginfo("Too late, back to state normal")
-                    pub_goto.publish(Bool(False))
+                    
                     return 'GoToNormal'
             
             ## Now check if the location is known
             if room.color[GoTo_room]['location'] is not None:
                 result = movement.GoTo(room.color[GoTo_room]['location'][0],room.color[GoTo_room]['location'][1])
                 if result:
-                    pub_goto.publish(Bool(True))
+                    
                     rospy.loginfo('I m arrived at %s:', room.color[GoTo_room]['name'])
                     # per evitare loop  
                     GoTo_room = "" 
@@ -333,8 +343,9 @@ class Play(smach.State):
                     self.counter += 1
         
             else:
-                pub_goto.publish(Bool(False))
+                
                 rospy.loginfo('######## ROOM UNKNOWN')
+                #pub.pubState('')
                 return 'GoToFind'
         
         return 'GoToNormal'
@@ -439,4 +450,5 @@ def main():
 if __name__ == '__main__':
     room = blueprint()
     movement = targetPosition()
+    pub = pubHandler()
     main()
