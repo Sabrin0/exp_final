@@ -69,4 +69,6 @@
   <!-- Start the server wall follower-->
   <node pkg="exp_final" type="follow_wall.py" name="wall_follower_server"/>
   
+  <!-- Start the ball detection node-->
+  <node pkg="exp_final" type="BallDetection.py" name="ball_detection"/>
 </launch>

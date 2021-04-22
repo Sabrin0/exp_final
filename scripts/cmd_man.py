@@ -26,6 +26,7 @@ import random
 import sys
 import rospy
 import actionlib
+from collections import OrderedDict
 ## ROS messages
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from std_msgs.msg import String, Float64, Bool
@@ -64,14 +65,41 @@ GoTo_room = None
 class blueprint:
     def __init__(self):
 
-        self.color = {
+        self.color = OrderedDict({
             'blue': {'name':'entrance', 'location': None},
             'red': {'name':'closet', 'location': None},
             'green': {'name':'living room', 'location': None},
             'yellow': {'name':'kitchen', 'location': None},
             'magenta': {'name':'bathroom', 'location': None},
             'black': {'name':'bedroom', 'location': None},
-        }
+        })
+        self.findCounter =0
+
+    def preFind(self):
+        locations = []
+        known = []
+
+        if self.findCounter == 0:
+            self.findCounter += 1
+            print('######## FIRST ITERATION PARTO DA CASA')
+            return [-5, 8]
+        
+        for key, value in self.color.items():
+            print('------KEY: ', key)
+            print('******VAL: ', value['location'])
+            #if value['location'] is not None:
+            #    explored.append(value['location'])
+            locations.append(value['location'])
+        print('LOCATION: ', locations)
+        for loc in locations:
+            if loc is None:
+                break
+            known.append(loc)
+
+        self.findCounter += 1
+        print('!!!!!!!!!!!!!!!!! known', known)
+        print('----------------l last known: ', known[-1])
+        return locations[-1]
 
 class pubHandler:
 
@@ -166,13 +194,15 @@ def callback_check(data):
         #client.cancel_all_goals()
 
     print('### BallDetected: ', BallDetected, "BallCheck: ", BallCheck, 'CurrentR: ', currentRadius )
-    if (BallDetected == True) and (BallCheck == True) and currentRadius > 70:
+    if (BallDetected == True) and (BallCheck == True) and currentRadius > 90:
         
         #rospy.loginfo('Tracking the Ball')
         
         rospy.loginfo('Save ball postion')
         #rospy.sleep(5)
-        room.color[ballColor]['location'] = [pos_x, pos_y]
+        #room.color[ballColor]['location'] = [pos_x, pos_y]
+        room.color[ballColor].update( location = [pos_x, pos_y])
+        
         print('Name:', room.color[ballColor]['name'], ' Location: ', room.color[ballColor]['location'])
 
 def callback_user(data):
@@ -383,15 +413,18 @@ class Find(smach.State):
         '/wall_follower_switch', SetBool)
         rospy.loginfo('--------------------- ')
         rospy.loginfo('Executing state FIND ')
+        ## first go to the last known position
+        go = room.preFind()
+        result = movement.GoTo(go[0],go[1])
+        if result:
         ## Setting the goal home position
-        
-        while room.color[GoTo_room]['location'] is None:
-            print('reaching the room: ', room.color[GoTo_room]['name'] )
-            resp = srv_client_wall_follower_(True)
-        
-        resp = srv_client_wall_follower_(False)
-        rospy.sleep(1)
-        return 'GoToPlay'
+            while room.color[GoTo_room]['location'] is None:
+                print('reaching the room: ', room.color[GoTo_room]['name'] )
+                resp = srv_client_wall_follower_(True)
+            GoTo_room = ''
+            resp = srv_client_wall_follower_(False)
+            rospy.sleep(1)
+            return 'GoToPlay'
 
             
 
