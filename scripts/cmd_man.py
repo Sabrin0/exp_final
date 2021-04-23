@@ -27,6 +27,7 @@ import sys
 import rospy
 import actionlib
 from collections import OrderedDict
+from operator import getitem
 ## ROS messages
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from std_msgs.msg import String, Float64, Bool
@@ -66,40 +67,44 @@ class blueprint:
     def __init__(self):
 
         self.color = OrderedDict({
-            'blue': {'name':'entrance', 'location': None},
-            'red': {'name':'closet', 'location': None},
-            'green': {'name':'living room', 'location': None},
-            'yellow': {'name':'kitchen', 'location': None},
-            'magenta': {'name':'bathroom', 'location': None},
-            'black': {'name':'bedroom', 'location': None},
+            'blue': {'name':'entrance', 'location': None, 'index':1},
+            'red': {'name':'closet', 'location': None, 'index':2},
+            'green': {'name':'living room', 'location': None, 'index':3},
+            'yellow': {'name':'kitchen', 'location': None, 'index':4},
+            'magenta': {'name':'bathroom', 'location': None, 'index':5},
+            'black': {'name':'bedroom', 'location': None, 'index':6},
         })
-        self.findCounter =0
+        self.findCounter = 0
+        #self.lastVisited = [
+        #                    [-5,8] #first home
+        #               ]
 
     def preFind(self):
+        #print(self.lastVisited)
+        
+        res = OrderedDict(sorted(self.color.items(),
+			key = lambda x: getitem(x[1], 'index')))
+		
         locations = []
         known = []
-
+        	
         if self.findCounter == 0:
-            self.findCounter += 1
-            print('######## FIRST ITERATION PARTO DA CASA')
+            print('FIRST IT START FROM HOME')
+            self.findCounter +=1
             return [-5, 8]
         
-        for key, value in self.color.items():
+        for key, value in res.items():
             print('------KEY: ', key)
             print('******VAL: ', value['location'])
-            #if value['location'] is not None:
-            #    explored.append(value['location'])
             locations.append(value['location'])
-        print('LOCATION: ', locations)
+            
         for loc in locations:
             if loc is None:
                 break
             known.append(loc)
-
-        self.findCounter += 1
-        print('!!!!!!!!!!!!!!!!! known', known)
-        print('----------------l last known: ', known[-1])
-        return locations[-1]
+        
+        self.findCounter +=1
+        return known[-1]
 
 class pubHandler:
 
@@ -201,6 +206,7 @@ def callback_check(data):
         rospy.loginfo('Save ball postion')
         #rospy.sleep(5)
         #room.color[ballColor]['location'] = [pos_x, pos_y]
+        #room.lastVisited.append([pos_x, pos_y])
         room.color[ballColor].update( location = [pos_x, pos_y])
         
         print('Name:', room.color[ballColor]['name'], ' Location: ', room.color[ballColor]['location'])
