@@ -36,11 +36,15 @@ class console_manager():
 
     def callback(self, data):
         self.state = data.data
-        rospy.loginfo('HEARD')
+        #rospy.loginfo('HEARD')
 
     def backUser(self):
         self.msg_play = user()
         command = raw_input("Please enter 'play' to call the dog: ")
+        
+        if self.state == 'sleep':
+            print('Sorry but the robot is sleeping')
+            return self.backUser()
 
         if command == "play":
             self.msg_play.play = True
@@ -87,7 +91,7 @@ if __name__ == "__main__":
     play = console_manager()
 
     while not rospy.is_shutdown():
-        rospy.loginfo('State: %s', play.state)
+        #rospy.loginfo('State: %s', play.state)
 
         if play.state == "normal":
             play.backUser()

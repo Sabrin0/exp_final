@@ -32,7 +32,7 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 ## Ros Messages
 from sensor_msgs.msg import CompressedImage
 from geometry_msgs.msg import Twist
-from std_msgs.msg import Float64, Bool
+from std_msgs.msg import Float64, Bool, String
 #from exp_assignment2.msg import BallState
 from exp_final.msg import BallState
 
@@ -95,7 +95,11 @@ class image_feature:
         #self.BallDet_pub = rospy.Publisher("BallState", Bool, queue_size=1)
         self.subscriber = rospy.Subscriber("/camera1/image_raw/compressed",
                                            CompressedImage, self.callback,  queue_size=1)
+        
+        self.state_sub = rospy.Subscriber("/currentState", String, self.callbackState, queue_size=1)
 
+    def callbackState(self, data):
+        self.state = data.data
 
     def callback(self, ros_data):
 
@@ -123,7 +127,7 @@ class image_feature:
         #print('##### lower, upper and found: ', lowerBound, upperBound, ballFound)
         # Se ballFound = true -> caccia la palla
         # Se ballColor = false -> palla non ancora trovata quinid procedere 
-        if ballFound and not cl.ball[ballColor]:
+        if ballFound and not cl.ball[ballColor] and self.state is not 'sleep':
             #rospy.loginfo('GOAL CANCELLED')
             #client.cancel_all_goals()
             mask = cv2.inRange(hsv, lowerBound, upperBound)

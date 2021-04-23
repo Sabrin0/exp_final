@@ -94,8 +94,8 @@ class blueprint:
             return [-5, 8]
         
         for key, value in res.items():
-            print('------KEY: ', key)
-            print('******VAL: ', value['location'])
+            #print('------KEY: ', key)
+            #print('******VAL: ', value['location'])
             locations.append(value['location'])
             
         for loc in locations:
@@ -198,12 +198,12 @@ def callback_check(data):
         #rospy.loginfo("Ball Detected! Start tracking ")
         #client.cancel_all_goals()
 
-    print('### BallDetected: ', BallDetected, "BallCheck: ", BallCheck, 'CurrentR: ', currentRadius )
-    if (BallDetected == True) and (BallCheck == True) and currentRadius > 90:
+    #print('### BallDetected: ', BallDetected, "BallCheck: ", BallCheck, 'CurrentR: ', currentRadius )
+    if (BallDetected == True) and (BallCheck == True) and currentRadius > 95:
         
-        #rospy.loginfo('Tracking the Ball')
+        rospy.loginfo('Tracking the Ball')
         
-        rospy.loginfo('Save ball postion')
+        #rospy.loginfo('Save ball postion')
         #rospy.sleep(5)
         #room.color[ballColor]['location'] = [pos_x, pos_y]
         #room.lastVisited.append([pos_x, pos_y])
@@ -267,16 +267,16 @@ class Normal(smach.State):
                 rospy.loginfo('RITORNO <PLAY>')
                 return 'GoToPlay'
                 
-            elif self.counter == 2:
+            elif self.counter == random.randint(2,4):
                 return 'GoToSleep'
             else:
-                result = movement.GoTo(0,7)
+                result = movement.GoTo(x_target,y_target)
                 if result:
                     
                     rospy.loginfo('I am arrived')
                     self.counter += 1
 
-        rospy.loginfo('############ finito loop normal ritorno sleep')
+        #rospy.loginfo('############ finito loop normal ritorno sleep')
         return 'GoToSleep'
 
 class Sleep(smach.State):
@@ -303,6 +303,7 @@ class Sleep(smach.State):
         #GoTo = targetPosition()
         rospy.loginfo('--------------------- ')
         rospy.loginfo('Executing state SLEEP ')
+        pub.pubState('sleep')
         ## Setting the goal home position
         result = movement.GoTo(movement.x_home,movement.y_home)
         if result: 
@@ -425,7 +426,10 @@ class Find(smach.State):
         if result:
         ## Setting the goal home position
             while room.color[GoTo_room]['location'] is None:
-                print('reaching the room: ', room.color[GoTo_room]['name'] )
+                sent = False
+                if not sent:
+                    sent = True
+                    print('reaching the room: ', room.color[GoTo_room]['name'] )
                 resp = srv_client_wall_follower_(True)
             GoTo_room = ''
             resp = srv_client_wall_follower_(False)
