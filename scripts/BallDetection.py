@@ -100,6 +100,7 @@ class image_feature:
 
     def callbackState(self, data):
         self.state = data.data
+        rospy.loginfo('Current State: %s' %self.state)
 
     def callback(self, ros_data):
 
@@ -127,7 +128,7 @@ class image_feature:
         #print('##### lower, upper and found: ', lowerBound, upperBound, ballFound)
         # Se ballFound = true -> caccia la palla
         # Se ballColor = false -> palla non ancora trovata quinid procedere 
-        if ballFound and not cl.ball[ballColor] and self.state is not 'sleep':
+        if ballFound and not cl.ball[ballColor] and (self.state != 'sleep'):
             #rospy.loginfo('GOAL CANCELLED')
             #client.cancel_all_goals()
             mask = cv2.inRange(hsv, lowerBound, upperBound)

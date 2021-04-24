@@ -26,6 +26,7 @@ import random
 import sys
 import rospy
 import actionlib
+import threading
 from collections import OrderedDict
 from operator import getitem
 ## ROS messages
@@ -267,7 +268,7 @@ class Normal(smach.State):
                 rospy.loginfo('RITORNO <PLAY>')
                 return 'GoToPlay'
                 
-            elif self.counter == random.randint(2,4):
+            elif self.counter == 2: #random.randint(1,3):
                 return 'GoToSleep'
             else:
                 result = movement.GoTo(x_target,y_target)
@@ -363,7 +364,7 @@ class Play(smach.State):
                 elapsed = start -time.time()
                 time.sleep(1)
                 print("I am waiting for user command...")
-                if elapsed == 30:
+                if elapsed == 10:
                     rospy.loginfo("Too late, back to state normal")
                     
                     return 'GoToNormal'
@@ -425,7 +426,13 @@ class Find(smach.State):
         result = movement.GoTo(go[0],go[1])
         if result:
         ## Setting the goal home position
+            start = time.time()
+            elapsed = 0
             while room.color[GoTo_room]['location'] is None:
+                elapsed = time.time() - start
+                if elapsed > 300:
+                    GoTo_room = ''
+                    return 'GoToPlay'
                 sent = False
                 if not sent:
                     sent = True
