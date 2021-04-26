@@ -1,11 +1,17 @@
 #!/usr/bin/env python
 
-"""
-@section description
-OpenCV node
-This node is responsible for the ball detection.
-In particular, once the ball is detected, it implemnt a simple algorith in order to track the ball untill the goal is reached.
-It also publishes on the topic BallState in order to communicate with the cmd_man when the ball is detected and when the robot is next to it.
+"""!
+
+This node is responsable for the ball detection. 
+There are two main phases:
+
+- __pre-processing__: Due to the module _colorLabeler_ the robot is able to detect any ball in the enviroment and recognize its color.
+    Once the ball is detected, the afromentioned module also returns the features for the specific color in order to procede with the tracking
+- __tracking__: It implemnts a simple algorith in order to track the ball untill the ball is reached, then publishes on the topic __cmd_vel__ 
+    in order to reach the ball position.
+
+It also publishes on the topic __BallState__ in order to communicate with the cmd_man whenever the ball is detected and the robot is next to it.
+By subscribing on the topic __currentState__, the robot avoids the tracking when the robot is in the sleep state. Also it remembers which ball has been already detected so, even in this case, it avoids the tracking.
 """
 
 ## Python libs
@@ -38,6 +44,20 @@ from exp_final.msg import BallState
 VERBOSE = False
 
 def BallDetection(gray, hsv, ballFound):
+    """!
+        Function that recognize any ball in the enviroment by using th _OpenCV_ function `cv2.HoughCircles(image, method, dp, minDist)`.
+        Once the ball has been detected it calls the module colorLabelr and its method generateBoundaries in order to return the required features.
+        
+        @param gray: image in grayscale
+        @param hsv: image in hsv colorspace
+        @param ballFound: `Bool`, It represents if the ball has been found or not
+
+        @return lowerBounds: `np.array`, lower mask of the color detected
+        @return upperBound: `np.array`, upper mask of the color detected 
+        @return ballFound: `Bool`, it indicate wheter the ball is dected or not
+        @return color: `String`, it represents the color of the ball detected
+            
+    """
     
     # detect circle
     circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, gray.shape[0],
@@ -81,30 +101,60 @@ def BallDetection(gray, hsv, ballFound):
 class image_feature:
 
     def __init__(self):
-        '''! Initialize ros publisher, ros subscriber'''
+        '''! The construct. Initialize the node, ros publisher, ros subscriber.
+            Attributes
+            ---
+            self.image_pub: `rospy.Publisher()`,
+                It allows the publication to the topic __output/image_raw/compressed__, CompressedImage.
+
+            self.vel_pub: `rospy.Publisher()`, 
+                It allows the publication to the topic __cmd_vel__, Twist. With this it's possible to move the robot toward the ball  
+            
+            self.BallDet_pub: `rospy.Publisher()`,
+                It allows the publication to the topic __BallState__, custom message. With this it's possible to send to the cmd_man specif istructions.
+
+            self.subscriber: `rospy.Subscriber()`,
+                It allows the subscription to the topic __camera1/image_raw/compressed__, CompressedImage.
+                With this it's possible to receive and then process the image from the camera.
+
+            self.state_sub: `rospy.Subscriber()`,
+                It allows the subscription to the topic __currentState__, String. With this it's possible to track or not the ball
+                depending on the current robot state
+        '''
         rospy.init_node('BallDetection', anonymous=True)
-        ## topic where we publish
+        ## Publisher topic /output/image_raw/compressed
         self.image_pub = rospy.Publisher("/output/image_raw/compressed",
                                          CompressedImage, queue_size=1)
+        ## Publisher topic /cmd_vel
         self.vel_pub = rospy.Publisher("/cmd_vel",
                                        Twist, queue_size=1)
-
-        ## flag for ball detected
+        ## Publisher topic /BallState
         self.BallDet_pub = rospy.Publisher("/BallState", BallState, queue_size=1)
-        #self.BallDet_pub = rospy.Publisher("BallState", Bool, queue_size=1)
+        ## Subscriber topic /camera1/image_raw/compressed
         self.subscriber = rospy.Subscriber("/camera1/image_raw/compressed",
                                            CompressedImage, self.callback,  queue_size=1)
-        
+        ## Subscriber topic /currentState
         self.state_sub = rospy.Subscriber("/currentState", String, self.callbackState, queue_size=1)
 
     def callbackState(self, data):
+        """!@brief Callback that receives the messages related to the current state of the robot from the cmd_man.
+        @param data: message over the topic __currentState__ 
+        Attributes
+        ---
+        self.state: type `String`
+            It stores the data from the afromentioned topic  
+        """
         self.state = data.data
         rospy.loginfo('Current State: %s' %self.state)
 
     def callback(self, ros_data):
 
-        '''Callback function of subscribed topic. 
-        Here images get converted and features detected'''
+        """!Callback function of subscribed topic. 
+            Here images get converted and features detected. Once the ball is dectetec it provides a simple alghorithm in order to follow
+            the ball, if neither the ball has been already detecter and nor the robot is in the state sleep.
+            Once the robot is next to the ball, the corresponding key of the dictionary `cl.ball` is set to `True`. It also publish the _currentRadius_
+            and the current _color_ of ball on the topic __BallStatus__.
+        """
         if VERBOSE:
             print ('received image of type: "%s"' % ros_data.format)
    
@@ -195,7 +245,8 @@ class image_feature:
 
 
 def main(args):
-    '''Initializes and cleanup ros node'''
+    """! Main program entry, it initializes and cleans up ros node.
+    """
     
     ic = image_feature()
     try:
@@ -206,6 +257,7 @@ def main(args):
 
 
 if __name__ == '__main__':
-    client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
+    #client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
+    ## Initiliazation class ColorLabeler
     cl = ColorLabeler()
     main(sys.argv)

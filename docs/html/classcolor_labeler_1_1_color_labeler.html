@@ -78,17 +78,22 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab4f4a87d15bc383f24be9906d33cb7b5"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcolor_labeler_1_1_color_labeler.html#ab4f4a87d15bc383f24be9906d33cb7b5">__init__</a> (self)</td></tr>
+<tr class="memdesc:ab4f4a87d15bc383f24be9906d33cb7b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The construct.  <a href="classcolor_labeler_1_1_color_labeler.html#ab4f4a87d15bc383f24be9906d33cb7b5">More...</a><br /></td></tr>
 <tr class="separator:ab4f4a87d15bc383f24be9906d33cb7b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef66fc61e916d86061da1b3b0dded6e8"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcolor_labeler_1_1_color_labeler.html#aef66fc61e916d86061da1b3b0dded6e8">label</a> (self, image, center, radius)</td></tr>
+<tr class="memdesc:aef66fc61e916d86061da1b3b0dded6e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method of the class <a class="el" href="namespacecolor_labeler.html">colorLabeler</a>.  <a href="classcolor_labeler_1_1_color_labeler.html#aef66fc61e916d86061da1b3b0dded6e8">More...</a><br /></td></tr>
 <tr class="separator:aef66fc61e916d86061da1b3b0dded6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5552b17cb9fcfa984f59816c71431b81"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcolor_labeler_1_1_color_labeler.html#a5552b17cb9fcfa984f59816c71431b81">generateBoundaries</a> (self, color)</td></tr>
+<tr class="memdesc:a5552b17cb9fcfa984f59816c71431b81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method of the class <a class="el" href="namespacecolor_labeler.html">colorLabeler</a>.  <a href="classcolor_labeler_1_1_color_labeler.html#a5552b17cb9fcfa984f59816c71431b81">More...</a><br /></td></tr>
 <tr class="separator:a5552b17cb9fcfa984f59816c71431b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a69513c6c50de17d9bd7e604e6bb6ccb3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcolor_labeler_1_1_color_labeler.html#a69513c6c50de17d9bd7e604e6bb6ccb3">ball</a></td></tr>
+<tr class="memdesc:a69513c6c50de17d9bd7e604e6bb6ccb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">flag for ball detection, if true the ball is ignored  <a href="classcolor_labeler_1_1_color_labeler.html#a69513c6c50de17d9bd7e604e6bb6ccb3">More...</a><br /></td></tr>
 <tr class="separator:a69513c6c50de17d9bd7e604e6bb6ccb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3b7566b6de63e48e4116b8569d03424"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcolor_labeler_1_1_color_labeler.html#aa3b7566b6de63e48e4116b8569d03424">lab</a></td></tr>
+<tr class="memdesc:aa3b7566b6de63e48e4116b8569d03424"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mean Color Dictionary RGB.  <a href="classcolor_labeler_1_1_color_labeler.html#aa3b7566b6de63e48e4116b8569d03424">More...</a><br /></td></tr>
 <tr class="separator:aa3b7566b6de63e48e4116b8569d03424"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a171e6d4f653bb87a975b59545cf32788"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcolor_labeler_1_1_color_labeler.html#a171e6d4f653bb87a975b59545cf32788">colorNames</a></td></tr>
 <tr class="separator:a171e6d4f653bb87a975b59545cf32788"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,6 +114,17 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The construct. </p>
+<p>Initialization of the dictionaries and the labeler</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self.ball</td><td><code>dict</code>, The keys represent the color of the balls and the corresponing value is a <code>Bool</code>: if the specific ball has been detected the flag is set to <code>True</code>, otherwise it's ´False´</td></tr>
+    <tr><td class="paramname">colors</td><td><code>dict</code>, it stores all the possible color with the corresponding RGB values</td></tr>
+    <tr><td class="paramname">self.lab</td><td><code>np.array</code>, memory allocation for the image </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -138,6 +154,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Method of the class <a class="el" href="namespacecolor_labeler.html">colorLabeler</a>. </p>
+<p>Given the color found, it returns the corresponding lower and the upper mask. If the color doesn't match any one in the dictionary the method return <code>None</code> for both the masks.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">color</td><td>The ball color detected in the image</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>loweBound, upperBound </dd></dl>
 
 </div>
 </div>
@@ -179,6 +205,18 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Method of the class <a class="el" href="namespacecolor_labeler.html">colorLabeler</a>. </p>
+<p>It creates a mask for the ball contour then compute avarage value for the masked region region. Then thoug a loop over the known hsv color values the distance between these ones and the mean of the masked image is calculated. The know hsv color values with the smaller distance is returned.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">image</td><td>image to be processed </td></tr>
+    <tr><td class="paramname">center</td><td>the center of the circle in the image circumscribing the ball </td></tr>
+    <tr><td class="paramname">radius</td><td>the radius of the circle in the image circumscribing the ball</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>self.colorName[minDist[1]]: the color found </dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -193,6 +231,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>flag for ball detection, if true the ball is ignored </p>
 
 </div>
 </div>
@@ -221,6 +261,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Mean Color Dictionary RGB. </p>
 
 </div>
 </div>

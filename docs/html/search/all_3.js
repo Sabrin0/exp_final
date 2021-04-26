@@ -10,7 +10,7 @@ var searchData=
   ['change_5fstate_18',['change_state',['../namespacefollow__wall.html#a4a7ce0260143960a3188ea9e024ed5d8',1,'follow_wall.change_state()'],['../namespacenew__follow.html#aca89f7c46820af3ca1c69de0d4acd923',1,'new_follow.change_state()']]],
   ['cl_19',['cl',['../namespace_ball_detection.html#a7ffe5ee300fe61c300fe7141981012f9',1,'BallDetection']]],
   ['clbk_5flaser_20',['clbk_laser',['../namespacefollow__wall.html#a9fbb5828182205bfbc8d08b4304942a1',1,'follow_wall.clbk_laser()'],['../namespacenew__follow.html#acf23c8542bb4e0cbfb25aacb128a6e84',1,'new_follow.clbk_laser()']]],
-  ['client_21',['client',['../namespace_ball_detection.html#a7ec28b56ba3239f82cba3763c82dc1c7',1,'BallDetection.client()'],['../namespacecmd__man.html#ab0787082f624fa3c830f7e8ea9090401',1,'cmd_man.client()']]],
+  ['client_21',['client',['../namespacecmd__man.html#ab0787082f624fa3c830f7e8ea9090401',1,'cmd_man']]],
   ['cmd_5fman_22',['cmd_man',['../namespacecmd__man.html',1,'']]],
   ['cmd_5fman_2epy_23',['cmd_man.py',['../cmd__man_8py.html',1,'']]],
   ['color_24',['color',['../classcmd__man_1_1blueprint.html#a961e2e2abd49c6a46a10afc08ba43813',1,'cmd_man.blueprint.color()'],['../classtest_1_1blueprint.html#a044ee23ebae7ed2616f7b2c94058b5c1',1,'test.blueprint.color()'],['../classuser_play_1_1console__manager.html#a645f79340fa6d3bd77a1618278963741',1,'userPlay.console_manager.color()']]],

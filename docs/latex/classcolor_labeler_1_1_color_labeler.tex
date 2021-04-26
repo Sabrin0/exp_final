@@ -4,18 +4,18 @@
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler_ab4f4a87d15bc383f24be9906d33cb7b5}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
-\item 
+\begin{DoxyCompactList}\small\item\em The construct. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler_aef66fc61e916d86061da1b3b0dded6e8}{label}} (self, image, center, radius)
-\item 
+\begin{DoxyCompactList}\small\item\em Method of the class \mbox{\hyperlink{namespacecolor_labeler}{color\+Labeler}}. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler_a5552b17cb9fcfa984f59816c71431b81}{generate\+Boundaries}} (self, color)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Method of the class \mbox{\hyperlink{namespacecolor_labeler}{color\+Labeler}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler_a69513c6c50de17d9bd7e604e6bb6ccb3}{ball}}
-\item 
+\begin{DoxyCompactList}\small\item\em flag for ball detection, if true the ball is ignored \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler_aa3b7566b6de63e48e4116b8569d03424}{lab}}
-\item 
+\begin{DoxyCompactList}\small\item\em Mean Color Dictionary RGB. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler_a171e6d4f653bb87a975b59545cf32788}{color\+Names}}
 \end{DoxyCompactItemize}
 
@@ -29,6 +29,21 @@ def \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler_a5552b17cb9fcfa984f598
 
 
 
+The construct. 
+
+Initialization of the dictionaries and the labeler
+
+
+\begin{DoxyParams}{Parameters}
+{\em self.\+ball} & {\ttfamily dict}, The keys represent the color of the balls and the corresponing value is a {\ttfamily Bool}\+: if the specific ball has been detected the flag is set to {\ttfamily True}, otherwise it\textquotesingle{}s ´\+False´\\
+\hline
+{\em colors} & {\ttfamily dict}, it stores all the possible color with the corresponding RGB values\\
+\hline
+{\em self.\+lab} & {\ttfamily np.\+array}, memory allocation for the image \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classcolor_labeler_1_1_color_labeler_a5552b17cb9fcfa984f59816c71431b81}\label{classcolor_labeler_1_1_color_labeler_a5552b17cb9fcfa984f59816c71431b81}} 
 \index{colorLabeler.ColorLabeler@{colorLabeler.ColorLabeler}!generateBoundaries@{generateBoundaries}}
@@ -36,6 +51,20 @@ def \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler_a5552b17cb9fcfa984f598
 \doxysubsubsection{\texorpdfstring{generateBoundaries()}{generateBoundaries()}}
 {\footnotesize\ttfamily def color\+Labeler.\+Color\+Labeler.\+generate\+Boundaries (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{color }\end{DoxyParamCaption})}
 
+
+
+Method of the class \mbox{\hyperlink{namespacecolor_labeler}{color\+Labeler}}. 
+
+Given the color found, it returns the corresponding lower and the upper mask. If the color doesn\textquotesingle{}t match any one in the dictionary the method return {\ttfamily None} for both the masks.
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & The ball color detected in the image\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lowe\+Bound, upper\+Bound 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classcolor_labeler_1_1_color_labeler_aef66fc61e916d86061da1b3b0dded6e8}\label{classcolor_labeler_1_1_color_labeler_aef66fc61e916d86061da1b3b0dded6e8}} 
 \index{colorLabeler.ColorLabeler@{colorLabeler.ColorLabeler}!label@{label}}
 \index{label@{label}!colorLabeler.ColorLabeler@{colorLabeler.ColorLabeler}}
@@ -44,12 +73,34 @@ def \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler_a5552b17cb9fcfa984f598
 
 
 
+Method of the class \mbox{\hyperlink{namespacecolor_labeler}{color\+Labeler}}. 
+
+It creates a mask for the ball contour then compute avarage value for the masked region region. Then thoug a loop over the known hsv color values the distance between these ones and the mean of the masked image is calculated. The know hsv color values with the smaller distance is returned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & image to be processed \\
+\hline
+{\em center} & the center of the circle in the image circumscribing the ball \\
+\hline
+{\em radius} & the radius of the circle in the image circumscribing the ball\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+self.\+color\+Name\mbox{[}min\+Dist\mbox{[}1\mbox{]}\mbox{]}\+: the color found 
+\end{DoxyReturn}
+
+
 \doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classcolor_labeler_1_1_color_labeler_a69513c6c50de17d9bd7e604e6bb6ccb3}\label{classcolor_labeler_1_1_color_labeler_a69513c6c50de17d9bd7e604e6bb6ccb3}} 
 \index{colorLabeler.ColorLabeler@{colorLabeler.ColorLabeler}!ball@{ball}}
 \index{ball@{ball}!colorLabeler.ColorLabeler@{colorLabeler.ColorLabeler}}
 \doxysubsubsection{\texorpdfstring{ball}{ball}}
 {\footnotesize\ttfamily color\+Labeler.\+Color\+Labeler.\+ball}
+
+
+
+flag for ball detection, if true the ball is ignored 
 
 \mbox{\Hypertarget{classcolor_labeler_1_1_color_labeler_a171e6d4f653bb87a975b59545cf32788}\label{classcolor_labeler_1_1_color_labeler_a171e6d4f653bb87a975b59545cf32788}} 
 \index{colorLabeler.ColorLabeler@{colorLabeler.ColorLabeler}!colorNames@{colorNames}}
@@ -62,6 +113,10 @@ def \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler_a5552b17cb9fcfa984f598
 \index{lab@{lab}!colorLabeler.ColorLabeler@{colorLabeler.ColorLabeler}}
 \doxysubsubsection{\texorpdfstring{lab}{lab}}
 {\footnotesize\ttfamily color\+Labeler.\+Color\+Labeler.\+lab}
+
+
+
+Mean Color Dictionary RGB. 
 
 
 

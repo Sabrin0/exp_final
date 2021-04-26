@@ -74,12 +74,17 @@ $(function() {
 <div class="title">cmd_man.pubHandler Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class that handles publishing on the topic <b>currentState</b>.  
+ <a href="classcmd__man_1_1pub_handler.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:add0ec63cc12067deb6477619cbfb582b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1pub_handler.html#add0ec63cc12067deb6477619cbfb582b">__init__</a> (self)</td></tr>
+<tr class="memdesc:add0ec63cc12067deb6477619cbfb582b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The construct.  <a href="classcmd__man_1_1pub_handler.html#add0ec63cc12067deb6477619cbfb582b">More...</a><br /></td></tr>
 <tr class="separator:add0ec63cc12067deb6477619cbfb582b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa13fdf04989d25a768bfed098d985596"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1pub_handler.html#aa13fdf04989d25a768bfed098d985596">pubState</a> (self, state)</td></tr>
+<tr class="memdesc:aa13fdf04989d25a768bfed098d985596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that provides the pubblication over the topic.  <a href="classcmd__man_1_1pub_handler.html#aa13fdf04989d25a768bfed098d985596">More...</a><br /></td></tr>
 <tr class="separator:aa13fdf04989d25a768bfed098d985596"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -87,7 +92,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a7e204d652929a8c404db21c91826e64b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1pub_handler.html#a7e204d652929a8c404db21c91826e64b">statePub</a></td></tr>
 <tr class="separator:a7e204d652929a8c404db21c91826e64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class that handles publishing on the topic <b>currentState</b>. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="add0ec63cc12067deb6477619cbfb582b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#add0ec63cc12067deb6477619cbfb582b">&#9670;&nbsp;</a></span>__init__()</h2>
 
@@ -103,6 +110,12 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The construct. </p>
+<p>Initilize ROS publisher. </p>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Attributes</h2>
+<p>self.statePub: <code>rospy.Publisher</code>, It allows the publication over the topic <b>currentState</b>, String. With this it's possible to publish the current state of the robot. </p>
 
 </div>
 </div>
@@ -132,6 +145,17 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Method that provides the pubblication over the topic. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>: <code>String</code>, the current state of the robot </td></tr>
+  </table>
+  </dd>
+</dl>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Attributes</h2>
+<p>self.statePub: it declares that the node is publishing </p>
 
 </div>
 </div>

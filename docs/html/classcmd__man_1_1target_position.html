@@ -74,24 +74,34 @@ $(function() {
 <div class="title">cmd_man.targetPosition Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class that manages the terget position to set as goal for the <em>Nav Stack</em>.  
+ <a href="classcmd__man_1_1target_position.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afd86f7cc82bdc43d849f4e10c698e16e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1target_position.html#afd86f7cc82bdc43d849f4e10c698e16e">randomPos</a> (self)</td></tr>
+<tr class="memdesc:afd86f7cc82bdc43d849f4e10c698e16e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that provides random position in the enviroment.  <a href="classcmd__man_1_1target_position.html#afd86f7cc82bdc43d849f4e10c698e16e">More...</a><br /></td></tr>
 <tr class="separator:afd86f7cc82bdc43d849f4e10c698e16e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a931175c83b1b97adb20266885a70aaa4"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1target_position.html#a931175c83b1b97adb20266885a70aaa4">GoTo</a> (self, x_target, y_target)</td></tr>
+<tr class="memdesc:a931175c83b1b97adb20266885a70aaa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Methods that creates an action client move_base with action definition file "MoveBaseAction".  <a href="classcmd__man_1_1target_position.html#a931175c83b1b97adb20266885a70aaa4">More...</a><br /></td></tr>
 <tr class="separator:a931175c83b1b97adb20266885a70aaa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:ae59fc822fd25cf484e3dbc28f29249b2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1target_position.html#ae59fc822fd25cf484e3dbc28f29249b2">x_home</a> = -5</td></tr>
+<tr class="memdesc:ae59fc822fd25cf484e3dbc28f29249b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">home x postion  <a href="classcmd__man_1_1target_position.html#ae59fc822fd25cf484e3dbc28f29249b2">More...</a><br /></td></tr>
 <tr class="separator:ae59fc822fd25cf484e3dbc28f29249b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f64561b23ef451fe9ec18e432f9a8eb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1target_position.html#a9f64561b23ef451fe9ec18e432f9a8eb">y_home</a> = 8</td></tr>
+<tr class="memdesc:a9f64561b23ef451fe9ec18e432f9a8eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">home y positiom  <a href="classcmd__man_1_1target_position.html#a9f64561b23ef451fe9ec18e432f9a8eb">More...</a><br /></td></tr>
 <tr class="separator:a9f64561b23ef451fe9ec18e432f9a8eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a637b04a073d91ff9d838785cbafa5b18"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1target_position.html#a637b04a073d91ff9d838785cbafa5b18">randomPosition</a></td></tr>
+<tr class="memdesc:a637b04a073d91ff9d838785cbafa5b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">list of random position in the enviroment  <a href="classcmd__man_1_1target_position.html#a637b04a073d91ff9d838785cbafa5b18">More...</a><br /></td></tr>
 <tr class="separator:a637b04a073d91ff9d838785cbafa5b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class that manages the terget position to set as goal for the <em>Nav Stack</em>. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a931175c83b1b97adb20266885a70aaa4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a931175c83b1b97adb20266885a70aaa4">&#9670;&nbsp;</a></span>GoTo()</h2>
 
@@ -124,6 +134,17 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Methods that creates an action client move_base with action definition file "MoveBaseAction". </p>
+<p>After waiting until the action server has started up and started listening for goals it set a new goal with the <em>MoveBaseGoal</em> constructor smd sends it. Then it waits for the server to finish performing the action. If the result doesn't arrive, assume the Server is not available.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x_target</td><td>the x positon set as goal </td></tr>
+    <tr><td class="paramname">y_target</td><td>the y position set as goal</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of executing the action </dd></dl>
+
 </div>
 </div>
 <a id="afd86f7cc82bdc43d849f4e10c698e16e"></a>
@@ -141,6 +162,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Method that provides random position in the enviroment. </p>
+<dl class="section return"><dt>Returns</dt><dd>x_target, y_target: positions to set as goal for the <em>Nav Stack</em> </dd></dl>
 
 </div>
 </div>
@@ -173,6 +197,8 @@ Static Public Attributes</h2></td></tr>
 <div class="line">        [5, -7]</div>
 <div class="line">    ]</div>
 </div><!-- fragment -->
+<p>list of random position in the enviroment </p>
+
 </div>
 </div>
 <a id="ae59fc822fd25cf484e3dbc28f29249b2"></a>
@@ -195,6 +221,8 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>home x postion </p>
+
 </div>
 </div>
 <a id="a9f64561b23ef451fe9ec18e432f9a8eb"></a>
@@ -216,6 +244,8 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>home y positiom </p>
 
 </div>
 </div>

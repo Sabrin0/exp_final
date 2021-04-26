@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 
 """!
-@author Luca Covizzi 
-@file cmd_man.py
-@mainpage Exprob Assignment 2
-@section Description
 
-This script, implementing a FSM, is the main ROS node.
-It's a subcriber of the topic BallState, in order to check the current status of the ball.
-It's also a publisher, due to the function head_control in order to move the robot head.
-And moreover it's a client of the the action server according to the robot movement.
-In this way, by checking several condition, it's possible to resarch the desired state inside the FSM.   
+
+@brief This script, implementing a FSM, is the main ROS node.
+It's a subcriber of the topic __BallState__, in order to check the current status of the ball and the topic __userCommand__
+for the purpose of reaching the Play state whenever it's called.
+It's also a publisher, in order to share with the other nodes the current state of the robot.
+Regarding the navigation, it's a client of the the _Nav Stack_ action server according to the robot movement. It acts as
+a client also for the follow_wall service, so a simple exploring behaviour is implemented.
+In this way, by checking several conditions, it's possible to resarch the desired state inside the FSM.   
 """
 
 from __future__ import print_function
@@ -39,34 +38,37 @@ from nav_msgs.msg import Odometry
 # import ros service
 from std_srvs.srv import *
 
-## Define home x position
-# @param x_home The fixed home coordinate x 
-#x_home = 5
-
-## Define home y position 
-# @param x_home The fixed home coordinate x
-#y_home = 8
-
-## Initial state of the ball status
-## @param BallDetected, bool flag for the ball detection
+## Flag for the ball detection, intialized as `False`
 BallDetected = False
 
-## @parama BallCheck, bool flag for the ball check  
+## Flag for the ball check, intialized as `False`
 BallCheck = False
+## Current radius of the ball detected 
 currentRadius = 0
-## Ball Color
+## Color of the ball detected, initialized as `None` 
 ballColor = None
-
+## Initialization of the follow_wall client
 srv_client_wall_follower_ = None
-
+## Play command, initialized as `False`
 play = False
+## Checking if the the play state is available, initialized as `False`
 playAvilable = False
+## GoTo command, initialized as `False`
 GoTo_room = None
 
-## Room class:
-class blueprint:
-    def __init__(self):
 
+class blueprint:
+    """! @brief Class that holds the blueprint of the enviroment. It's used during the navigation since it
+        stores the position of the rooms and if they has been visited or not.
+    """
+    def __init__(self):
+        """! 
+            @brief The construct. Initialize the dictionary `self.color` and the param `self.findcounter`.
+
+            @param self.color: `dictionary`, in which all the info about the rooms are
+            stored
+            @param self.findCounter `int`, which count how many time the state Find is called.
+        """
         self.color = OrderedDict({
             'blue': {'name':'entrance', 'location': None, 'index':1},
             'red': {'name':'closet', 'location': None, 'index':2},
@@ -76,12 +78,15 @@ class blueprint:
             'black': {'name':'bedroom', 'location': None, 'index':6},
         })
         self.findCounter = 0
-        #self.lastVisited = [
-        #                    [-5,8] #first home
-        #               ]
-
+        
     def preFind(self):
-        #print(self.lastVisited)
+        """! @brief Method of the class blueprint. It's called by the state Find, in this way, since the robot start from the User position
+            it goes first to the last room visited (starting from the first key in the color dictionary) before exporing the enviroment.
+            If the findCounter is equal to 0, however it starts from the user position and it is incremented every cicle. \n
+            __Please Notice__: given that python2 does not ensure the order of the dictionary a simple method is implemeted to do so.
+
+            @return x,y position of the last know room of the dictionary color  
+        """
         
         res = OrderedDict(sorted(self.color.items(),
 			key = lambda x: getitem(x[1], 'index')))
@@ -108,19 +113,39 @@ class blueprint:
         return known[-1]
 
 class pubHandler:
-
+    """! @brief Class that handles publishing on the topic __currentState__.
+    """
     def __init__(self):
+        """! @brief The construct. Initilize ROS publisher.
+        Attributes
+        ---
+        self.statePub: `rospy.Publisher`,
+            It allows the publication over the topic __currentState__, String. With this it's possible to
+            publish the current state of the robot.
+        """
         self.statePub = rospy.Publisher("currentState", String, queue_size=1)
     
     def pubState(self, state):
+        """! Method that provides the pubblication over the topic
+        @param state : `String`, the current state of the robot
+        Attributes
+        ---
+        self.statePub: it declares that the node is publishing
+        """
         self.statePub.publish(state)
         
 
 class targetPosition:
+    """! 
+        @brief Class that manages the terget position to set as goal for the _Nav Stack_.
+        
+    """
 
+    ## home x postion 
     x_home = -5
+    ## home y positiom
     y_home = 8
-    
+    ## list of random position in the enviroment
     randomPosition = [ 
         [0, 7],
         [-6, 1],
@@ -131,6 +156,9 @@ class targetPosition:
     ]
 
     def randomPos(self):
+        """! Method that provides random position in the enviroment
+        @return x_target, y_target: positions to set as goal for the _Nav Stack_
+        """
         P = random.randint(0, 5)
         x_target = self.randomPosition[P][0]
         y_target = self.randomPosition[P][1]
@@ -138,6 +166,17 @@ class targetPosition:
         return x_target, y_target
     
     def GoTo(self, x_target, y_target):
+        """! 
+            @brief Methods that creates an action client move_base with action definition file "MoveBaseAction". 
+            After waiting until the action server has started up and started listening for goals it set a new goal
+            with the _MoveBaseGoal_ constructor smd sends it. Then it waits for the server to finish performing 
+            the action. If the result doesn't arrive, assume the Server is not available.
+
+            @param x_target the x positon set as goal
+            @param y_target the y position set as goal
+
+            @return Result of executing the action
+        """
         client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
         client.wait_for_server()
         goal = MoveBaseGoal()
@@ -163,9 +202,8 @@ class targetPosition:
 
 
 ## Action client for the action server dedicated to the movment
-#client = actionlib.SimpleActionClient('/robot/reaching_goal_robot', exp_assignment2.msg.PlanningAction)
 client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
-# Functions 
+
 def decision():
     """!@brief Documentation for the function decision()
      

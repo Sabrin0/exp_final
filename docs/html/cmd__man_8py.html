@@ -79,11 +79,13 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1blueprint.html">cmd_man.blueprint</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Room class:  <a href="classcmd__man_1_1blueprint.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that holds the blueprint of the enviroment.  <a href="classcmd__man_1_1blueprint.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1pub_handler.html">cmd_man.pubHandler</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that handles publishing on the topic <b>currentState</b>.  <a href="classcmd__man_1_1pub_handler.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1target_position.html">cmd_man.targetPosition</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that manages the terget position to set as goal for the <em>Nav Stack</em>.  <a href="classcmd__man_1_1target_position.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1_normal.html">cmd_man.Normal</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define normal state.  <a href="classcmd__man_1_1_normal.html#details">More...</a><br /></td></tr>
@@ -101,6 +103,7 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacecmd__man"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html">cmd_man</a></td></tr>
+<tr class="memdesc:namespacecmd__man"><td class="mdescLeft">&#160;</td><td class="mdescRight">This script, implementing a FSM, is the main ROS node. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -121,27 +124,31 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a6c343360ecee99b936275be79f8777b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a6c343360ecee99b936275be79f8777b6">cmd_man.BallDetected</a> = False</td></tr>
-<tr class="memdesc:a6c343360ecee99b936275be79f8777b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define home x position.  <a href="namespacecmd__man.html#a6c343360ecee99b936275be79f8777b6">More...</a><br /></td></tr>
+<tr class="memdesc:a6c343360ecee99b936275be79f8777b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for the ball detection, intialized as <code>False</code>  <a href="namespacecmd__man.html#a6c343360ecee99b936275be79f8777b6">More...</a><br /></td></tr>
 <tr class="separator:a6c343360ecee99b936275be79f8777b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2501594f04eb8fbfd4f5357ce3c58e32"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a2501594f04eb8fbfd4f5357ce3c58e32">cmd_man.BallCheck</a> = False</td></tr>
-<tr class="memdesc:a2501594f04eb8fbfd4f5357ce3c58e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">@parama BallCheck, bool flag for the ball check <br  />
-  <a href="namespacecmd__man.html#a2501594f04eb8fbfd4f5357ce3c58e32">More...</a><br /></td></tr>
+<tr class="memdesc:a2501594f04eb8fbfd4f5357ce3c58e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for the ball check, intialized as <code>False</code>  <a href="namespacecmd__man.html#a2501594f04eb8fbfd4f5357ce3c58e32">More...</a><br /></td></tr>
 <tr class="separator:a2501594f04eb8fbfd4f5357ce3c58e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9bd96c0dfe89e0ef1cb9c261f603054"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#ab9bd96c0dfe89e0ef1cb9c261f603054">cmd_man.currentRadius</a> = 0</td></tr>
+<tr class="memdesc:ab9bd96c0dfe89e0ef1cb9c261f603054"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current radius of the ball detected.  <a href="namespacecmd__man.html#ab9bd96c0dfe89e0ef1cb9c261f603054">More...</a><br /></td></tr>
 <tr class="separator:ab9bd96c0dfe89e0ef1cb9c261f603054"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abba1e6565e3bbd37c61270b090c8c4b8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#abba1e6565e3bbd37c61270b090c8c4b8">cmd_man.ballColor</a> = None</td></tr>
-<tr class="memdesc:abba1e6565e3bbd37c61270b090c8c4b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ball Color.  <a href="namespacecmd__man.html#abba1e6565e3bbd37c61270b090c8c4b8">More...</a><br /></td></tr>
+<tr class="memdesc:abba1e6565e3bbd37c61270b090c8c4b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Color of the ball detected, initialized as <code>None</code>  <a href="namespacecmd__man.html#abba1e6565e3bbd37c61270b090c8c4b8">More...</a><br /></td></tr>
 <tr class="separator:abba1e6565e3bbd37c61270b090c8c4b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4c988f8b7d0e0608b35d7bb310bcb2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#ae4c988f8b7d0e0608b35d7bb310bcb2c">cmd_man.srv_client_wall_follower_</a> = None</td></tr>
+<tr class="memdesc:ae4c988f8b7d0e0608b35d7bb310bcb2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the <a class="el" href="namespacefollow__wall.html">follow_wall</a> client.  <a href="namespacecmd__man.html#ae4c988f8b7d0e0608b35d7bb310bcb2c">More...</a><br /></td></tr>
 <tr class="separator:ae4c988f8b7d0e0608b35d7bb310bcb2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71624d8316bb834e7065bde56a4eb569"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a71624d8316bb834e7065bde56a4eb569">cmd_man.play</a> = False</td></tr>
+<tr class="memdesc:a71624d8316bb834e7065bde56a4eb569"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classcmd__man_1_1_play.html" title="Define Play state.">Play</a> command, initialized as <code>False</code>  <a href="namespacecmd__man.html#a71624d8316bb834e7065bde56a4eb569">More...</a><br /></td></tr>
 <tr class="separator:a71624d8316bb834e7065bde56a4eb569"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99f0de5fa2792d00a60ebbb47c40abd6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a99f0de5fa2792d00a60ebbb47c40abd6">cmd_man.playAvilable</a> = False</td></tr>
+<tr class="memdesc:a99f0de5fa2792d00a60ebbb47c40abd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checking if the the play state is available, initialized as <code>False</code>  <a href="namespacecmd__man.html#a99f0de5fa2792d00a60ebbb47c40abd6">More...</a><br /></td></tr>
 <tr class="separator:a99f0de5fa2792d00a60ebbb47c40abd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73895f62bfd8cdb1c8e229f52e6eea13"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a73895f62bfd8cdb1c8e229f52e6eea13">cmd_man.GoTo_room</a> = None</td></tr>
+<tr class="memdesc:a73895f62bfd8cdb1c8e229f52e6eea13"><td class="mdescLeft">&#160;</td><td class="mdescRight">GoTo command, initialized as <code>False</code>  <a href="namespacecmd__man.html#a73895f62bfd8cdb1c8e229f52e6eea13">More...</a><br /></td></tr>
 <tr class="separator:a73895f62bfd8cdb1c8e229f52e6eea13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0787082f624fa3c830f7e8ea9090401"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#ab0787082f624fa3c830f7e8ea9090401">cmd_man.client</a> = actionlib.SimpleActionClient('move_base', MoveBaseAction)</td></tr>
-<tr class="memdesc:ab0787082f624fa3c830f7e8ea9090401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Action client for the action server dedicated to the movment client = actionlib.SimpleActionClient('/robot/reaching_goal_robot', exp_assignment2.msg.PlanningAction)  <a href="namespacecmd__man.html#ab0787082f624fa3c830f7e8ea9090401">More...</a><br /></td></tr>
+<tr class="memdesc:ab0787082f624fa3c830f7e8ea9090401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Action client for the action server dedicated to the movment.  <a href="namespacecmd__man.html#ab0787082f624fa3c830f7e8ea9090401">More...</a><br /></td></tr>
 <tr class="separator:ab0787082f624fa3c830f7e8ea9090401"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2310ba62c26f7ea062d94297508a0220"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a2310ba62c26f7ea062d94297508a0220">cmd_man.room</a> = blueprint()</td></tr>
 <tr class="separator:a2310ba62c26f7ea062d94297508a0220"><td class="memSeparator" colspan="2">&#160;</td></tr>

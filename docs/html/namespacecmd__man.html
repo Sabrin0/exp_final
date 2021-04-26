@@ -70,15 +70,20 @@ $(function() {
 <div class="title">cmd_man Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This script, implementing a FSM, is the main ROS node.  
+<a href="namespacecmd__man.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1blueprint.html">blueprint</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Room class:  <a href="classcmd__man_1_1blueprint.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that holds the blueprint of the enviroment.  <a href="classcmd__man_1_1blueprint.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1pub_handler.html">pubHandler</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that handles publishing on the topic <b>currentState</b>.  <a href="classcmd__man_1_1pub_handler.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1target_position.html">targetPosition</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that manages the terget position to set as goal for the <em>Nav Stack</em>.  <a href="classcmd__man_1_1target_position.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1_normal.html">Normal</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define normal state.  <a href="classcmd__man_1_1_normal.html#details">More...</a><br /></td></tr>
@@ -111,27 +116,31 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a6c343360ecee99b936275be79f8777b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a6c343360ecee99b936275be79f8777b6">BallDetected</a> = False</td></tr>
-<tr class="memdesc:a6c343360ecee99b936275be79f8777b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define home x position.  <a href="namespacecmd__man.html#a6c343360ecee99b936275be79f8777b6">More...</a><br /></td></tr>
+<tr class="memdesc:a6c343360ecee99b936275be79f8777b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for the ball detection, intialized as <code>False</code>  <a href="namespacecmd__man.html#a6c343360ecee99b936275be79f8777b6">More...</a><br /></td></tr>
 <tr class="separator:a6c343360ecee99b936275be79f8777b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2501594f04eb8fbfd4f5357ce3c58e32"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a2501594f04eb8fbfd4f5357ce3c58e32">BallCheck</a> = False</td></tr>
-<tr class="memdesc:a2501594f04eb8fbfd4f5357ce3c58e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">@parama BallCheck, bool flag for the ball check <br  />
-  <a href="namespacecmd__man.html#a2501594f04eb8fbfd4f5357ce3c58e32">More...</a><br /></td></tr>
+<tr class="memdesc:a2501594f04eb8fbfd4f5357ce3c58e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for the ball check, intialized as <code>False</code>  <a href="namespacecmd__man.html#a2501594f04eb8fbfd4f5357ce3c58e32">More...</a><br /></td></tr>
 <tr class="separator:a2501594f04eb8fbfd4f5357ce3c58e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9bd96c0dfe89e0ef1cb9c261f603054"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#ab9bd96c0dfe89e0ef1cb9c261f603054">currentRadius</a> = 0</td></tr>
+<tr class="memdesc:ab9bd96c0dfe89e0ef1cb9c261f603054"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current radius of the ball detected.  <a href="namespacecmd__man.html#ab9bd96c0dfe89e0ef1cb9c261f603054">More...</a><br /></td></tr>
 <tr class="separator:ab9bd96c0dfe89e0ef1cb9c261f603054"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abba1e6565e3bbd37c61270b090c8c4b8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#abba1e6565e3bbd37c61270b090c8c4b8">ballColor</a> = None</td></tr>
-<tr class="memdesc:abba1e6565e3bbd37c61270b090c8c4b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ball Color.  <a href="namespacecmd__man.html#abba1e6565e3bbd37c61270b090c8c4b8">More...</a><br /></td></tr>
+<tr class="memdesc:abba1e6565e3bbd37c61270b090c8c4b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Color of the ball detected, initialized as <code>None</code>  <a href="namespacecmd__man.html#abba1e6565e3bbd37c61270b090c8c4b8">More...</a><br /></td></tr>
 <tr class="separator:abba1e6565e3bbd37c61270b090c8c4b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4c988f8b7d0e0608b35d7bb310bcb2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#ae4c988f8b7d0e0608b35d7bb310bcb2c">srv_client_wall_follower_</a> = None</td></tr>
+<tr class="memdesc:ae4c988f8b7d0e0608b35d7bb310bcb2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the <a class="el" href="namespacefollow__wall.html">follow_wall</a> client.  <a href="namespacecmd__man.html#ae4c988f8b7d0e0608b35d7bb310bcb2c">More...</a><br /></td></tr>
 <tr class="separator:ae4c988f8b7d0e0608b35d7bb310bcb2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71624d8316bb834e7065bde56a4eb569"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a71624d8316bb834e7065bde56a4eb569">play</a> = False</td></tr>
+<tr class="memdesc:a71624d8316bb834e7065bde56a4eb569"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classcmd__man_1_1_play.html" title="Define Play state.">Play</a> command, initialized as <code>False</code>  <a href="namespacecmd__man.html#a71624d8316bb834e7065bde56a4eb569">More...</a><br /></td></tr>
 <tr class="separator:a71624d8316bb834e7065bde56a4eb569"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99f0de5fa2792d00a60ebbb47c40abd6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a99f0de5fa2792d00a60ebbb47c40abd6">playAvilable</a> = False</td></tr>
+<tr class="memdesc:a99f0de5fa2792d00a60ebbb47c40abd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checking if the the play state is available, initialized as <code>False</code>  <a href="namespacecmd__man.html#a99f0de5fa2792d00a60ebbb47c40abd6">More...</a><br /></td></tr>
 <tr class="separator:a99f0de5fa2792d00a60ebbb47c40abd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73895f62bfd8cdb1c8e229f52e6eea13"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a73895f62bfd8cdb1c8e229f52e6eea13">GoTo_room</a> = None</td></tr>
+<tr class="memdesc:a73895f62bfd8cdb1c8e229f52e6eea13"><td class="mdescLeft">&#160;</td><td class="mdescRight">GoTo command, initialized as <code>False</code>  <a href="namespacecmd__man.html#a73895f62bfd8cdb1c8e229f52e6eea13">More...</a><br /></td></tr>
 <tr class="separator:a73895f62bfd8cdb1c8e229f52e6eea13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0787082f624fa3c830f7e8ea9090401"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#ab0787082f624fa3c830f7e8ea9090401">client</a> = actionlib.SimpleActionClient('move_base', MoveBaseAction)</td></tr>
-<tr class="memdesc:ab0787082f624fa3c830f7e8ea9090401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Action client for the action server dedicated to the movment client = actionlib.SimpleActionClient('/robot/reaching_goal_robot', exp_assignment2.msg.PlanningAction)  <a href="namespacecmd__man.html#ab0787082f624fa3c830f7e8ea9090401">More...</a><br /></td></tr>
+<tr class="memdesc:ab0787082f624fa3c830f7e8ea9090401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Action client for the action server dedicated to the movment.  <a href="namespacecmd__man.html#ab0787082f624fa3c830f7e8ea9090401">More...</a><br /></td></tr>
 <tr class="separator:ab0787082f624fa3c830f7e8ea9090401"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2310ba62c26f7ea062d94297508a0220"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecmd__man.html#a2310ba62c26f7ea062d94297508a0220">room</a> = <a class="el" href="classcmd__man_1_1blueprint.html">blueprint</a>()</td></tr>
 <tr class="separator:a2310ba62c26f7ea062d94297508a0220"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,7 +150,9 @@ Variables</h2></td></tr>
 <tr class="separator:a465514eb2e8f678efc4ae252c4bd153b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Luca Covizzi </dd></dl>
+<div class="textblock"><p>This script, implementing a FSM, is the main ROS node. </p>
+<p>It's a subcriber of the topic <b>BallState</b>, in order to check the current status of the ball and the topic <b>userCommand</b> for the purpose of reaching the <a class="el" href="classcmd__man_1_1_play.html" title="Define Play state.">Play</a> state whenever it's called. It's also a publisher, in order to share with the other nodes the current state of the robot. Regarding the navigation, it's a client of the the <em>Nav Stack</em> action server according to the robot movement. It acts as a client also for the <a class="el" href="namespacefollow__wall.html">follow_wall</a> service, so a simple exploring behaviour is implemented. In this way, by checking several conditions, it's possible to resarch the desired state inside the FSM. <br  />
+ </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a230fcab660c41bab82fc3c849ff44ac3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a230fcab660c41bab82fc3c849ff44ac3">&#9670;&nbsp;</a></span>callback_check()</h2>
@@ -256,8 +267,7 @@ While the ball is detected, the values of the radious is updated and if it excee
       </table>
 </div><div class="memdoc">
 
-<p>@parama BallCheck, bool flag for the ball check <br  />
- </p>
+<p>Flag for the ball check, intialized as <code>False</code> </p>
 
 </div>
 </div>
@@ -273,7 +283,7 @@ While the ball is detected, the values of the radious is updated and if it excee
       </table>
 </div><div class="memdoc">
 
-<p>Ball Color. </p>
+<p>Color of the ball detected, initialized as <code>None</code> </p>
 
 </div>
 </div>
@@ -289,25 +299,7 @@ While the ball is detected, the values of the radious is updated and if it excee
       </table>
 </div><div class="memdoc">
 
-<p>Define home x position. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x_home</td><td>The fixed home coordinate x x_home = 5</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Define home y position </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x_home</td><td>The fixed home coordinate x y_home = 8</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Initial state of the ball status </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">BallDetected,bool</td><td>flag for the ball detection </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Flag for the ball detection, intialized as <code>False</code> </p>
 
 </div>
 </div>
@@ -323,7 +315,7 @@ While the ball is detected, the values of the radious is updated and if it excee
       </table>
 </div><div class="memdoc">
 
-<p>Action client for the action server dedicated to the movment client = actionlib.SimpleActionClient('/robot/reaching_goal_robot', exp_assignment2.msg.PlanningAction) </p>
+<p>Action client for the action server dedicated to the movment. </p>
 
 </div>
 </div>
@@ -339,6 +331,8 @@ While the ball is detected, the values of the radious is updated and if it excee
       </table>
 </div><div class="memdoc">
 
+<p>Current radius of the ball detected. </p>
+
 </div>
 </div>
 <a id="a73895f62bfd8cdb1c8e229f52e6eea13"></a>
@@ -352,6 +346,8 @@ While the ball is detected, the values of the radious is updated and if it excee
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>GoTo command, initialized as <code>False</code> </p>
 
 </div>
 </div>
@@ -381,6 +377,8 @@ While the ball is detected, the values of the radious is updated and if it excee
       </table>
 </div><div class="memdoc">
 
+<p><a class="el" href="classcmd__man_1_1_play.html" title="Define Play state.">Play</a> command, initialized as <code>False</code> </p>
+
 </div>
 </div>
 <a id="a99f0de5fa2792d00a60ebbb47c40abd6"></a>
@@ -394,6 +392,8 @@ While the ball is detected, the values of the radious is updated and if it excee
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Checking if the the play state is available, initialized as <code>False</code> </p>
 
 </div>
 </div>
@@ -436,6 +436,8 @@ While the ball is detected, the values of the radious is updated and if it excee
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initialization of the <a class="el" href="namespacefollow__wall.html">follow_wall</a> client. </p>
 
 </div>
 </div>

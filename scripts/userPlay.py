@@ -27,7 +27,8 @@ class console_manager():
             It allows the publication to the topic __userCommand__, custom message. Thought this message the user can send command
             to the robot.
         
-        self.play_sub: It allows the subscription to the topic '/currentState', type String. Thought the user remains updated
+        self.play_sub: `rospy.Subscriber()`
+            It allows the subscription to the topic '/currentState', type String. Thought the user remains updated
             with the curren state of the robot. 
         """
     

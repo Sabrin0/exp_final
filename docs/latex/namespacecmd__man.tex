@@ -1,14 +1,19 @@
 \hypertarget{namespacecmd__man}{}\doxysection{cmd\+\_\+man Namespace Reference}
 \label{namespacecmd__man}\index{cmd\_man@{cmd\_man}}
+
+
+This script, implementing a FSM, is the main ROS node.  
+
+
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classcmd__man_1_1blueprint}{blueprint}}
-\begin{DoxyCompactList}\small\item\em Room class\+: \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Class that holds the blueprint of the enviroment. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classcmd__man_1_1pub_handler}{pub\+Handler}}
-\item 
+\begin{DoxyCompactList}\small\item\em Class that handles publishing on the topic {\bfseries{current\+State}}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classcmd__man_1_1target_position}{target\+Position}}
-\item 
+\begin{DoxyCompactList}\small\item\em Class that manages the terget position to set as goal for the {\itshape Nav Stack}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classcmd__man_1_1_normal}{Normal}}
 \begin{DoxyCompactList}\small\item\em Define normal state. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}}
@@ -34,24 +39,23 @@ def \mbox{\hyperlink{namespacecmd__man_a1f7de7e944f025b34fc7428fe0e5dd19}{main}}
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{namespacecmd__man_a6c343360ecee99b936275be79f8777b6}{Ball\+Detected}} = False
-\begin{DoxyCompactList}\small\item\em Define home x position. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Flag for the ball detection, intialized as {\ttfamily False} \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacecmd__man_a2501594f04eb8fbfd4f5357ce3c58e32}{Ball\+Check}} = False
-\begin{DoxyCompactList}\small\item\em @parama Ball\+Check, bool flag for the ball check ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Flag for the ball check, intialized as {\ttfamily False} \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{namespacecmd__man_ab9bd96c0dfe89e0ef1cb9c261f603054}{current\+Radius}} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em Current radius of the ball detected. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacecmd__man_abba1e6565e3bbd37c61270b090c8c4b8}{ball\+Color}} = None
-\begin{DoxyCompactList}\small\item\em Ball Color. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Color of the ball detected, initialized as {\ttfamily None} \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacecmd__man_ae4c988f8b7d0e0608b35d7bb310bcb2c}{srv\+\_\+client\+\_\+wall\+\_\+follower\+\_\+}} = None
-\item 
+\begin{DoxyCompactList}\small\item\em Initialization of the \mbox{\hyperlink{namespacefollow__wall}{follow\+\_\+wall}} client. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacecmd__man_a71624d8316bb834e7065bde56a4eb569}{play}} = False
-\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcmd__man_1_1_play}{Play}} command, initialized as {\ttfamily False} \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacecmd__man_a99f0de5fa2792d00a60ebbb47c40abd6}{play\+Avilable}} = False
-\item 
+\begin{DoxyCompactList}\small\item\em Checking if the the play state is available, initialized as {\ttfamily False} \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacecmd__man_a73895f62bfd8cdb1c8e229f52e6eea13}{Go\+To\+\_\+room}} = None
-\item 
+\begin{DoxyCompactList}\small\item\em Go\+To command, initialized as {\ttfamily False} \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacecmd__man_ab0787082f624fa3c830f7e8ea9090401}{client}} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{}, Move\+Base\+Action)
-\begin{DoxyCompactList}\small\item\em Action client for the action server dedicated to the movment client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}/robot/reaching\+\_\+goal\+\_\+robot\textquotesingle{}, exp\+\_\+assignment2.\+msg.\+Planning\+Action) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Action client for the action server dedicated to the movment. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacecmd__man_a2310ba62c26f7ea062d94297508a0220}{room}} = \mbox{\hyperlink{classcmd__man_1_1blueprint}{blueprint}}()
 \item 
 \mbox{\hyperlink{namespacecmd__man_a7b65238fd30234485d513f74b0bffb5e}{movement}} = \mbox{\hyperlink{classcmd__man_1_1target_position}{target\+Position}}()
@@ -61,10 +65,10 @@ bool \mbox{\hyperlink{namespacecmd__man_a99f0de5fa2792d00a60ebbb47c40abd6}{play\
 
 
 \doxysubsection{Detailed Description}
-\begin{DoxyAuthor}{Author}
-Luca Covizzi 
-\end{DoxyAuthor}
+This script, implementing a FSM, is the main ROS node. 
 
+It\textquotesingle{}s a subcriber of the topic {\bfseries{Ball\+State}}, in order to check the current status of the ball and the topic {\bfseries{user\+Command}} for the purpose of reaching the \mbox{\hyperlink{classcmd__man_1_1_play}{Play}} state whenever it\textquotesingle{}s called. It\textquotesingle{}s also a publisher, in order to share with the other nodes the current state of the robot. Regarding the navigation, it\textquotesingle{}s a client of the the {\itshape Nav Stack} action server according to the robot movement. It acts as a client also for the \mbox{\hyperlink{namespacefollow__wall}{follow\+\_\+wall}} service, so a simple exploring behaviour is implemented. In this way, by checking several conditions, it\textquotesingle{}s possible to resarch the desired state inside the FSM. ~\newline
+ 
 
 \doxysubsection{Function Documentation}
 \mbox{\Hypertarget{namespacecmd__man_a230fcab660c41bab82fc3c849ff44ac3}\label{namespacecmd__man_a230fcab660c41bab82fc3c849ff44ac3}} 
@@ -126,8 +130,7 @@ Documentation for the function \mbox{\hyperlink{namespacecmd__man_a6cf57c3b25985
 
 
 
-@parama Ball\+Check, bool flag for the ball check ~\newline
- 
+Flag for the ball check, intialized as {\ttfamily False} 
 
 \mbox{\Hypertarget{namespacecmd__man_abba1e6565e3bbd37c61270b090c8c4b8}\label{namespacecmd__man_abba1e6565e3bbd37c61270b090c8c4b8}} 
 \index{cmd\_man@{cmd\_man}!ballColor@{ballColor}}
@@ -137,7 +140,7 @@ Documentation for the function \mbox{\hyperlink{namespacecmd__man_a6cf57c3b25985
 
 
 
-Ball Color. 
+Color of the ball detected, initialized as {\ttfamily None} 
 
 \mbox{\Hypertarget{namespacecmd__man_a6c343360ecee99b936275be79f8777b6}\label{namespacecmd__man_a6c343360ecee99b936275be79f8777b6}} 
 \index{cmd\_man@{cmd\_man}!BallDetected@{BallDetected}}
@@ -147,23 +150,8 @@ Ball Color.
 
 
 
-Define home x position. 
+Flag for the ball detection, intialized as {\ttfamily False} 
 
-
-\begin{DoxyParams}{Parameters}
-{\em x\+\_\+home} & The fixed home coordinate x x\+\_\+home = 5\\
-\hline
-\end{DoxyParams}
-Define home y position 
-\begin{DoxyParams}{Parameters}
-{\em x\+\_\+home} & The fixed home coordinate x y\+\_\+home = 8\\
-\hline
-\end{DoxyParams}
-Initial state of the ball status 
-\begin{DoxyParams}{Parameters}
-{\em Ball\+Detected,bool} & flag for the ball detection \\
-\hline
-\end{DoxyParams}
 \mbox{\Hypertarget{namespacecmd__man_ab0787082f624fa3c830f7e8ea9090401}\label{namespacecmd__man_ab0787082f624fa3c830f7e8ea9090401}} 
 \index{cmd\_man@{cmd\_man}!client@{client}}
 \index{client@{client}!cmd\_man@{cmd\_man}}
@@ -172,7 +160,7 @@ Initial state of the ball status
 
 
 
-Action client for the action server dedicated to the movment client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}/robot/reaching\+\_\+goal\+\_\+robot\textquotesingle{}, exp\+\_\+assignment2.\+msg.\+Planning\+Action) 
+Action client for the action server dedicated to the movment. 
 
 \mbox{\Hypertarget{namespacecmd__man_ab9bd96c0dfe89e0ef1cb9c261f603054}\label{namespacecmd__man_ab9bd96c0dfe89e0ef1cb9c261f603054}} 
 \index{cmd\_man@{cmd\_man}!currentRadius@{currentRadius}}
@@ -180,11 +168,19 @@ Action client for the action server dedicated to the movment client = actionlib.
 \doxysubsubsection{\texorpdfstring{currentRadius}{currentRadius}}
 {\footnotesize\ttfamily int cmd\+\_\+man.\+current\+Radius = 0}
 
+
+
+Current radius of the ball detected. 
+
 \mbox{\Hypertarget{namespacecmd__man_a73895f62bfd8cdb1c8e229f52e6eea13}\label{namespacecmd__man_a73895f62bfd8cdb1c8e229f52e6eea13}} 
 \index{cmd\_man@{cmd\_man}!GoTo\_room@{GoTo\_room}}
 \index{GoTo\_room@{GoTo\_room}!cmd\_man@{cmd\_man}}
 \doxysubsubsection{\texorpdfstring{GoTo\_room}{GoTo\_room}}
 {\footnotesize\ttfamily cmd\+\_\+man.\+Go\+To\+\_\+room = None}
+
+
+
+Go\+To command, initialized as {\ttfamily False} 
 
 \mbox{\Hypertarget{namespacecmd__man_a7b65238fd30234485d513f74b0bffb5e}\label{namespacecmd__man_a7b65238fd30234485d513f74b0bffb5e}} 
 \index{cmd\_man@{cmd\_man}!movement@{movement}}
@@ -198,11 +194,19 @@ Action client for the action server dedicated to the movment client = actionlib.
 \doxysubsubsection{\texorpdfstring{play}{play}}
 {\footnotesize\ttfamily bool cmd\+\_\+man.\+play = False}
 
+
+
+\mbox{\hyperlink{classcmd__man_1_1_play}{Play}} command, initialized as {\ttfamily False} 
+
 \mbox{\Hypertarget{namespacecmd__man_a99f0de5fa2792d00a60ebbb47c40abd6}\label{namespacecmd__man_a99f0de5fa2792d00a60ebbb47c40abd6}} 
 \index{cmd\_man@{cmd\_man}!playAvilable@{playAvilable}}
 \index{playAvilable@{playAvilable}!cmd\_man@{cmd\_man}}
 \doxysubsubsection{\texorpdfstring{playAvilable}{playAvilable}}
 {\footnotesize\ttfamily bool cmd\+\_\+man.\+play\+Avilable = False}
+
+
+
+Checking if the the play state is available, initialized as {\ttfamily False} 
 
 \mbox{\Hypertarget{namespacecmd__man_a465514eb2e8f678efc4ae252c4bd153b}\label{namespacecmd__man_a465514eb2e8f678efc4ae252c4bd153b}} 
 \index{cmd\_man@{cmd\_man}!pub@{pub}}
@@ -221,4 +225,8 @@ Action client for the action server dedicated to the movment client = actionlib.
 \index{srv\_client\_wall\_follower\_@{srv\_client\_wall\_follower\_}!cmd\_man@{cmd\_man}}
 \doxysubsubsection{\texorpdfstring{srv\_client\_wall\_follower\_}{srv\_client\_wall\_follower\_}}
 {\footnotesize\ttfamily cmd\+\_\+man.\+srv\+\_\+client\+\_\+wall\+\_\+follower\+\_\+ = None}
+
+
+
+Initialization of the \mbox{\hyperlink{namespacefollow__wall}{follow\+\_\+wall}} client. 
 

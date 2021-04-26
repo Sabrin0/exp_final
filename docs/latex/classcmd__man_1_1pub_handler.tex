@@ -1,18 +1,26 @@
 \hypertarget{classcmd__man_1_1pub_handler}{}\doxysection{cmd\+\_\+man.\+pub\+Handler Class Reference}
 \label{classcmd__man_1_1pub_handler}\index{cmd\_man.pubHandler@{cmd\_man.pubHandler}}
+
+
+Class that handles publishing on the topic {\bfseries{current\+State}}.  
+
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{classcmd__man_1_1pub_handler_add0ec63cc12067deb6477619cbfb582b}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
-\item 
+\begin{DoxyCompactList}\small\item\em The construct. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classcmd__man_1_1pub_handler_aa13fdf04989d25a768bfed098d985596}{pub\+State}} (self, state)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Method that provides the pubblication over the topic. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classcmd__man_1_1pub_handler_a7e204d652929a8c404db21c91826e64b}{state\+Pub}}
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Class that handles publishing on the topic {\bfseries{current\+State}}. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classcmd__man_1_1pub_handler_add0ec63cc12067deb6477619cbfb582b}\label{classcmd__man_1_1pub_handler_add0ec63cc12067deb6477619cbfb582b}} 
@@ -23,6 +31,11 @@ def \mbox{\hyperlink{classcmd__man_1_1pub_handler_aa13fdf04989d25a768bfed098d985
 
 
 
+The construct. 
+
+Initilize ROS publisher. \hypertarget{classcmd__man_1_1pub_handler_autotoc_md3}{}\doxysubsubsection{Attributes}\label{classcmd__man_1_1pub_handler_autotoc_md3}
+self.\+state\+Pub\+: {\ttfamily rospy.\+Publisher}, It allows the publication over the topic {\bfseries{current\+State}}, String. With this it\textquotesingle{}s possible to publish the current state of the robot. 
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classcmd__man_1_1pub_handler_aa13fdf04989d25a768bfed098d985596}\label{classcmd__man_1_1pub_handler_aa13fdf04989d25a768bfed098d985596}} 
 \index{cmd\_man.pubHandler@{cmd\_man.pubHandler}!pubState@{pubState}}
@@ -31,6 +44,16 @@ def \mbox{\hyperlink{classcmd__man_1_1pub_handler_aa13fdf04989d25a768bfed098d985
 {\footnotesize\ttfamily def cmd\+\_\+man.\+pub\+Handler.\+pub\+State (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{state }\end{DoxyParamCaption})}
 
 
+
+Method that provides the pubblication over the topic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & \+: {\ttfamily String}, the current state of the robot \\
+\hline
+\end{DoxyParams}
+\hypertarget{classcmd__man_1_1pub_handler_autotoc_md4}{}\doxysubsubsection{Attributes}\label{classcmd__man_1_1pub_handler_autotoc_md4}
+self.\+state\+Pub\+: it declares that the node is publishing 
 
 \doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classcmd__man_1_1pub_handler_a7e204d652929a8c404db21c91826e64b}\label{classcmd__man_1_1pub_handler_a7e204d652929a8c404db21c91826e64b}} 

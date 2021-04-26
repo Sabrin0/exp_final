@@ -1,22 +1,30 @@
 \hypertarget{classcmd__man_1_1target_position}{}\doxysection{cmd\+\_\+man.\+target\+Position Class Reference}
 \label{classcmd__man_1_1target_position}\index{cmd\_man.targetPosition@{cmd\_man.targetPosition}}
+
+
+Class that manages the terget position to set as goal for the {\itshape Nav Stack}.  
+
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{classcmd__man_1_1target_position_afd86f7cc82bdc43d849f4e10c698e16e}{random\+Pos}} (self)
-\item 
+\begin{DoxyCompactList}\small\item\em Method that provides random position in the enviroment. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classcmd__man_1_1target_position_a931175c83b1b97adb20266885a70aaa4}{Go\+To}} (self, x\+\_\+target, y\+\_\+target)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Methods that creates an action client move\+\_\+base with action definition file \char`\"{}\+Move\+Base\+Action\char`\"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{classcmd__man_1_1target_position_ae59fc822fd25cf484e3dbc28f29249b2}{x\+\_\+home}} = -\/5
-\item 
+\begin{DoxyCompactList}\small\item\em home x postion \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classcmd__man_1_1target_position_a9f64561b23ef451fe9ec18e432f9a8eb}{y\+\_\+home}} = 8
-\item 
+\begin{DoxyCompactList}\small\item\em home y positiom \end{DoxyCompactList}\item 
 list \mbox{\hyperlink{classcmd__man_1_1target_position_a637b04a073d91ff9d838785cbafa5b18}{random\+Position}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em list of random position in the enviroment \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Class that manages the terget position to set as goal for the {\itshape Nav Stack}. 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classcmd__man_1_1target_position_a931175c83b1b97adb20266885a70aaa4}\label{classcmd__man_1_1target_position_a931175c83b1b97adb20266885a70aaa4}} 
@@ -25,12 +33,35 @@ list \mbox{\hyperlink{classcmd__man_1_1target_position_a637b04a073d91ff9d838785c
 \doxysubsubsection{\texorpdfstring{GoTo()}{GoTo()}}
 {\footnotesize\ttfamily def cmd\+\_\+man.\+target\+Position.\+Go\+To (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x\+\_\+target,  }\item[{}]{y\+\_\+target }\end{DoxyParamCaption})}
 
+
+
+Methods that creates an action client move\+\_\+base with action definition file \char`\"{}\+Move\+Base\+Action\char`\"{}. 
+
+After waiting until the action server has started up and started listening for goals it set a new goal with the {\itshape Move\+Base\+Goal} constructor smd sends it. Then it waits for the server to finish performing the action. If the result doesn\textquotesingle{}t arrive, assume the Server is not available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+\_\+target} & the x positon set as goal \\
+\hline
+{\em y\+\_\+target} & the y position set as goal\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result of executing the action 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classcmd__man_1_1target_position_afd86f7cc82bdc43d849f4e10c698e16e}\label{classcmd__man_1_1target_position_afd86f7cc82bdc43d849f4e10c698e16e}} 
 \index{cmd\_man.targetPosition@{cmd\_man.targetPosition}!randomPos@{randomPos}}
 \index{randomPos@{randomPos}!cmd\_man.targetPosition@{cmd\_man.targetPosition}}
 \doxysubsubsection{\texorpdfstring{randomPos()}{randomPos()}}
 {\footnotesize\ttfamily def cmd\+\_\+man.\+target\+Position.\+random\+Pos (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
 
+
+
+Method that provides random position in the enviroment. 
+
+\begin{DoxyReturn}{Returns}
+x\+\_\+target, y\+\_\+target\+: positions to set as goal for the {\itshape Nav Stack} 
+\end{DoxyReturn}
 
 
 \doxysubsection{Member Data Documentation}
@@ -52,17 +83,29 @@ list \mbox{\hyperlink{classcmd__man_1_1target_position_a637b04a073d91ff9d838785c
 \DoxyCodeLine{    ]}
 
 \end{DoxyCode}
+
+
+list of random position in the enviroment 
+
 \mbox{\Hypertarget{classcmd__man_1_1target_position_ae59fc822fd25cf484e3dbc28f29249b2}\label{classcmd__man_1_1target_position_ae59fc822fd25cf484e3dbc28f29249b2}} 
 \index{cmd\_man.targetPosition@{cmd\_man.targetPosition}!x\_home@{x\_home}}
 \index{x\_home@{x\_home}!cmd\_man.targetPosition@{cmd\_man.targetPosition}}
 \doxysubsubsection{\texorpdfstring{x\_home}{x\_home}}
 {\footnotesize\ttfamily int cmd\+\_\+man.\+target\+Position.\+x\+\_\+home = -\/5\hspace{0.3cm}{\ttfamily [static]}}
 
+
+
+home x postion 
+
 \mbox{\Hypertarget{classcmd__man_1_1target_position_a9f64561b23ef451fe9ec18e432f9a8eb}\label{classcmd__man_1_1target_position_a9f64561b23ef451fe9ec18e432f9a8eb}} 
 \index{cmd\_man.targetPosition@{cmd\_man.targetPosition}!y\_home@{y\_home}}
 \index{y\_home@{y\_home}!cmd\_man.targetPosition@{cmd\_man.targetPosition}}
 \doxysubsubsection{\texorpdfstring{y\_home}{y\_home}}
 {\footnotesize\ttfamily int cmd\+\_\+man.\+target\+Position.\+y\+\_\+home = 8\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+home y positiom 
 
 
 

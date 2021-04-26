@@ -1,5 +1,10 @@
 \hypertarget{namespace_ball_detection}{}\doxysection{Ball\+Detection Namespace Reference}
 \label{namespace_ball_detection}\index{BallDetection@{BallDetection}}
+
+
+This node is responsable for the ball detection.  
+
+
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -9,28 +14,30 @@ class \mbox{\hyperlink{class_ball_detection_1_1image__feature}{image\+\_\+featur
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{namespace_ball_detection_ab81c8ddc2e19ebdc8f2bcc563e6648d5}{Ball\+Detection}} (gray, hsv, ball\+Found)
-\item 
+\begin{DoxyCompactList}\small\item\em Function that recognize any ball in the enviroment by using th {\itshape Open\+CV} function {\ttfamily cv2.\+Hough\+Circles(image, method, dp, min\+Dist)}. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespace_ball_detection_abb2e292098c33e9d50e35e637e131a2e}{main}} (args)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Main program entry, it initializes and cleans up ros node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{namespace_ball_detection_abe04396aeba9fba94fee10950196b7e6}{VERBOSE}} = False
 \item 
-\mbox{\hyperlink{namespace_ball_detection_a7ec28b56ba3239f82cba3763c82dc1c7}{client}} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{}, Move\+Base\+Action)
-\item 
 \mbox{\hyperlink{namespace_ball_detection_a7ffe5ee300fe61c300fe7141981012f9}{cl}} = \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler}{Color\+Labeler}}()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Initiliazation class Color\+Labeler. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\begin{DoxyVerb}@section description
-OpenCV node
-This node is responsible for the ball detection.
-In particular, once the ball is detected, it implemnt a simple algorith in order to track the ball untill the goal is reached.
-It also publishes on the topic BallState in order to communicate with the cmd_man when the ball is detected and when the robot is next to it.
-\end{DoxyVerb}
- 
+This node is responsable for the ball detection. 
+
+There are two main phases\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{pre-\/processing}}\+: Due to the module {\itshape \mbox{\hyperlink{namespacecolor_labeler}{color\+Labeler}}} the robot is able to detect any ball in the enviroment and recognize its color. Once the ball is detected, the afromentioned module also returns the features for the specific color in order to procede with the tracking
+\item {\bfseries{tracking}}\+: It implemnts a simple algorith in order to track the ball untill the ball is reached, then publishes on the topic {\bfseries{cmd\+\_\+vel}} in order to reach the ball position.
+\end{DoxyItemize}
+
+It also publishes on the topic {\bfseries{Ball\+State}} in order to communicate with the \mbox{\hyperlink{namespacecmd__man}{cmd\+\_\+man}} whenever the ball is detected and the robot is next to it. By subscribing on the topic {\bfseries{current\+State}}, the robot avoids the tracking when the robot is in the sleep state. Also it remembers which ball has been already detected so, even in this case, it avoids the tracking. 
 
 \doxysubsection{Function Documentation}
 \mbox{\Hypertarget{namespace_ball_detection_ab81c8ddc2e19ebdc8f2bcc563e6648d5}\label{namespace_ball_detection_ab81c8ddc2e19ebdc8f2bcc563e6648d5}} 
@@ -39,14 +46,41 @@ It also publishes on the topic BallState in order to communicate with the cmd_ma
 \doxysubsubsection{\texorpdfstring{BallDetection()}{BallDetection()}}
 {\footnotesize\ttfamily def Ball\+Detection.\+Ball\+Detection (\begin{DoxyParamCaption}\item[{}]{gray,  }\item[{}]{hsv,  }\item[{}]{ball\+Found }\end{DoxyParamCaption})}
 
+
+
+Function that recognize any ball in the enviroment by using th {\itshape Open\+CV} function {\ttfamily cv2.\+Hough\+Circles(image, method, dp, min\+Dist)}. 
+
+Once the ball has been detected it calls the module color\+Labelr and its method generate\+Boundaries in order to return the required features.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gray} & image in grayscale \\
+\hline
+{\em hsv} & image in hsv colorspace \\
+\hline
+{\em ball\+Found} & {\ttfamily Bool}, It represents if the ball has been found or not\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lower\+Bounds\+: {\ttfamily np.\+array}, lower mask of the color detected 
+
+upper\+Bound\+: {\ttfamily np.\+array}, upper mask of the color detected 
+
+ball\+Found\+: {\ttfamily Bool}, it indicate wheter the ball is dected or not 
+
+color\+: {\ttfamily String}, it represents the color of the ball detected 
+\end{DoxyReturn}
 \mbox{\Hypertarget{namespace_ball_detection_abb2e292098c33e9d50e35e637e131a2e}\label{namespace_ball_detection_abb2e292098c33e9d50e35e637e131a2e}} 
 \index{BallDetection@{BallDetection}!main@{main}}
 \index{main@{main}!BallDetection@{BallDetection}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily def Ball\+Detection.\+main (\begin{DoxyParamCaption}\item[{}]{args }\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Initializes and cleanup ros node\end{DoxyVerb}
- 
+
+
+Main program entry, it initializes and cleans up ros node. 
+
+
 
 \doxysubsection{Variable Documentation}
 \mbox{\Hypertarget{namespace_ball_detection_a7ffe5ee300fe61c300fe7141981012f9}\label{namespace_ball_detection_a7ffe5ee300fe61c300fe7141981012f9}} 
@@ -55,11 +89,9 @@ It also publishes on the topic BallState in order to communicate with the cmd_ma
 \doxysubsubsection{\texorpdfstring{cl}{cl}}
 {\footnotesize\ttfamily Ball\+Detection.\+cl = \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler}{Color\+Labeler}}()}
 
-\mbox{\Hypertarget{namespace_ball_detection_a7ec28b56ba3239f82cba3763c82dc1c7}\label{namespace_ball_detection_a7ec28b56ba3239f82cba3763c82dc1c7}} 
-\index{BallDetection@{BallDetection}!client@{client}}
-\index{client@{client}!BallDetection@{BallDetection}}
-\doxysubsubsection{\texorpdfstring{client}{client}}
-{\footnotesize\ttfamily Ball\+Detection.\+client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{}, Move\+Base\+Action)}
+
+
+Initiliazation class Color\+Labeler. 
 
 \mbox{\Hypertarget{namespace_ball_detection_abe04396aeba9fba94fee10950196b7e6}\label{namespace_ball_detection_abe04396aeba9fba94fee10950196b7e6}} 
 \index{BallDetection@{BallDetection}!VERBOSE@{VERBOSE}}

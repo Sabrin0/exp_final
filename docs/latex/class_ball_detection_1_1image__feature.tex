@@ -4,24 +4,24 @@
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{class_ball_detection_1_1image__feature_a7af211a45a6486937c64b0bc7e6b2a35}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
-\begin{DoxyCompactList}\small\item\em Initialize ros publisher, ros subscriber. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The construct. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{class_ball_detection_1_1image__feature_af798347513682b6420fefd56334cb864}{callback\+State}} (self, data)
-\item 
+\begin{DoxyCompactList}\small\item\em Callback that receives the messages related to the current state of the robot from the \mbox{\hyperlink{namespacecmd__man}{cmd\+\_\+man}}. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{class_ball_detection_1_1image__feature_abea65101f13e839e8ae79e34d40ef823}{callback}} (self, ros\+\_\+data)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Callback function of subscribed topic. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_ball_detection_1_1image__feature_a86da6fdbd839a4ee5756a2c45f7961e0}{image\+\_\+pub}}
-\begin{DoxyCompactList}\small\item\em topic where we publish \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Publisher topic /output/image\+\_\+raw/compressed. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_ball_detection_1_1image__feature_a77847c4e948f3c14a2245c8cb7250107}{vel\+\_\+pub}}
-\item 
+\begin{DoxyCompactList}\small\item\em Publisher topic /cmd\+\_\+vel. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_ball_detection_1_1image__feature_a4d700e974ab5b8f00c2521dec58f43eb}{Ball\+Det\+\_\+pub}}
-\begin{DoxyCompactList}\small\item\em flag for ball detected \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Publisher topic /\+Ball\+State. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_ball_detection_1_1image__feature_a1bb89b0b4d5e035032f6c2cefd9b4f99}{subscriber}}
-\item 
+\begin{DoxyCompactList}\small\item\em Subscriber topic /camera1/image\+\_\+raw/compressed. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_ball_detection_1_1image__feature_a415e95851b4ada64b21ba4ae24613425}{state\+\_\+sub}}
-\item 
+\begin{DoxyCompactList}\small\item\em Subscriber topic /current\+State. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_ball_detection_1_1image__feature_a360294e96f49c61851a23ba417ffff53}{state}}
 \end{DoxyCompactItemize}
 
@@ -35,9 +35,19 @@ def \mbox{\hyperlink{class_ball_detection_1_1image__feature_abea65101f13e839e8ae
 
 
 
-Initialize ros publisher, ros subscriber. 
+The construct. 
+
+Initialize the node, ros publisher, ros subscriber. \hypertarget{class_ball_detection_1_1image__feature_autotoc_md1}{}\doxysubsubsection{Attributes}\label{class_ball_detection_1_1image__feature_autotoc_md1}
+self.\+image\+\_\+pub\+: {\ttfamily rospy.\+Publisher()}, It allows the publication to the topic {\bfseries{output/image\+\_\+raw/compressed}}, Compressed\+Image.
+
+self.\+vel\+\_\+pub\+: {\ttfamily rospy.\+Publisher()}, It allows the publication to the topic {\bfseries{cmd\+\_\+vel}}, Twist. With this it\textquotesingle{}s possible to move the robot toward the ball ~\newline
 
 
+self.\+Ball\+Det\+\_\+pub\+: {\ttfamily rospy.\+Publisher()}, It allows the publication to the topic {\bfseries{Ball\+State}}, custom message. With this it\textquotesingle{}s possible to send to the \mbox{\hyperlink{namespacecmd__man}{cmd\+\_\+man}} specif istructions.
+
+self.\+subscriber\+: {\ttfamily rospy.\+Subscriber()}, It allows the subscription to the topic {\bfseries{camera1/image\+\_\+raw/compressed}}, Compressed\+Image. With this it\textquotesingle{}s possible to receive and then process the image from the camera.
+
+self.\+state\+\_\+sub\+: {\ttfamily rospy.\+Subscriber()}, It allows the subscription to the topic {\bfseries{current\+State}}, String. With this it\textquotesingle{}s possible to track or not the ball depending on the current robot state 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_ball_detection_1_1image__feature_abea65101f13e839e8ae79e34d40ef823}\label{class_ball_detection_1_1image__feature_abea65101f13e839e8ae79e34d40ef823}} 
@@ -46,15 +56,28 @@ Initialize ros publisher, ros subscriber.
 \doxysubsubsection{\texorpdfstring{callback()}{callback()}}
 {\footnotesize\ttfamily def Ball\+Detection.\+image\+\_\+feature.\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{ros\+\_\+data }\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Callback function of subscribed topic. 
-Here images get converted and features detected\end{DoxyVerb}
- \mbox{\Hypertarget{class_ball_detection_1_1image__feature_af798347513682b6420fefd56334cb864}\label{class_ball_detection_1_1image__feature_af798347513682b6420fefd56334cb864}} 
+
+
+Callback function of subscribed topic. 
+
+Here images get converted and features detected. Once the ball is dectetec it provides a simple alghorithm in order to follow the ball, if neither the ball has been already detecter and nor the robot is in the state sleep. Once the robot is next to the ball, the corresponding key of the dictionary {\ttfamily cl.\+ball} is set to {\ttfamily True}. It also publish the {\itshape current\+Radius} and the current {\itshape color} of ball on the topic {\bfseries{Ball\+Status}}. \mbox{\Hypertarget{class_ball_detection_1_1image__feature_af798347513682b6420fefd56334cb864}\label{class_ball_detection_1_1image__feature_af798347513682b6420fefd56334cb864}} 
 \index{BallDetection.image\_feature@{BallDetection.image\_feature}!callbackState@{callbackState}}
 \index{callbackState@{callbackState}!BallDetection.image\_feature@{BallDetection.image\_feature}}
 \doxysubsubsection{\texorpdfstring{callbackState()}{callbackState()}}
 {\footnotesize\ttfamily def Ball\+Detection.\+image\+\_\+feature.\+callback\+State (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{data }\end{DoxyParamCaption})}
 
 
+
+Callback that receives the messages related to the current state of the robot from the \mbox{\hyperlink{namespacecmd__man}{cmd\+\_\+man}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & message over the topic {\bfseries{current\+State}} \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_ball_detection_1_1image__feature_autotoc_md2}{}\doxysubsubsection{Attributes}\label{class_ball_detection_1_1image__feature_autotoc_md2}
+self.\+state\+: type {\ttfamily String} It stores the data from the afromentioned topic ~\newline
+ 
 
 \doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{class_ball_detection_1_1image__feature_a4d700e974ab5b8f00c2521dec58f43eb}\label{class_ball_detection_1_1image__feature_a4d700e974ab5b8f00c2521dec58f43eb}} 
@@ -65,7 +88,7 @@ Here images get converted and features detected\end{DoxyVerb}
 
 
 
-flag for ball detected 
+Publisher topic /\+Ball\+State. 
 
 \mbox{\Hypertarget{class_ball_detection_1_1image__feature_a86da6fdbd839a4ee5756a2c45f7961e0}\label{class_ball_detection_1_1image__feature_a86da6fdbd839a4ee5756a2c45f7961e0}} 
 \index{BallDetection.image\_feature@{BallDetection.image\_feature}!image\_pub@{image\_pub}}
@@ -75,7 +98,7 @@ flag for ball detected
 
 
 
-topic where we publish 
+Publisher topic /output/image\+\_\+raw/compressed. 
 
 \mbox{\Hypertarget{class_ball_detection_1_1image__feature_a360294e96f49c61851a23ba417ffff53}\label{class_ball_detection_1_1image__feature_a360294e96f49c61851a23ba417ffff53}} 
 \index{BallDetection.image\_feature@{BallDetection.image\_feature}!state@{state}}
@@ -89,17 +112,29 @@ topic where we publish
 \doxysubsubsection{\texorpdfstring{state\_sub}{state\_sub}}
 {\footnotesize\ttfamily Ball\+Detection.\+image\+\_\+feature.\+state\+\_\+sub}
 
+
+
+Subscriber topic /current\+State. 
+
 \mbox{\Hypertarget{class_ball_detection_1_1image__feature_a1bb89b0b4d5e035032f6c2cefd9b4f99}\label{class_ball_detection_1_1image__feature_a1bb89b0b4d5e035032f6c2cefd9b4f99}} 
 \index{BallDetection.image\_feature@{BallDetection.image\_feature}!subscriber@{subscriber}}
 \index{subscriber@{subscriber}!BallDetection.image\_feature@{BallDetection.image\_feature}}
 \doxysubsubsection{\texorpdfstring{subscriber}{subscriber}}
 {\footnotesize\ttfamily Ball\+Detection.\+image\+\_\+feature.\+subscriber}
 
+
+
+Subscriber topic /camera1/image\+\_\+raw/compressed. 
+
 \mbox{\Hypertarget{class_ball_detection_1_1image__feature_a77847c4e948f3c14a2245c8cb7250107}\label{class_ball_detection_1_1image__feature_a77847c4e948f3c14a2245c8cb7250107}} 
 \index{BallDetection.image\_feature@{BallDetection.image\_feature}!vel\_pub@{vel\_pub}}
 \index{vel\_pub@{vel\_pub}!BallDetection.image\_feature@{BallDetection.image\_feature}}
 \doxysubsubsection{\texorpdfstring{vel\_pub}{vel\_pub}}
 {\footnotesize\ttfamily Ball\+Detection.\+image\+\_\+feature.\+vel\+\_\+pub}
+
+
+
+Publisher topic /cmd\+\_\+vel. 
 
 
 
