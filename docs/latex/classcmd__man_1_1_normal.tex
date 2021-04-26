@@ -1,0 +1,91 @@
+\hypertarget{classcmd__man_1_1_normal}{}\doxysection{cmd\+\_\+man.\+Normal Class Reference}
+\label{classcmd__man_1_1_normal}\index{cmd\_man.Normal@{cmd\_man.Normal}}
+
+
+Define normal state.  
+
+
+Inheritance diagram for cmd\+\_\+man.\+Normal\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcmd__man_1_1_normal}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classcmd__man_1_1_normal_aeb32164834b4b9a1a0b0e8ae70532bf7}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Initialization of the functioin ~\newline
+ \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classcmd__man_1_1_normal_ac8b4e19639b183e728ff038a1e78ff2b}{execute}} (self, userdata)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcmd__man_1_1_normal}{Normal}} state execution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcmd__man_1_1_normal_a1581c153edb1baf090588a154684b661}{rate}}
+\item 
+\mbox{\hyperlink{classcmd__man_1_1_normal_a69ead053bbd9849b4d51b7e9e207a65f}{counter}}
+\begin{DoxyCompactList}\small\item\em If the Ball is Detcted, go to PLAY. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Define normal state. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcmd__man_1_1_normal_aeb32164834b4b9a1a0b0e8ae70532bf7}\label{classcmd__man_1_1_normal_aeb32164834b4b9a1a0b0e8ae70532bf7}} 
+\index{cmd\_man.Normal@{cmd\_man.Normal}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!cmd\_man.Normal@{cmd\_man.Normal}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def cmd\+\_\+man.\+Normal.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Initialization of the functioin ~\newline
+ 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcmd__man_1_1_normal_ac8b4e19639b183e728ff038a1e78ff2b}\label{classcmd__man_1_1_normal_ac8b4e19639b183e728ff038a1e78ff2b}} 
+\index{cmd\_man.Normal@{cmd\_man.Normal}!execute@{execute}}
+\index{execute@{execute}!cmd\_man.Normal@{cmd\_man.Normal}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily def cmd\+\_\+man.\+Normal.\+execute (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{userdata }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classcmd__man_1_1_normal}{Normal}} state execution. 
+
+\begin{DoxyVerb}    In the NORMAL state a random position is sent to the Action Server go_to_point_action.
+    If the ball is detected the goal is cancelled
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classcmd__man_1_1_normal_a69ead053bbd9849b4d51b7e9e207a65f}\label{classcmd__man_1_1_normal_a69ead053bbd9849b4d51b7e9e207a65f}} 
+\index{cmd\_man.Normal@{cmd\_man.Normal}!counter@{counter}}
+\index{counter@{counter}!cmd\_man.Normal@{cmd\_man.Normal}}
+\doxysubsubsection{\texorpdfstring{counter}{counter}}
+{\footnotesize\ttfamily cmd\+\_\+man.\+Normal.\+counter}
+
+
+
+If the Ball is Detcted, go to PLAY. 
+
+\begin{DoxyReturn}{Returns}
+Go\+To\+Play
+\end{DoxyReturn}
+After some NORMAL state iteration, go to SLEEP mode \begin{DoxyReturn}{Returns}
+Go\+To\+Sleep 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcmd__man_1_1_normal_a1581c153edb1baf090588a154684b661}\label{classcmd__man_1_1_normal_a1581c153edb1baf090588a154684b661}} 
+\index{cmd\_man.Normal@{cmd\_man.Normal}!rate@{rate}}
+\index{rate@{rate}!cmd\_man.Normal@{cmd\_man.Normal}}
+\doxysubsubsection{\texorpdfstring{rate}{rate}}
+{\footnotesize\ttfamily cmd\+\_\+man.\+Normal.\+rate}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+scripts/\mbox{\hyperlink{cmd__man_8py}{cmd\+\_\+man.\+py}}\end{DoxyCompactItemize}

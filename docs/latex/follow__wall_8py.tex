@@ -1,0 +1,41 @@
+\hypertarget{follow__wall_8py}{}\doxysection{scripts/follow\+\_\+wall.py File Reference}
+\label{follow__wall_8py}\index{scripts/follow\_wall.py@{scripts/follow\_wall.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefollow__wall}{follow\+\_\+wall}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacefollow__wall_a25afaa88280b445dc6c40fd64cbc9b7d}{follow\+\_\+wall.\+wall\+\_\+follower\+\_\+switch}} (req)
+\begin{DoxyCompactList}\small\item\em Function that handle the server call. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_a9fbb5828182205bfbc8d08b4304942a1}{follow\+\_\+wall.\+clbk\+\_\+laser}} (msg)
+\begin{DoxyCompactList}\small\item\em Callback that handle the data recived from the laser . \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_a4a7ce0260143960a3188ea9e024ed5d8}{follow\+\_\+wall.\+change\+\_\+state}} (state)
+\begin{DoxyCompactList}\small\item\em Function thar provides the switch among the three different states. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_ab816bc5b8667d41bc3f179157560993e}{follow\+\_\+wall.\+take\+\_\+action}} ()
+\begin{DoxyCompactList}\small\item\em Function that returns the state to perform depending on which regions of the laser is involved. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_a3b1c659f1172e5ac288be3a5acb7806a}{follow\+\_\+wall.\+find\+\_\+wall}} ()
+\begin{DoxyCompactList}\small\item\em Function that publishes velocities on the topic {\bfseries{cmd\+\_\+vel}}, It allows the robot to reach the wall. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_ac9bbae3175baea369fe44b0547217fb7}{follow\+\_\+wall.\+turn\+\_\+left}} ()
+\begin{DoxyCompactList}\small\item\em Function that publishes velocities on the topic {\bfseries{cmd\+\_\+vel}}, It allows the robot to turn left and avoid obstacles. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_a4a3f3fa393e5f319cfa3f7ed7e479bd2}{follow\+\_\+wall.\+follow\+\_\+the\+\_\+wall}} ()
+\begin{DoxyCompactList}\small\item\em Function that publishes velocities on the topic {\bfseries{cmd\+\_\+vel}}, It allows the robot to follow the wall. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_a0aa94d6d2ab4189f6d466c59eba19dbb}{follow\+\_\+wall.\+end\+\_\+wall}} ()
+\item 
+def \mbox{\hyperlink{namespacefollow__wall_aaefd3dc477be853fad38d103e7da3fd2}{follow\+\_\+wall.\+main}} ()
+\begin{DoxyCompactList}\small\item\em Main of the node, which is initilized as ROS service, publisher on the topic {\bfseries{cmd\+\_\+vel}} and subriber on topic {\bfseries{scan}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespacefollow__wall_af87ceb1ad4b9a4125590c19a1a9b9012}{follow\+\_\+wall.\+active\+\_\+}} = False
+\item 
+\mbox{\hyperlink{namespacefollow__wall_a885aedc191b83db2241c64b04fa76db7}{follow\+\_\+wall.\+pub\+\_\+}} = None
+\item 
+dictionary \mbox{\hyperlink{namespacefollow__wall_a973b32b73a90b03bfa8112d0132adcea}{follow\+\_\+wall.\+regions\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Initialization of the dictionay regions\+\_\+. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacefollow__wall_ae91c81967d8567207a9e06d8d5605fdb}{follow\+\_\+wall.\+state\+\_\+}} = 0
+\begin{DoxyCompactList}\small\item\em Initialization of the global variable state\+\_\+. \end{DoxyCompactList}\item 
+dictionary \mbox{\hyperlink{namespacefollow__wall_aa57fdbe899960bc645d89bbe6754b43d}{follow\+\_\+wall.\+state\+\_\+dict\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Initialization of the dictionary state\+\_\+dict\+\_\+. \end{DoxyCompactList}\end{DoxyCompactItemize}

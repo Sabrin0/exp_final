@@ -1,0 +1,69 @@
+\hypertarget{namespace_ball_detection}{}\doxysection{Ball\+Detection Namespace Reference}
+\label{namespace_ball_detection}\index{BallDetection@{BallDetection}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_ball_detection_1_1image__feature}{image\+\_\+feature}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespace_ball_detection_ab81c8ddc2e19ebdc8f2bcc563e6648d5}{Ball\+Detection}} (gray, hsv, ball\+Found)
+\item 
+def \mbox{\hyperlink{namespace_ball_detection_abb2e292098c33e9d50e35e637e131a2e}{main}} (args)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespace_ball_detection_abe04396aeba9fba94fee10950196b7e6}{VERBOSE}} = False
+\item 
+\mbox{\hyperlink{namespace_ball_detection_a7ec28b56ba3239f82cba3763c82dc1c7}{client}} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{}, Move\+Base\+Action)
+\item 
+\mbox{\hyperlink{namespace_ball_detection_a7ffe5ee300fe61c300fe7141981012f9}{cl}} = \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler}{Color\+Labeler}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@section description
+OpenCV node
+This node is responsible for the ball detection.
+In particular, once the ball is detected, it implemnt a simple algorith in order to track the ball untill the goal is reached.
+It also publishes on the topic BallState in order to communicate with the cmd_man when the ball is detected and when the robot is next to it.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_ball_detection_ab81c8ddc2e19ebdc8f2bcc563e6648d5}\label{namespace_ball_detection_ab81c8ddc2e19ebdc8f2bcc563e6648d5}} 
+\index{BallDetection@{BallDetection}!BallDetection@{BallDetection}}
+\index{BallDetection@{BallDetection}!BallDetection@{BallDetection}}
+\doxysubsubsection{\texorpdfstring{BallDetection()}{BallDetection()}}
+{\footnotesize\ttfamily def Ball\+Detection.\+Ball\+Detection (\begin{DoxyParamCaption}\item[{}]{gray,  }\item[{}]{hsv,  }\item[{}]{ball\+Found }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_ball_detection_abb2e292098c33e9d50e35e637e131a2e}\label{namespace_ball_detection_abb2e292098c33e9d50e35e637e131a2e}} 
+\index{BallDetection@{BallDetection}!main@{main}}
+\index{main@{main}!BallDetection@{BallDetection}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def Ball\+Detection.\+main (\begin{DoxyParamCaption}\item[{}]{args }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes and cleanup ros node\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespace_ball_detection_a7ffe5ee300fe61c300fe7141981012f9}\label{namespace_ball_detection_a7ffe5ee300fe61c300fe7141981012f9}} 
+\index{BallDetection@{BallDetection}!cl@{cl}}
+\index{cl@{cl}!BallDetection@{BallDetection}}
+\doxysubsubsection{\texorpdfstring{cl}{cl}}
+{\footnotesize\ttfamily Ball\+Detection.\+cl = \mbox{\hyperlink{classcolor_labeler_1_1_color_labeler}{Color\+Labeler}}()}
+
+\mbox{\Hypertarget{namespace_ball_detection_a7ec28b56ba3239f82cba3763c82dc1c7}\label{namespace_ball_detection_a7ec28b56ba3239f82cba3763c82dc1c7}} 
+\index{BallDetection@{BallDetection}!client@{client}}
+\index{client@{client}!BallDetection@{BallDetection}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily Ball\+Detection.\+client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{}, Move\+Base\+Action)}
+
+\mbox{\Hypertarget{namespace_ball_detection_abe04396aeba9fba94fee10950196b7e6}\label{namespace_ball_detection_abe04396aeba9fba94fee10950196b7e6}} 
+\index{BallDetection@{BallDetection}!VERBOSE@{VERBOSE}}
+\index{VERBOSE@{VERBOSE}!BallDetection@{BallDetection}}
+\doxysubsubsection{\texorpdfstring{VERBOSE}{VERBOSE}}
+{\footnotesize\ttfamily bool Ball\+Detection.\+VERBOSE = False}
+

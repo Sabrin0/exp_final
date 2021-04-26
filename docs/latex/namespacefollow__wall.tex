@@ -1,0 +1,255 @@
+\hypertarget{namespacefollow__wall}{}\doxysection{follow\+\_\+wall Namespace Reference}
+\label{namespacefollow__wall}\index{follow\_wall@{follow\_wall}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacefollow__wall_a25afaa88280b445dc6c40fd64cbc9b7d}{wall\+\_\+follower\+\_\+switch}} (req)
+\begin{DoxyCompactList}\small\item\em Function that handle the server call. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_a9fbb5828182205bfbc8d08b4304942a1}{clbk\+\_\+laser}} (msg)
+\begin{DoxyCompactList}\small\item\em Callback that handle the data recived from the laser . \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_a4a7ce0260143960a3188ea9e024ed5d8}{change\+\_\+state}} (state)
+\begin{DoxyCompactList}\small\item\em Function thar provides the switch among the three different states. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_ab816bc5b8667d41bc3f179157560993e}{take\+\_\+action}} ()
+\begin{DoxyCompactList}\small\item\em Function that returns the state to perform depending on which regions of the laser is involved. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_a3b1c659f1172e5ac288be3a5acb7806a}{find\+\_\+wall}} ()
+\begin{DoxyCompactList}\small\item\em Function that publishes velocities on the topic {\bfseries{cmd\+\_\+vel}}, It allows the robot to reach the wall. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_ac9bbae3175baea369fe44b0547217fb7}{turn\+\_\+left}} ()
+\begin{DoxyCompactList}\small\item\em Function that publishes velocities on the topic {\bfseries{cmd\+\_\+vel}}, It allows the robot to turn left and avoid obstacles. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_a4a3f3fa393e5f319cfa3f7ed7e479bd2}{follow\+\_\+the\+\_\+wall}} ()
+\begin{DoxyCompactList}\small\item\em Function that publishes velocities on the topic {\bfseries{cmd\+\_\+vel}}, It allows the robot to follow the wall. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacefollow__wall_a0aa94d6d2ab4189f6d466c59eba19dbb}{end\+\_\+wall}} ()
+\item 
+def \mbox{\hyperlink{namespacefollow__wall_aaefd3dc477be853fad38d103e7da3fd2}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main of the node, which is initilized as ROS service, publisher on the topic {\bfseries{cmd\+\_\+vel}} and subriber on topic {\bfseries{scan}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespacefollow__wall_af87ceb1ad4b9a4125590c19a1a9b9012}{active\+\_\+}} = False
+\item 
+\mbox{\hyperlink{namespacefollow__wall_a885aedc191b83db2241c64b04fa76db7}{pub\+\_\+}} = None
+\item 
+dictionary \mbox{\hyperlink{namespacefollow__wall_a973b32b73a90b03bfa8112d0132adcea}{regions\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Initialization of the dictionay regions\+\_\+. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacefollow__wall_ae91c81967d8567207a9e06d8d5605fdb}{state\+\_\+}} = 0
+\begin{DoxyCompactList}\small\item\em Initialization of the global variable state\+\_\+. \end{DoxyCompactList}\item 
+dictionary \mbox{\hyperlink{namespacefollow__wall_aa57fdbe899960bc645d89bbe6754b43d}{state\+\_\+dict\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Initialization of the dictionary state\+\_\+dict\+\_\+. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{index_Description}{}\doxysubsection{Description}\label{index_Description}
+This is a ROS server that provide navigation though the walls once it has been activated by the command manager. ~\newline
+ Flag for server activation. Simple dictionary that stores the laser field of view into five separate regions 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacefollow__wall_a4a7ce0260143960a3188ea9e024ed5d8}\label{namespacefollow__wall_a4a7ce0260143960a3188ea9e024ed5d8}} 
+\index{follow\_wall@{follow\_wall}!change\_state@{change\_state}}
+\index{change\_state@{change\_state}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{change\_state()}{change\_state()}}
+{\footnotesize\ttfamily def follow\+\_\+wall.\+change\+\_\+state (\begin{DoxyParamCaption}\item[{}]{state }\end{DoxyParamCaption})}
+
+
+
+Function thar provides the switch among the three different states. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em state\+\_\+} & \\
+\hline
+ & {\em state\+\_\+dict\+\_\+} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacefollow__wall_a9fbb5828182205bfbc8d08b4304942a1}\label{namespacefollow__wall_a9fbb5828182205bfbc8d08b4304942a1}} 
+\index{follow\_wall@{follow\_wall}!clbk\_laser@{clbk\_laser}}
+\index{clbk\_laser@{clbk\_laser}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{clbk\_laser()}{clbk\_laser()}}
+{\footnotesize\ttfamily def follow\+\_\+wall.\+clbk\+\_\+laser (\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+Callback that handle the data recived from the laser . 
+
+
+\begin{DoxyParams}{Parameters}
+{\em regions\+\_\+} & Dictionary that stores the ranges data \mbox{[}m\mbox{]} from the {\ttfamily Laser\+Scan} into five different regions. Please notice\+: It\textquotesingle{}s stores only the minimum value in order to give tha maximum priority to the nearest point of the object detected. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacefollow__wall_a0aa94d6d2ab4189f6d466c59eba19dbb}\label{namespacefollow__wall_a0aa94d6d2ab4189f6d466c59eba19dbb}} 
+\index{follow\_wall@{follow\_wall}!end\_wall@{end\_wall}}
+\index{end\_wall@{end\_wall}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{end\_wall()}{end\_wall()}}
+{\footnotesize\ttfamily def follow\+\_\+wall.\+end\+\_\+wall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacefollow__wall_a3b1c659f1172e5ac288be3a5acb7806a}\label{namespacefollow__wall_a3b1c659f1172e5ac288be3a5acb7806a}} 
+\index{follow\_wall@{follow\_wall}!find\_wall@{find\_wall}}
+\index{find\_wall@{find\_wall}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{find\_wall()}{find\_wall()}}
+{\footnotesize\ttfamily def follow\+\_\+wall.\+find\+\_\+wall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function that publishes velocities on the topic {\bfseries{cmd\+\_\+vel}}, It allows the robot to reach the wall. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg.\+linear.\+x} & {\ttfamily Twist()}, field of the ROS msg representing the linear velocity along x \\
+\hline
+{\em msg.\+angular.\+z} & {\ttfamily Twist()}, field of the ROS msg representing the angular velocity along z \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+msg ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefollow__wall_a4a3f3fa393e5f319cfa3f7ed7e479bd2}\label{namespacefollow__wall_a4a3f3fa393e5f319cfa3f7ed7e479bd2}} 
+\index{follow\_wall@{follow\_wall}!follow\_the\_wall@{follow\_the\_wall}}
+\index{follow\_the\_wall@{follow\_the\_wall}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{follow\_the\_wall()}{follow\_the\_wall()}}
+{\footnotesize\ttfamily def follow\+\_\+wall.\+follow\+\_\+the\+\_\+wall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function that publishes velocities on the topic {\bfseries{cmd\+\_\+vel}}, It allows the robot to follow the wall. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg.\+linear.\+x} & {\ttfamily Twist()}, field of the ROS msg representing the linear velocity along x \\
+\hline
+{\em msg.\+angular.\+z} & {\ttfamily Twist()}, field of the ROS msg representing the angular velocity along z \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+msg ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefollow__wall_aaefd3dc477be853fad38d103e7da3fd2}\label{namespacefollow__wall_aaefd3dc477be853fad38d103e7da3fd2}} 
+\index{follow\_wall@{follow\_wall}!main@{main}}
+\index{main@{main}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def follow\+\_\+wall.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main of the node, which is initilized as ROS service, publisher on the topic {\bfseries{cmd\+\_\+vel}} and subriber on topic {\bfseries{scan}}. 
+
+~\newline
+ Inside a loop, It checks the current state provided in order to switch between the three differen states. ~\newline
+ \mbox{\Hypertarget{namespacefollow__wall_ab816bc5b8667d41bc3f179157560993e}\label{namespacefollow__wall_ab816bc5b8667d41bc3f179157560993e}} 
+\index{follow\_wall@{follow\_wall}!take\_action@{take\_action}}
+\index{take\_action@{take\_action}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{take\_action()}{take\_action()}}
+{\footnotesize\ttfamily def follow\+\_\+wall.\+take\+\_\+action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function that returns the state to perform depending on which regions of the laser is involved. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state\+\_\+description} & {\ttfamily String}, simple description of the current state \\
+\hline
+{\em d0} & {\ttfamily flaot}, minor treshold \\
+\hline
+{\em d} & {\ttfamily float}, major treshold \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacefollow__wall_ac9bbae3175baea369fe44b0547217fb7}\label{namespacefollow__wall_ac9bbae3175baea369fe44b0547217fb7}} 
+\index{follow\_wall@{follow\_wall}!turn\_left@{turn\_left}}
+\index{turn\_left@{turn\_left}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{turn\_left()}{turn\_left()}}
+{\footnotesize\ttfamily def follow\+\_\+wall.\+turn\+\_\+left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function that publishes velocities on the topic {\bfseries{cmd\+\_\+vel}}, It allows the robot to turn left and avoid obstacles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg.\+angular.\+z} & {\ttfamily Twist()}, field of the ROS msg representing the angular velocity along z \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+msg ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefollow__wall_a25afaa88280b445dc6c40fd64cbc9b7d}\label{namespacefollow__wall_a25afaa88280b445dc6c40fd64cbc9b7d}} 
+\index{follow\_wall@{follow\_wall}!wall\_follower\_switch@{wall\_follower\_switch}}
+\index{wall\_follower\_switch@{wall\_follower\_switch}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{wall\_follower\_switch()}{wall\_follower\_switch()}}
+{\footnotesize\ttfamily def follow\+\_\+wall.\+wall\+\_\+follower\+\_\+switch (\begin{DoxyParamCaption}\item[{}]{req }\end{DoxyParamCaption})}
+
+
+
+Function that handle the server call. 
+
+\begin{DoxyReturn}{Returns}
+res\+: It returns a {\ttfamily Bool} value in order to activate or not the server 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacefollow__wall_af87ceb1ad4b9a4125590c19a1a9b9012}\label{namespacefollow__wall_af87ceb1ad4b9a4125590c19a1a9b9012}} 
+\index{follow\_wall@{follow\_wall}!active\_@{active\_}}
+\index{active\_@{active\_}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{active\_}{active\_}}
+{\footnotesize\ttfamily bool follow\+\_\+wall.\+active\+\_\+ = False}
+
+\mbox{\Hypertarget{namespacefollow__wall_a885aedc191b83db2241c64b04fa76db7}\label{namespacefollow__wall_a885aedc191b83db2241c64b04fa76db7}} 
+\index{follow\_wall@{follow\_wall}!pub\_@{pub\_}}
+\index{pub\_@{pub\_}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{pub\_}{pub\_}}
+{\footnotesize\ttfamily follow\+\_\+wall.\+pub\+\_\+ = None}
+
+\mbox{\Hypertarget{namespacefollow__wall_a973b32b73a90b03bfa8112d0132adcea}\label{namespacefollow__wall_a973b32b73a90b03bfa8112d0132adcea}} 
+\index{follow\_wall@{follow\_wall}!regions\_@{regions\_}}
+\index{regions\_@{regions\_}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{regions\_}{regions\_}}
+{\footnotesize\ttfamily dictionary follow\+\_\+wall.\+regions\+\_\+}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 =  \{}
+\DoxyCodeLine{2     \textcolor{stringliteral}{'right'}: 0,}
+\DoxyCodeLine{3     \textcolor{stringliteral}{'fright'}: 0,}
+\DoxyCodeLine{4     \textcolor{stringliteral}{'front'}: 0,}
+\DoxyCodeLine{5     \textcolor{stringliteral}{'fleft'}: 0,}
+\DoxyCodeLine{6     \textcolor{stringliteral}{'left'}: 0,}
+\DoxyCodeLine{7 \}}
+
+\end{DoxyCode}
+
+
+Initialization of the dictionay regions\+\_\+. 
+
+\mbox{\Hypertarget{namespacefollow__wall_ae91c81967d8567207a9e06d8d5605fdb}\label{namespacefollow__wall_ae91c81967d8567207a9e06d8d5605fdb}} 
+\index{follow\_wall@{follow\_wall}!state\_@{state\_}}
+\index{state\_@{state\_}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily int follow\+\_\+wall.\+state\+\_\+ = 0}
+
+
+
+Initialization of the global variable state\+\_\+. 
+
+\mbox{\Hypertarget{namespacefollow__wall_aa57fdbe899960bc645d89bbe6754b43d}\label{namespacefollow__wall_aa57fdbe899960bc645d89bbe6754b43d}} 
+\index{follow\_wall@{follow\_wall}!state\_dict\_@{state\_dict\_}}
+\index{state\_dict\_@{state\_dict\_}!follow\_wall@{follow\_wall}}
+\doxysubsubsection{\texorpdfstring{state\_dict\_}{state\_dict\_}}
+{\footnotesize\ttfamily dictionary follow\+\_\+wall.\+state\+\_\+dict\+\_\+}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 =  \{}
+\DoxyCodeLine{2     0: \textcolor{stringliteral}{'find the wall'},}
+\DoxyCodeLine{3     1: \textcolor{stringliteral}{'turn left'},}
+\DoxyCodeLine{4     2: \textcolor{stringliteral}{'follow the wall'},}
+\DoxyCodeLine{5     \textcolor{comment}{\# End of wall}}
+\DoxyCodeLine{6     3: \textcolor{stringliteral}{'end of the wall'},}
+\DoxyCodeLine{7 \}}
+
+\end{DoxyCode}
+
+
+Initialization of the dictionary state\+\_\+dict\+\_\+. 
+
+It represents the three possible states of the behaviour. 

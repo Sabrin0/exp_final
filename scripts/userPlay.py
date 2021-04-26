@@ -10,13 +10,29 @@ from exp_final.msg import user
 from std_msgs.msg import Bool, String
 
 class console_manager():
+    """!@brief This class is the core of the user node. It handles the communication between the command manager 
+    and the user interface. 
+    """
     def __init__(self):
-
-        # check later if the color passed is ok
-        self.color = ["blue", "red", "green", "yellow", "magenta", "black"]
+        """!@brief The construct. It initialize the node and some attributes. It also print a welcome message.
+        Attributes
+        ----------
+        self.color: type `list`
+            List of all the possible color related to each specific room
         
+        self.state: type `String`
+            It represents the current state of the robot. It's initializated as _normal_.
+
+        self.play_pub: `rospy.Publisher()`
+            It allows the publication to the topic __userCommand__, custom message. Thought this message the user can send command
+            to the robot.
+        
+        self.play_sub: It allows the subscription to the topic '/currentState', type String. Thought the user remains updated
+            with the curren state of the robot. 
+        """
+    
+        self.color = ["blue", "red", "green", "yellow", "magenta", "black"]
         self.state = "normal"
-        # initialize node as publisher
         self.play_pub = rospy.Publisher('/userCommand', user, queue_size=1)
         self.play_sub = rospy.Subscriber("/currentState", String, self.callback, queue_size=1)
         rospy.init_node('userPlay')
@@ -35,10 +51,31 @@ class console_manager():
                 """)
 
     def callback(self, data):
+        """!@brief Callback that receives the messages related to the current state of the robot from the Comand Manager.
+        @param data: message over the topic __currentState__ 
+        Attributes
+        ---
+        self.state: type `String`
+            It stores the data from the afromentioned topic  
+        """
         self.state = data.data
         #rospy.loginfo('HEARD')
 
     def backUser(self):
+        """!@brief Methods that saves the input command _play_ in order to  call the robot to the user.
+        This is done by sending the string _play_  over the  topic __currentState__ when the command manager recives the command, 
+        it sends the user position as _Nav Stack goal_.
+        It also checks if the robot is in the normal state, otherwise it just ignore the input.
+        Attributes
+        ---
+        self.msg_play: ros message
+            It contains:
+                - play: type `Bool`, it checks if the user inputs the correct command
+                - color: type `String`, it stores the color selected by  the user. Initialized as empty string
+        
+        command: String,
+            It stores the `raw_input()` data from the user.
+        """
         self.msg_play = user()
         command = raw_input("Please enter 'play' to call the dog: ")
         
@@ -63,6 +100,13 @@ class console_manager():
             return self.backUser()
     
     def GoTo(self):
+        """!@brief Methods that saves the `raw_input()` data representing the _GoTo_ command. \n
+        This message, if available, will be sent to the command manager through the topic __userPlay__ .
+        Attributes
+        ---
+         color: type String. 
+            Color entered by the user.
+        """
         
         print(r"""Please enter a specific color to reach the desired room:
 

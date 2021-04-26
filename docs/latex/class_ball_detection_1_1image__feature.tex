@@ -1,0 +1,108 @@
+\hypertarget{class_ball_detection_1_1image__feature}{}\doxysection{Ball\+Detection.\+image\+\_\+feature Class Reference}
+\label{class_ball_detection_1_1image__feature}\index{BallDetection.image\_feature@{BallDetection.image\_feature}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_ball_detection_1_1image__feature_a7af211a45a6486937c64b0bc7e6b2a35}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Initialize ros publisher, ros subscriber. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_ball_detection_1_1image__feature_af798347513682b6420fefd56334cb864}{callback\+State}} (self, data)
+\item 
+def \mbox{\hyperlink{class_ball_detection_1_1image__feature_abea65101f13e839e8ae79e34d40ef823}{callback}} (self, ros\+\_\+data)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_ball_detection_1_1image__feature_a86da6fdbd839a4ee5756a2c45f7961e0}{image\+\_\+pub}}
+\begin{DoxyCompactList}\small\item\em topic where we publish \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_ball_detection_1_1image__feature_a77847c4e948f3c14a2245c8cb7250107}{vel\+\_\+pub}}
+\item 
+\mbox{\hyperlink{class_ball_detection_1_1image__feature_a4d700e974ab5b8f00c2521dec58f43eb}{Ball\+Det\+\_\+pub}}
+\begin{DoxyCompactList}\small\item\em flag for ball detected \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_ball_detection_1_1image__feature_a1bb89b0b4d5e035032f6c2cefd9b4f99}{subscriber}}
+\item 
+\mbox{\hyperlink{class_ball_detection_1_1image__feature_a415e95851b4ada64b21ba4ae24613425}{state\+\_\+sub}}
+\item 
+\mbox{\hyperlink{class_ball_detection_1_1image__feature_a360294e96f49c61851a23ba417ffff53}{state}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_ball_detection_1_1image__feature_a7af211a45a6486937c64b0bc7e6b2a35}\label{class_ball_detection_1_1image__feature_a7af211a45a6486937c64b0bc7e6b2a35}} 
+\index{BallDetection.image\_feature@{BallDetection.image\_feature}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!BallDetection.image\_feature@{BallDetection.image\_feature}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Ball\+Detection.\+image\+\_\+feature.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Initialize ros publisher, ros subscriber. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_ball_detection_1_1image__feature_abea65101f13e839e8ae79e34d40ef823}\label{class_ball_detection_1_1image__feature_abea65101f13e839e8ae79e34d40ef823}} 
+\index{BallDetection.image\_feature@{BallDetection.image\_feature}!callback@{callback}}
+\index{callback@{callback}!BallDetection.image\_feature@{BallDetection.image\_feature}}
+\doxysubsubsection{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily def Ball\+Detection.\+image\+\_\+feature.\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{ros\+\_\+data }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Callback function of subscribed topic. 
+Here images get converted and features detected\end{DoxyVerb}
+ \mbox{\Hypertarget{class_ball_detection_1_1image__feature_af798347513682b6420fefd56334cb864}\label{class_ball_detection_1_1image__feature_af798347513682b6420fefd56334cb864}} 
+\index{BallDetection.image\_feature@{BallDetection.image\_feature}!callbackState@{callbackState}}
+\index{callbackState@{callbackState}!BallDetection.image\_feature@{BallDetection.image\_feature}}
+\doxysubsubsection{\texorpdfstring{callbackState()}{callbackState()}}
+{\footnotesize\ttfamily def Ball\+Detection.\+image\+\_\+feature.\+callback\+State (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{data }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_ball_detection_1_1image__feature_a4d700e974ab5b8f00c2521dec58f43eb}\label{class_ball_detection_1_1image__feature_a4d700e974ab5b8f00c2521dec58f43eb}} 
+\index{BallDetection.image\_feature@{BallDetection.image\_feature}!BallDet\_pub@{BallDet\_pub}}
+\index{BallDet\_pub@{BallDet\_pub}!BallDetection.image\_feature@{BallDetection.image\_feature}}
+\doxysubsubsection{\texorpdfstring{BallDet\_pub}{BallDet\_pub}}
+{\footnotesize\ttfamily Ball\+Detection.\+image\+\_\+feature.\+Ball\+Det\+\_\+pub}
+
+
+
+flag for ball detected 
+
+\mbox{\Hypertarget{class_ball_detection_1_1image__feature_a86da6fdbd839a4ee5756a2c45f7961e0}\label{class_ball_detection_1_1image__feature_a86da6fdbd839a4ee5756a2c45f7961e0}} 
+\index{BallDetection.image\_feature@{BallDetection.image\_feature}!image\_pub@{image\_pub}}
+\index{image\_pub@{image\_pub}!BallDetection.image\_feature@{BallDetection.image\_feature}}
+\doxysubsubsection{\texorpdfstring{image\_pub}{image\_pub}}
+{\footnotesize\ttfamily Ball\+Detection.\+image\+\_\+feature.\+image\+\_\+pub}
+
+
+
+topic where we publish 
+
+\mbox{\Hypertarget{class_ball_detection_1_1image__feature_a360294e96f49c61851a23ba417ffff53}\label{class_ball_detection_1_1image__feature_a360294e96f49c61851a23ba417ffff53}} 
+\index{BallDetection.image\_feature@{BallDetection.image\_feature}!state@{state}}
+\index{state@{state}!BallDetection.image\_feature@{BallDetection.image\_feature}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily Ball\+Detection.\+image\+\_\+feature.\+state}
+
+\mbox{\Hypertarget{class_ball_detection_1_1image__feature_a415e95851b4ada64b21ba4ae24613425}\label{class_ball_detection_1_1image__feature_a415e95851b4ada64b21ba4ae24613425}} 
+\index{BallDetection.image\_feature@{BallDetection.image\_feature}!state\_sub@{state\_sub}}
+\index{state\_sub@{state\_sub}!BallDetection.image\_feature@{BallDetection.image\_feature}}
+\doxysubsubsection{\texorpdfstring{state\_sub}{state\_sub}}
+{\footnotesize\ttfamily Ball\+Detection.\+image\+\_\+feature.\+state\+\_\+sub}
+
+\mbox{\Hypertarget{class_ball_detection_1_1image__feature_a1bb89b0b4d5e035032f6c2cefd9b4f99}\label{class_ball_detection_1_1image__feature_a1bb89b0b4d5e035032f6c2cefd9b4f99}} 
+\index{BallDetection.image\_feature@{BallDetection.image\_feature}!subscriber@{subscriber}}
+\index{subscriber@{subscriber}!BallDetection.image\_feature@{BallDetection.image\_feature}}
+\doxysubsubsection{\texorpdfstring{subscriber}{subscriber}}
+{\footnotesize\ttfamily Ball\+Detection.\+image\+\_\+feature.\+subscriber}
+
+\mbox{\Hypertarget{class_ball_detection_1_1image__feature_a77847c4e948f3c14a2245c8cb7250107}\label{class_ball_detection_1_1image__feature_a77847c4e948f3c14a2245c8cb7250107}} 
+\index{BallDetection.image\_feature@{BallDetection.image\_feature}!vel\_pub@{vel\_pub}}
+\index{vel\_pub@{vel\_pub}!BallDetection.image\_feature@{BallDetection.image\_feature}}
+\doxysubsubsection{\texorpdfstring{vel\_pub}{vel\_pub}}
+{\footnotesize\ttfamily Ball\+Detection.\+image\+\_\+feature.\+vel\+\_\+pub}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+scripts/\mbox{\hyperlink{_ball_detection_8py}{Ball\+Detection.\+py}}\end{DoxyCompactItemize}

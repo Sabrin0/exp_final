@@ -1,0 +1,224 @@
+\hypertarget{namespacecmd__man}{}\doxysection{cmd\+\_\+man Namespace Reference}
+\label{namespacecmd__man}\index{cmd\_man@{cmd\_man}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classcmd__man_1_1blueprint}{blueprint}}
+\begin{DoxyCompactList}\small\item\em Room class\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcmd__man_1_1pub_handler}{pub\+Handler}}
+\item 
+class \mbox{\hyperlink{classcmd__man_1_1target_position}{target\+Position}}
+\item 
+class \mbox{\hyperlink{classcmd__man_1_1_normal}{Normal}}
+\begin{DoxyCompactList}\small\item\em Define normal state. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}}
+\begin{DoxyCompactList}\small\item\em Define \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}} state. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcmd__man_1_1_play}{Play}}
+\begin{DoxyCompactList}\small\item\em Define \mbox{\hyperlink{classcmd__man_1_1_play}{Play}} state. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcmd__man_1_1_find}{Find}}
+\begin{DoxyCompactList}\small\item\em Define \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}} state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacecmd__man_a6cf57c3b25985d2cbbba782de9706cff}{decision}} ()
+\begin{DoxyCompactList}\small\item\em Documentation for the function \mbox{\hyperlink{namespacecmd__man_a6cf57c3b25985d2cbbba782de9706cff}{decision()}} \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacecmd__man_a6f05dcc897ec4b39538a652f559d4f3d}{callback\+\_\+odom}} (data)
+\item 
+def \mbox{\hyperlink{namespacecmd__man_a230fcab660c41bab82fc3c849ff44ac3}{callback\+\_\+check}} (data)
+\begin{DoxyCompactList}\small\item\em Documentation for the function \mbox{\hyperlink{namespacecmd__man_a230fcab660c41bab82fc3c849ff44ac3}{callback\+\_\+check()}} \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacecmd__man_af325bba39a2e17ae88872477b6b85283}{callback\+\_\+user}} (data)
+\item 
+def \mbox{\hyperlink{namespacecmd__man_a1f7de7e944f025b34fc7428fe0e5dd19}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespacecmd__man_a6c343360ecee99b936275be79f8777b6}{Ball\+Detected}} = False
+\begin{DoxyCompactList}\small\item\em Define home x position. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacecmd__man_a2501594f04eb8fbfd4f5357ce3c58e32}{Ball\+Check}} = False
+\begin{DoxyCompactList}\small\item\em @parama Ball\+Check, bool flag for the ball check ~\newline
+ \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacecmd__man_ab9bd96c0dfe89e0ef1cb9c261f603054}{current\+Radius}} = 0
+\item 
+\mbox{\hyperlink{namespacecmd__man_abba1e6565e3bbd37c61270b090c8c4b8}{ball\+Color}} = None
+\begin{DoxyCompactList}\small\item\em Ball Color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacecmd__man_ae4c988f8b7d0e0608b35d7bb310bcb2c}{srv\+\_\+client\+\_\+wall\+\_\+follower\+\_\+}} = None
+\item 
+bool \mbox{\hyperlink{namespacecmd__man_a71624d8316bb834e7065bde56a4eb569}{play}} = False
+\item 
+bool \mbox{\hyperlink{namespacecmd__man_a99f0de5fa2792d00a60ebbb47c40abd6}{play\+Avilable}} = False
+\item 
+\mbox{\hyperlink{namespacecmd__man_a73895f62bfd8cdb1c8e229f52e6eea13}{Go\+To\+\_\+room}} = None
+\item 
+\mbox{\hyperlink{namespacecmd__man_ab0787082f624fa3c830f7e8ea9090401}{client}} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{}, Move\+Base\+Action)
+\begin{DoxyCompactList}\small\item\em Action client for the action server dedicated to the movment client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}/robot/reaching\+\_\+goal\+\_\+robot\textquotesingle{}, exp\+\_\+assignment2.\+msg.\+Planning\+Action) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacecmd__man_a2310ba62c26f7ea062d94297508a0220}{room}} = \mbox{\hyperlink{classcmd__man_1_1blueprint}{blueprint}}()
+\item 
+\mbox{\hyperlink{namespacecmd__man_a7b65238fd30234485d513f74b0bffb5e}{movement}} = \mbox{\hyperlink{classcmd__man_1_1target_position}{target\+Position}}()
+\item 
+\mbox{\hyperlink{namespacecmd__man_a465514eb2e8f678efc4ae252c4bd153b}{pub}} = \mbox{\hyperlink{classcmd__man_1_1pub_handler}{pub\+Handler}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Luca Covizzi 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacecmd__man_a230fcab660c41bab82fc3c849ff44ac3}\label{namespacecmd__man_a230fcab660c41bab82fc3c849ff44ac3}} 
+\index{cmd\_man@{cmd\_man}!callback\_check@{callback\_check}}
+\index{callback\_check@{callback\_check}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{callback\_check()}{callback\_check()}}
+{\footnotesize\ttfamily def cmd\+\_\+man.\+callback\+\_\+check (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})}
+
+
+
+Documentation for the function \mbox{\hyperlink{namespacecmd__man_a230fcab660c41bab82fc3c849ff44ac3}{callback\+\_\+check()}} 
+
+\begin{DoxyVerb}This function subscribes to the topic BallState.
+If the message related to the ball detection is setted to true, the action server for the robot movement is stopped and the state PLAY starts.
+While the ball is detected, the values of the radious is updated and if it exceeds a treshold the head starts to rotate.
+
+@param BallDetected Bool
+@param BallCheck Bool
+@param currentradious Float64
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacecmd__man_a6f05dcc897ec4b39538a652f559d4f3d}\label{namespacecmd__man_a6f05dcc897ec4b39538a652f559d4f3d}} 
+\index{cmd\_man@{cmd\_man}!callback\_odom@{callback\_odom}}
+\index{callback\_odom@{callback\_odom}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{callback\_odom()}{callback\_odom()}}
+{\footnotesize\ttfamily def cmd\+\_\+man.\+callback\+\_\+odom (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacecmd__man_af325bba39a2e17ae88872477b6b85283}\label{namespacecmd__man_af325bba39a2e17ae88872477b6b85283}} 
+\index{cmd\_man@{cmd\_man}!callback\_user@{callback\_user}}
+\index{callback\_user@{callback\_user}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{callback\_user()}{callback\_user()}}
+{\footnotesize\ttfamily def cmd\+\_\+man.\+callback\+\_\+user (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacecmd__man_a6cf57c3b25985d2cbbba782de9706cff}\label{namespacecmd__man_a6cf57c3b25985d2cbbba782de9706cff}} 
+\index{cmd\_man@{cmd\_man}!decision@{decision}}
+\index{decision@{decision}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{decision()}{decision()}}
+{\footnotesize\ttfamily def cmd\+\_\+man.\+decision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Documentation for the function \mbox{\hyperlink{namespacecmd__man_a6cf57c3b25985d2cbbba782de9706cff}{decision()}} 
+
+\begin{DoxyVerb} It returns random state between GoTonormal or GoToSleep
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacecmd__man_a1f7de7e944f025b34fc7428fe0e5dd19}\label{namespacecmd__man_a1f7de7e944f025b34fc7428fe0e5dd19}} 
+\index{cmd\_man@{cmd\_man}!main@{main}}
+\index{main@{main}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def cmd\+\_\+man.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacecmd__man_a2501594f04eb8fbfd4f5357ce3c58e32}\label{namespacecmd__man_a2501594f04eb8fbfd4f5357ce3c58e32}} 
+\index{cmd\_man@{cmd\_man}!BallCheck@{BallCheck}}
+\index{BallCheck@{BallCheck}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{BallCheck}{BallCheck}}
+{\footnotesize\ttfamily bool cmd\+\_\+man.\+Ball\+Check = False}
+
+
+
+@parama Ball\+Check, bool flag for the ball check ~\newline
+ 
+
+\mbox{\Hypertarget{namespacecmd__man_abba1e6565e3bbd37c61270b090c8c4b8}\label{namespacecmd__man_abba1e6565e3bbd37c61270b090c8c4b8}} 
+\index{cmd\_man@{cmd\_man}!ballColor@{ballColor}}
+\index{ballColor@{ballColor}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{ballColor}{ballColor}}
+{\footnotesize\ttfamily cmd\+\_\+man.\+ball\+Color = None}
+
+
+
+Ball Color. 
+
+\mbox{\Hypertarget{namespacecmd__man_a6c343360ecee99b936275be79f8777b6}\label{namespacecmd__man_a6c343360ecee99b936275be79f8777b6}} 
+\index{cmd\_man@{cmd\_man}!BallDetected@{BallDetected}}
+\index{BallDetected@{BallDetected}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{BallDetected}{BallDetected}}
+{\footnotesize\ttfamily bool cmd\+\_\+man.\+Ball\+Detected = False}
+
+
+
+Define home x position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+\_\+home} & The fixed home coordinate x x\+\_\+home = 5\\
+\hline
+\end{DoxyParams}
+Define home y position 
+\begin{DoxyParams}{Parameters}
+{\em x\+\_\+home} & The fixed home coordinate x y\+\_\+home = 8\\
+\hline
+\end{DoxyParams}
+Initial state of the ball status 
+\begin{DoxyParams}{Parameters}
+{\em Ball\+Detected,bool} & flag for the ball detection \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacecmd__man_ab0787082f624fa3c830f7e8ea9090401}\label{namespacecmd__man_ab0787082f624fa3c830f7e8ea9090401}} 
+\index{cmd\_man@{cmd\_man}!client@{client}}
+\index{client@{client}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily cmd\+\_\+man.\+client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{}, Move\+Base\+Action)}
+
+
+
+Action client for the action server dedicated to the movment client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}/robot/reaching\+\_\+goal\+\_\+robot\textquotesingle{}, exp\+\_\+assignment2.\+msg.\+Planning\+Action) 
+
+\mbox{\Hypertarget{namespacecmd__man_ab9bd96c0dfe89e0ef1cb9c261f603054}\label{namespacecmd__man_ab9bd96c0dfe89e0ef1cb9c261f603054}} 
+\index{cmd\_man@{cmd\_man}!currentRadius@{currentRadius}}
+\index{currentRadius@{currentRadius}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{currentRadius}{currentRadius}}
+{\footnotesize\ttfamily int cmd\+\_\+man.\+current\+Radius = 0}
+
+\mbox{\Hypertarget{namespacecmd__man_a73895f62bfd8cdb1c8e229f52e6eea13}\label{namespacecmd__man_a73895f62bfd8cdb1c8e229f52e6eea13}} 
+\index{cmd\_man@{cmd\_man}!GoTo\_room@{GoTo\_room}}
+\index{GoTo\_room@{GoTo\_room}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{GoTo\_room}{GoTo\_room}}
+{\footnotesize\ttfamily cmd\+\_\+man.\+Go\+To\+\_\+room = None}
+
+\mbox{\Hypertarget{namespacecmd__man_a7b65238fd30234485d513f74b0bffb5e}\label{namespacecmd__man_a7b65238fd30234485d513f74b0bffb5e}} 
+\index{cmd\_man@{cmd\_man}!movement@{movement}}
+\index{movement@{movement}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{movement}{movement}}
+{\footnotesize\ttfamily cmd\+\_\+man.\+movement = \mbox{\hyperlink{classcmd__man_1_1target_position}{target\+Position}}()}
+
+\mbox{\Hypertarget{namespacecmd__man_a71624d8316bb834e7065bde56a4eb569}\label{namespacecmd__man_a71624d8316bb834e7065bde56a4eb569}} 
+\index{cmd\_man@{cmd\_man}!play@{play}}
+\index{play@{play}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{play}{play}}
+{\footnotesize\ttfamily bool cmd\+\_\+man.\+play = False}
+
+\mbox{\Hypertarget{namespacecmd__man_a99f0de5fa2792d00a60ebbb47c40abd6}\label{namespacecmd__man_a99f0de5fa2792d00a60ebbb47c40abd6}} 
+\index{cmd\_man@{cmd\_man}!playAvilable@{playAvilable}}
+\index{playAvilable@{playAvilable}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{playAvilable}{playAvilable}}
+{\footnotesize\ttfamily bool cmd\+\_\+man.\+play\+Avilable = False}
+
+\mbox{\Hypertarget{namespacecmd__man_a465514eb2e8f678efc4ae252c4bd153b}\label{namespacecmd__man_a465514eb2e8f678efc4ae252c4bd153b}} 
+\index{cmd\_man@{cmd\_man}!pub@{pub}}
+\index{pub@{pub}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{pub}{pub}}
+{\footnotesize\ttfamily cmd\+\_\+man.\+pub = \mbox{\hyperlink{classcmd__man_1_1pub_handler}{pub\+Handler}}()}
+
+\mbox{\Hypertarget{namespacecmd__man_a2310ba62c26f7ea062d94297508a0220}\label{namespacecmd__man_a2310ba62c26f7ea062d94297508a0220}} 
+\index{cmd\_man@{cmd\_man}!room@{room}}
+\index{room@{room}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{room}{room}}
+{\footnotesize\ttfamily cmd\+\_\+man.\+room = \mbox{\hyperlink{classcmd__man_1_1blueprint}{blueprint}}()}
+
+\mbox{\Hypertarget{namespacecmd__man_ae4c988f8b7d0e0608b35d7bb310bcb2c}\label{namespacecmd__man_ae4c988f8b7d0e0608b35d7bb310bcb2c}} 
+\index{cmd\_man@{cmd\_man}!srv\_client\_wall\_follower\_@{srv\_client\_wall\_follower\_}}
+\index{srv\_client\_wall\_follower\_@{srv\_client\_wall\_follower\_}!cmd\_man@{cmd\_man}}
+\doxysubsubsection{\texorpdfstring{srv\_client\_wall\_follower\_}{srv\_client\_wall\_follower\_}}
+{\footnotesize\ttfamily cmd\+\_\+man.\+srv\+\_\+client\+\_\+wall\+\_\+follower\+\_\+ = None}
+

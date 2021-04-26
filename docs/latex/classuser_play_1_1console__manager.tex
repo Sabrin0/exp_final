@@ -1,0 +1,143 @@
+\hypertarget{classuser_play_1_1console__manager}{}\doxysection{user\+Play.\+console\+\_\+manager Class Reference}
+\label{classuser_play_1_1console__manager}\index{userPlay.console\_manager@{userPlay.console\_manager}}
+
+
+This class is the core of the user node.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classuser_play_1_1console__manager_afc47e9751fc786e7c645c6c49fde2750}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em The construct. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classuser_play_1_1console__manager_aaa062af06c9e0aa6fc6d6e2cfaf17b28}{callback}} (self, data)
+\begin{DoxyCompactList}\small\item\em Callback that receives the messages related to the current state of the robot from the Comand Manager. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classuser_play_1_1console__manager_a816df895f96a5d24fa02ed4958a1e657}{back\+User}} (self)
+\begin{DoxyCompactList}\small\item\em Methods that saves the input command {\itshape play} in order to call the robot to the user. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classuser_play_1_1console__manager_ab893c78c279766a1d241626039e7fb87}{Go\+To}} (self)
+\begin{DoxyCompactList}\small\item\em Methods that saves the {\ttfamily raw\+\_\+input()} data representing the {\itshape Go\+To} command. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classuser_play_1_1console__manager_a645f79340fa6d3bd77a1618278963741}{color}}
+\item 
+\mbox{\hyperlink{classuser_play_1_1console__manager_a743a3ca9a8125be1c4b15c68263afd1f}{state}}
+\item 
+\mbox{\hyperlink{classuser_play_1_1console__manager_a91b94b975c335761c95b2fadbea2c428}{play\+\_\+pub}}
+\item 
+\mbox{\hyperlink{classuser_play_1_1console__manager_ad02d10dbc9c4dd4cf4ebd14669dd9c8a}{play\+\_\+sub}}
+\item 
+\mbox{\hyperlink{classuser_play_1_1console__manager_a8cbd7f09a2727df1cfc1d0d28bf0b252}{msg\+\_\+play}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class is the core of the user node. 
+
+It handles the communication between the command manager and the user interface. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classuser_play_1_1console__manager_afc47e9751fc786e7c645c6c49fde2750}\label{classuser_play_1_1console__manager_afc47e9751fc786e7c645c6c49fde2750}} 
+\index{userPlay.console\_manager@{userPlay.console\_manager}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!userPlay.console\_manager@{userPlay.console\_manager}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def user\+Play.\+console\+\_\+manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+The construct. 
+
+It initialize the node and some attributes. It also print a welcome message. \hypertarget{classuser_play_1_1console__manager_autotoc_md1}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md1}
+self.\+color\+: type {\ttfamily list} List of all the possible color related to each specific room
+
+self.\+state\+: type {\ttfamily String} It represents the current state of the robot. It\textquotesingle{}s initializated as {\itshape normal}.
+
+self.\+play\+\_\+pub\+: {\ttfamily rospy.\+Publisher()} It allows the publication to the topic {\bfseries{user\+Command}}, custom message. Thought this message the user can send command to the robot.
+
+self.\+play\+\_\+sub\+: It allows the subscription to the topic \textquotesingle{}/current\+State\textquotesingle{}, type String. Thought the user remains updated with the curren state of the robot. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classuser_play_1_1console__manager_a816df895f96a5d24fa02ed4958a1e657}\label{classuser_play_1_1console__manager_a816df895f96a5d24fa02ed4958a1e657}} 
+\index{userPlay.console\_manager@{userPlay.console\_manager}!backUser@{backUser}}
+\index{backUser@{backUser}!userPlay.console\_manager@{userPlay.console\_manager}}
+\doxysubsubsection{\texorpdfstring{backUser()}{backUser()}}
+{\footnotesize\ttfamily def user\+Play.\+console\+\_\+manager.\+back\+User (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Methods that saves the input command {\itshape play} in order to call the robot to the user. 
+
+This is done by sending the string {\itshape play} over the topic {\bfseries{current\+State}} when the command manager recives the command, it sends the user position as {\itshape Nav Stack goal}. It also checks if the robot is in the normal state, otherwise it just ignore the input. \hypertarget{classuser_play_1_1console__manager_autotoc_md3}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md3}
+self.\+msg\+\_\+play\+: ros message It contains\+:
+\begin{DoxyItemize}
+\item play\+: type {\ttfamily Bool}, it checks if the user inputs the correct command
+\item color\+: type {\ttfamily String}, it stores the color selected by the user. Initialized as empty string
+\end{DoxyItemize}
+
+command\+: String, It stores the {\ttfamily raw\+\_\+input()} data from the user. \mbox{\Hypertarget{classuser_play_1_1console__manager_aaa062af06c9e0aa6fc6d6e2cfaf17b28}\label{classuser_play_1_1console__manager_aaa062af06c9e0aa6fc6d6e2cfaf17b28}} 
+\index{userPlay.console\_manager@{userPlay.console\_manager}!callback@{callback}}
+\index{callback@{callback}!userPlay.console\_manager@{userPlay.console\_manager}}
+\doxysubsubsection{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily def user\+Play.\+console\+\_\+manager.\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{data }\end{DoxyParamCaption})}
+
+
+
+Callback that receives the messages related to the current state of the robot from the Comand Manager. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & message over the topic {\bfseries{current\+State}} \\
+\hline
+\end{DoxyParams}
+\hypertarget{classuser_play_1_1console__manager_autotoc_md2}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md2}
+self.\+state\+: type {\ttfamily String} It stores the data from the afromentioned topic ~\newline
+ \mbox{\Hypertarget{classuser_play_1_1console__manager_ab893c78c279766a1d241626039e7fb87}\label{classuser_play_1_1console__manager_ab893c78c279766a1d241626039e7fb87}} 
+\index{userPlay.console\_manager@{userPlay.console\_manager}!GoTo@{GoTo}}
+\index{GoTo@{GoTo}!userPlay.console\_manager@{userPlay.console\_manager}}
+\doxysubsubsection{\texorpdfstring{GoTo()}{GoTo()}}
+{\footnotesize\ttfamily def user\+Play.\+console\+\_\+manager.\+Go\+To (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Methods that saves the {\ttfamily raw\+\_\+input()} data representing the {\itshape Go\+To} command. 
+
+~\newline
+ This message, if available, will be sent to the command manager through the topic {\bfseries{\mbox{\hyperlink{namespaceuser_play}{user\+Play}}}} . \hypertarget{classuser_play_1_1console__manager_autotoc_md4}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md4}
+color\+: type String. Color entered by the user. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classuser_play_1_1console__manager_a645f79340fa6d3bd77a1618278963741}\label{classuser_play_1_1console__manager_a645f79340fa6d3bd77a1618278963741}} 
+\index{userPlay.console\_manager@{userPlay.console\_manager}!color@{color}}
+\index{color@{color}!userPlay.console\_manager@{userPlay.console\_manager}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily user\+Play.\+console\+\_\+manager.\+color}
+
+\mbox{\Hypertarget{classuser_play_1_1console__manager_a8cbd7f09a2727df1cfc1d0d28bf0b252}\label{classuser_play_1_1console__manager_a8cbd7f09a2727df1cfc1d0d28bf0b252}} 
+\index{userPlay.console\_manager@{userPlay.console\_manager}!msg\_play@{msg\_play}}
+\index{msg\_play@{msg\_play}!userPlay.console\_manager@{userPlay.console\_manager}}
+\doxysubsubsection{\texorpdfstring{msg\_play}{msg\_play}}
+{\footnotesize\ttfamily user\+Play.\+console\+\_\+manager.\+msg\+\_\+play}
+
+\mbox{\Hypertarget{classuser_play_1_1console__manager_a91b94b975c335761c95b2fadbea2c428}\label{classuser_play_1_1console__manager_a91b94b975c335761c95b2fadbea2c428}} 
+\index{userPlay.console\_manager@{userPlay.console\_manager}!play\_pub@{play\_pub}}
+\index{play\_pub@{play\_pub}!userPlay.console\_manager@{userPlay.console\_manager}}
+\doxysubsubsection{\texorpdfstring{play\_pub}{play\_pub}}
+{\footnotesize\ttfamily user\+Play.\+console\+\_\+manager.\+play\+\_\+pub}
+
+\mbox{\Hypertarget{classuser_play_1_1console__manager_ad02d10dbc9c4dd4cf4ebd14669dd9c8a}\label{classuser_play_1_1console__manager_ad02d10dbc9c4dd4cf4ebd14669dd9c8a}} 
+\index{userPlay.console\_manager@{userPlay.console\_manager}!play\_sub@{play\_sub}}
+\index{play\_sub@{play\_sub}!userPlay.console\_manager@{userPlay.console\_manager}}
+\doxysubsubsection{\texorpdfstring{play\_sub}{play\_sub}}
+{\footnotesize\ttfamily user\+Play.\+console\+\_\+manager.\+play\+\_\+sub}
+
+\mbox{\Hypertarget{classuser_play_1_1console__manager_a743a3ca9a8125be1c4b15c68263afd1f}\label{classuser_play_1_1console__manager_a743a3ca9a8125be1c4b15c68263afd1f}} 
+\index{userPlay.console\_manager@{userPlay.console\_manager}!state@{state}}
+\index{state@{state}!userPlay.console\_manager@{userPlay.console\_manager}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily user\+Play.\+console\+\_\+manager.\+state}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+scripts/\mbox{\hyperlink{user_play_8py}{user\+Play.\+py}}\end{DoxyCompactItemize}

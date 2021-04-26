@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-"""!
-@package dockstring
+"""
 @section description
 OpenCV node
 This node is responsible for the ball detection.
