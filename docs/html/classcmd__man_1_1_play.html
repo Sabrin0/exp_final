@@ -87,10 +87,11 @@ Inheritance diagram for cmd_man.Play:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0a4aae9eb49c7c64c737a853e942249d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1_play.html#a0a4aae9eb49c7c64c737a853e942249d">__init__</a> (self)</td></tr>
-<tr class="memdesc:a0a4aae9eb49c7c64c737a853e942249d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the functioin <br  />
+<tr class="memdesc:a0a4aae9eb49c7c64c737a853e942249d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The construct <br  />
   <a href="classcmd__man_1_1_play.html#a0a4aae9eb49c7c64c737a853e942249d">More...</a><br /></td></tr>
 <tr class="separator:a0a4aae9eb49c7c64c737a853e942249d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3639691d2166178a59bb162b551a18b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1_play.html#af3639691d2166178a59bb162b551a18b">execute</a> (self, userdata)</td></tr>
+<tr class="memdesc:af3639691d2166178a59bb162b551a18b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classcmd__man_1_1_play.html" title="Define Play state.">Play</a> state execution.  <a href="classcmd__man_1_1_play.html#af3639691d2166178a59bb162b551a18b">More...</a><br /></td></tr>
 <tr class="separator:af3639691d2166178a59bb162b551a18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -98,8 +99,7 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a08bdffdc33ca55388580d2f16cf6291d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1_play.html#a08bdffdc33ca55388580d2f16cf6291d">rate</a></td></tr>
 <tr class="separator:a08bdffdc33ca55388580d2f16cf6291d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c466cd6a2bfb0af36269ebce815fd9a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1_play.html#a3c466cd6a2bfb0af36269ebce815fd9a">counter</a></td></tr>
-<tr class="memdesc:a3c466cd6a2bfb0af36269ebce815fd9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publishin for the user console <br  />
-  <a href="classcmd__man_1_1_play.html#a3c466cd6a2bfb0af36269ebce815fd9a">More...</a><br /></td></tr>
+<tr class="memdesc:a3c466cd6a2bfb0af36269ebce815fd9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">After some iteration go to state normal.  <a href="classcmd__man_1_1_play.html#a3c466cd6a2bfb0af36269ebce815fd9a">More...</a><br /></td></tr>
 <tr class="separator:a3c466cd6a2bfb0af36269ebce815fd9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -121,7 +121,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initialization of the functioin <br  />
+<p>The construct <br  />
  </p>
 
 </div>
@@ -153,6 +153,10 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p><a class="el" href="classcmd__man_1_1_play.html" title="Define Play state.">Play</a> state execution. </p>
+<p><br  />
+ First though the <em>Nav Stack</em> the robot comes back to the user. There it waits for the <em>GoTo</em> command and if the room is known it reach the desired location. Otherwise it goes to the state <a class="el" href="classcmd__man_1_1_find.html" title="Define Find state.">Find</a>. Moreover the robot waits for the command only for 30 second, if the time expires it goes to the state <a class="el" href="classcmd__man_1_1_normal.html" title="Define normal state.">Normal</a>. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -168,10 +172,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Publishin for the user console <br  />
- </p>
-<p>While loop to remain in the state until some conditions are missed.</p>
-<p>After some iteration go to state normal </p>
+<p>After some iteration go to state normal. </p>
 
 </div>
 </div>

@@ -2,7 +2,7 @@
 \label{classcmd__man_1_1_find}\index{cmd\_man.Find@{cmd\_man.Find}}
 
 
-Define \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}} state.  
+Define \mbox{\hyperlink{classcmd__man_1_1_find}{Find}} state.  
 
 
 Inheritance diagram for cmd\+\_\+man.\+Find\+:\begin{figure}[H]
@@ -15,10 +15,10 @@ Inheritance diagram for cmd\+\_\+man.\+Find\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{classcmd__man_1_1_find_a7b0b0a44bf02ecd68d4b15c13d1de1f7}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
-\begin{DoxyCompactList}\small\item\em Initialization of the functioin ~\newline
+\begin{DoxyCompactList}\small\item\em The construct ~\newline
  \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classcmd__man_1_1_find_a57ed49f5db15184b9f3972c0ea9abc47}{execute}} (self, userdata)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcmd__man_1_1_find}{Find}} state execution. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -27,7 +27,7 @@ def \mbox{\hyperlink{classcmd__man_1_1_find_a57ed49f5db15184b9f3972c0ea9abc47}{e
 
 
 \doxysubsection{Detailed Description}
-Define \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}} state. 
+Define \mbox{\hyperlink{classcmd__man_1_1_find}{Find}} state. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classcmd__man_1_1_find_a7b0b0a44bf02ecd68d4b15c13d1de1f7}\label{classcmd__man_1_1_find_a7b0b0a44bf02ecd68d4b15c13d1de1f7}} 
@@ -38,7 +38,7 @@ Define \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}} state.
 
 
 
-Initialization of the functioin ~\newline
+The construct ~\newline
  
 
 
@@ -51,6 +51,12 @@ Initialization of the functioin ~\newline
 {\footnotesize\ttfamily def cmd\+\_\+man.\+Find.\+execute (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{userdata }\end{DoxyParamCaption})}
 
 
+
+\mbox{\hyperlink{classcmd__man_1_1_find}{Find}} state execution. 
+
+~\newline
+ If it\textquotesingle{}s the first iteration the \mbox{\hyperlink{namespacefollow__wall}{follow\+\_\+wall}} service is called from the user position. Otherwise the robot first goes to the last known postion and the it starts exploring. ~\newline
+ When it reaches the desired location the robots save the position and it returns the state \mbox{\hyperlink{classcmd__man_1_1_play}{Play}}. After a while, if the robot does not find the desired room, it comes however to the state \mbox{\hyperlink{classcmd__man_1_1_play}{Play}}. 
 
 \doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classcmd__man_1_1_find_a82cd2d7e27788bcf7f669d189b3d93b5}\label{classcmd__man_1_1_find_a82cd2d7e27788bcf7f669d189b3d93b5}} 

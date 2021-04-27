@@ -15,10 +15,9 @@ Inheritance diagram for cmd\+\_\+man.\+Normal\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{classcmd__man_1_1_normal_aeb32164834b4b9a1a0b0e8ae70532bf7}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
-\begin{DoxyCompactList}\small\item\em Initialization of the functioin ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The construct. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classcmd__man_1_1_normal_ac8b4e19639b183e728ff038a1e78ff2b}{execute}} (self, userdata)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcmd__man_1_1_normal}{Normal}} state execution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcmd__man_1_1_normal}{Normal}} state execution In the \mbox{\hyperlink{classcmd__man_1_1_normal}{Normal}} state a random position is sent as goal for the {\itshape Nav Stack}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -40,8 +39,7 @@ Define normal state.
 
 
 
-Initialization of the functioin ~\newline
- 
+The construct. 
 
 
 
@@ -54,12 +52,9 @@ Initialization of the functioin ~\newline
 
 
 
-\mbox{\hyperlink{classcmd__man_1_1_normal}{Normal}} state execution. 
+\mbox{\hyperlink{classcmd__man_1_1_normal}{Normal}} state execution In the \mbox{\hyperlink{classcmd__man_1_1_normal}{Normal}} state a random position is sent as goal for the {\itshape Nav Stack}. 
 
-\begin{DoxyVerb}    In the NORMAL state a random position is sent to the Action Server go_to_point_action.
-    If the ball is detected the goal is cancelled
-\end{DoxyVerb}
- 
+If the command {\ttfamily play} is recived the FSM changes state to \mbox{\hyperlink{classcmd__man_1_1_play}{Play}}. However after some iterations it returns the state \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}} 
 
 \doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classcmd__man_1_1_normal_a69ead053bbd9849b4d51b7e9e207a65f}\label{classcmd__man_1_1_normal_a69ead053bbd9849b4d51b7e9e207a65f}} 

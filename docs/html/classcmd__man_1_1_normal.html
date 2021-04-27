@@ -87,11 +87,10 @@ Inheritance diagram for cmd_man.Normal:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aeb32164834b4b9a1a0b0e8ae70532bf7"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1_normal.html#aeb32164834b4b9a1a0b0e8ae70532bf7">__init__</a> (self)</td></tr>
-<tr class="memdesc:aeb32164834b4b9a1a0b0e8ae70532bf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the functioin <br  />
-  <a href="classcmd__man_1_1_normal.html#aeb32164834b4b9a1a0b0e8ae70532bf7">More...</a><br /></td></tr>
+<tr class="memdesc:aeb32164834b4b9a1a0b0e8ae70532bf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The construct.  <a href="classcmd__man_1_1_normal.html#aeb32164834b4b9a1a0b0e8ae70532bf7">More...</a><br /></td></tr>
 <tr class="separator:aeb32164834b4b9a1a0b0e8ae70532bf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8b4e19639b183e728ff038a1e78ff2b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1_normal.html#ac8b4e19639b183e728ff038a1e78ff2b">execute</a> (self, userdata)</td></tr>
-<tr class="memdesc:ac8b4e19639b183e728ff038a1e78ff2b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classcmd__man_1_1_normal.html" title="Define normal state.">Normal</a> state execution.  <a href="classcmd__man_1_1_normal.html#ac8b4e19639b183e728ff038a1e78ff2b">More...</a><br /></td></tr>
+<tr class="memdesc:ac8b4e19639b183e728ff038a1e78ff2b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classcmd__man_1_1_normal.html" title="Define normal state.">Normal</a> state execution In the <a class="el" href="classcmd__man_1_1_normal.html" title="Define normal state.">Normal</a> state a random position is sent as goal for the <em>Nav Stack</em>.  <a href="classcmd__man_1_1_normal.html#ac8b4e19639b183e728ff038a1e78ff2b">More...</a><br /></td></tr>
 <tr class="separator:ac8b4e19639b183e728ff038a1e78ff2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -121,8 +120,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initialization of the functioin <br  />
- </p>
+<p>The construct. </p>
 
 </div>
 </div>
@@ -153,10 +151,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classcmd__man_1_1_normal.html" title="Define normal state.">Normal</a> state execution. </p>
-<pre class="fragment">    In the NORMAL state a random position is sent to the Action Server go_to_point_action.
-    If the ball is detected the goal is cancelled
-</pre> 
+<p><a class="el" href="classcmd__man_1_1_normal.html" title="Define normal state.">Normal</a> state execution In the <a class="el" href="classcmd__man_1_1_normal.html" title="Define normal state.">Normal</a> state a random position is sent as goal for the <em>Nav Stack</em>. </p>
+<p>If the command <code>play</code> is recived the FSM changes state to <a class="el" href="classcmd__man_1_1_play.html" title="Define Play state.">Play</a>. However after some iterations it returns the state <a class="el" href="classcmd__man_1_1_sleep.html" title="Define Sleep state.">Sleep</a> </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>

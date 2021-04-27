@@ -15,7 +15,7 @@ Inheritance diagram for cmd\+\_\+man.\+Sleep\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{classcmd__man_1_1_sleep_a872380841ebeb150525febb7c2d0e8df}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
-\begin{DoxyCompactList}\small\item\em Initialization of the functioin ~\newline
+\begin{DoxyCompactList}\small\item\em The construct ~\newline
  \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classcmd__man_1_1_sleep_afd722a2b8bb481c9e0ba909121676f75}{execute}} (self, userdata)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}} state execution. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -38,7 +38,7 @@ Define \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}} state.
 
 
 
-Initialization of the functioin ~\newline
+The construct ~\newline
  
 
 
@@ -54,8 +54,9 @@ Initialization of the functioin ~\newline
 
 \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}} state execution. 
 
-\begin{DoxyVerb}    It sends a position to the server Go_to_Point_action in order to back home.
-    After a while it backs to the state NORMAL
+~\newline
+ \begin{DoxyVerb}    It sends the home position as goal for the _Nav Stack_.
+    Once it's arrived it sleeps and after a while it backs to the state Normal
 
     @return GoToNormal
 \end{DoxyVerb}

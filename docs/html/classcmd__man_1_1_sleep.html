@@ -87,7 +87,7 @@ Inheritance diagram for cmd_man.Sleep:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a872380841ebeb150525febb7c2d0e8df"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1_sleep.html#a872380841ebeb150525febb7c2d0e8df">__init__</a> (self)</td></tr>
-<tr class="memdesc:a872380841ebeb150525febb7c2d0e8df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the functioin <br  />
+<tr class="memdesc:a872380841ebeb150525febb7c2d0e8df"><td class="mdescLeft">&#160;</td><td class="mdescRight">The construct <br  />
   <a href="classcmd__man_1_1_sleep.html#a872380841ebeb150525febb7c2d0e8df">More...</a><br /></td></tr>
 <tr class="separator:a872380841ebeb150525febb7c2d0e8df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd722a2b8bb481c9e0ba909121676f75"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcmd__man_1_1_sleep.html#afd722a2b8bb481c9e0ba909121676f75">execute</a> (self, userdata)</td></tr>
@@ -118,7 +118,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initialization of the functioin <br  />
+<p>The construct <br  />
  </p>
 
 </div>
@@ -151,8 +151,9 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p><a class="el" href="classcmd__man_1_1_sleep.html" title="Define Sleep state.">Sleep</a> state execution. </p>
-<pre class="fragment">    It sends a position to the server Go_to_Point_action in order to back home.
-    After a while it backs to the state NORMAL
+<p><br  />
+ </p><pre class="fragment">    It sends the home position as goal for the _Nav Stack_.
+    Once it's arrived it sleeps and after a while it backs to the state Normal
 
     @return GoToNormal
 </pre> 

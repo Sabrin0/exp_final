@@ -16,7 +16,7 @@ class \mbox{\hyperlink{classcmd__man_1_1_sleep}{cmd\+\_\+man.\+Sleep}}
 class \mbox{\hyperlink{classcmd__man_1_1_play}{cmd\+\_\+man.\+Play}}
 \begin{DoxyCompactList}\small\item\em Define \mbox{\hyperlink{classcmd__man_1_1_play}{Play}} state. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classcmd__man_1_1_find}{cmd\+\_\+man.\+Find}}
-\begin{DoxyCompactList}\small\item\em Define \mbox{\hyperlink{classcmd__man_1_1_sleep}{Sleep}} state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Define \mbox{\hyperlink{classcmd__man_1_1_find}{Find}} state. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
@@ -28,13 +28,13 @@ class \mbox{\hyperlink{classcmd__man_1_1_find}{cmd\+\_\+man.\+Find}}
 def \mbox{\hyperlink{namespacecmd__man_a6cf57c3b25985d2cbbba782de9706cff}{cmd\+\_\+man.\+decision}} ()
 \begin{DoxyCompactList}\small\item\em Documentation for the function \mbox{\hyperlink{namespacecmd__man_a6cf57c3b25985d2cbbba782de9706cff}{decision()}} \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespacecmd__man_a6f05dcc897ec4b39538a652f559d4f3d}{cmd\+\_\+man.\+callback\+\_\+odom}} (data)
-\item 
+\begin{DoxyCompactList}\small\item\em Callback for the odom datas provided by the topic {\bfseries{odom}} \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespacecmd__man_a230fcab660c41bab82fc3c849ff44ac3}{cmd\+\_\+man.\+callback\+\_\+check}} (data)
-\begin{DoxyCompactList}\small\item\em Documentation for the function \mbox{\hyperlink{namespacecmd__man_a230fcab660c41bab82fc3c849ff44ac3}{callback\+\_\+check()}} \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Callback for the odom datas provided by the topic {\bfseries{Ball\+State}} Once the ball has been detected the robot start tracking it. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespacecmd__man_af325bba39a2e17ae88872477b6b85283}{cmd\+\_\+man.\+callback\+\_\+user}} (data)
-\item 
+\begin{DoxyCompactList}\small\item\em Callback for the data provided by the topic {\bfseries{\mbox{\hyperlink{namespaceuser_play}{user\+Play}}}} If it listens the command play, the FSM cancel all goals of the {\itshape Nav Stack} and it goes to the state \mbox{\hyperlink{classcmd__man_1_1_play}{Play}}. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespacecmd__man_a1f7de7e944f025b34fc7428fe0e5dd19}{cmd\+\_\+man.\+main}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Main entry of the node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -57,8 +57,8 @@ bool \mbox{\hyperlink{namespacecmd__man_a99f0de5fa2792d00a60ebbb47c40abd6}{cmd\+
 \mbox{\hyperlink{namespacecmd__man_ab0787082f624fa3c830f7e8ea9090401}{cmd\+\_\+man.\+client}} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{}, Move\+Base\+Action)
 \begin{DoxyCompactList}\small\item\em Action client for the action server dedicated to the movment. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacecmd__man_a2310ba62c26f7ea062d94297508a0220}{cmd\+\_\+man.\+room}} = blueprint()
-\item 
+\begin{DoxyCompactList}\small\item\em Initialization of the class blueprint. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacecmd__man_a7b65238fd30234485d513f74b0bffb5e}{cmd\+\_\+man.\+movement}} = target\+Position()
-\item 
+\begin{DoxyCompactList}\small\item\em Initialization of the class \mbox{\hyperlink{classcmd__man_1_1target_position}{target\+Position}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacecmd__man_a465514eb2e8f678efc4ae252c4bd153b}{cmd\+\_\+man.\+pub}} = pub\+Handler()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Initialization of the class \mbox{\hyperlink{classcmd__man_1_1pub_handler}{pub\+Handler}}. \end{DoxyCompactList}\end{DoxyCompactItemize}

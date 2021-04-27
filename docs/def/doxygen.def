@@ -812,9 +812,9 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'self';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '447';
+      sec-mem-desc-line = '462';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-Initialization of the functioin        <br>
+The construct       <br>
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
 
@@ -842,12 +842,16 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'userdata';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '456';
+      sec-mem-desc-line = '471';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-
+Find state execution.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
-
+ \n
+            If it's the first iteration the follow_wall service is called from the user position.
+            Otherwise the robot first goes to the last known postion and the it starts exploring. \n
+            When it reaches the desired location the robots save the position and it returns the state Play.
+            After a while, if the robot does not find the desired room, it comes however to the state Play. 
 _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
@@ -863,7 +867,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'rate';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '454';
+      sec-mem-desc-line = '469';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -873,9 +877,9 @@ _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-  cp-fileline  = '444';
+  cp-fileline  = '459';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
-Define Sleep state.
+Define Find state.
 _EnD_oF_dEf_TeXt_;
   cp-documentation = <<_EnD_oF_dEf_TeXt_
 
@@ -1179,9 +1183,9 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'self';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '269';
+      sec-mem-desc-line = '283';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-Initialization of the functioin        <br>
+The construct.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
 
@@ -1209,15 +1213,14 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'userdata';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '278';
+      sec-mem-desc-line = '292';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-Normal state execution.
+Normal state execution
+        In the Normal state a random position is sent as goal for the <em>Nav Stack</em>.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
-@verbatim 
-    In the NORMAL state a random position is sent to the Action Server go_to_point_action.
-    If the ball is detected the goal is cancelled
-@endverbatim
+        If the command <tt>play</tt> is recived the FSM changes state to Play. However after some iterations it
+        returns the state Sleep 
 _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
@@ -1233,7 +1236,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'rate';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '275';
+      sec-mem-desc-line = '289';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -1251,7 +1254,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'counter';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '276';
+      sec-mem-desc-line = '290';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 If the Ball is Detcted, go to PLAY.
 _EnD_oF_dEf_TeXt_;
@@ -1265,7 +1268,7 @@ _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-  cp-fileline  = '266';
+  cp-fileline  = '279';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
 Define normal state.
 _EnD_oF_dEf_TeXt_;
@@ -1336,9 +1339,9 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'self';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '357';
+      sec-mem-desc-line = '371';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-Initialization of the functioin        <br>
+The construct        <br>
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
 
@@ -1366,12 +1369,15 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'userdata';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '366';
+      sec-mem-desc-line = '380';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-
+Play state execution.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
-
+ \n
+            First though the <em>Nav Stack</em> the robot comes back to the user. There it waits for the <em>GoTo</em> command and
+            if the room is known it reach the desired location. Otherwise it goes to the state Find.
+            Moreover the robot waits for the command only for 30 second, if the time expires it goes to the state Normal.
 _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
@@ -1387,7 +1393,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'rate';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '364';
+      sec-mem-desc-line = '378';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -1405,19 +1411,17 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'counter';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '379';
+      sec-mem-desc-line = '394';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-Publishin for the user console  <br>
+After some iteration go to state normal.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
-While loop to remain in the state until some conditions are missed.
 
-After some iteration go to state normal
 _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-  cp-fileline  = '354';
+  cp-fileline  = '368';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
 Define Play state.
 _EnD_oF_dEf_TeXt_;
@@ -1586,9 +1590,9 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'self';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '324';
+      sec-mem-desc-line = '338';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-Initialization of the functioin        <br>
+The construct    <br>
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
 
@@ -1616,14 +1620,15 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'userdata';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '333';
+      sec-mem-desc-line = '347';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Sleep state execution.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+ \n 
 @verbatim 
-    It sends a position to the server Go_to_Point_action in order to back home.
-    After a while it backs to the state NORMAL
+    It sends the home position as goal for the _Nav Stack_.
+    Once it's arrived it sleeps and after a while it backs to the state Normal
 
     @return GoToNormal
 @endverbatim
@@ -1642,7 +1647,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'rate';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '331';
+      sec-mem-desc-line = '345';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -1652,7 +1657,7 @@ _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-  cp-fileline  = '321';
+  cp-fileline  = '335';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
 Define Sleep state.
 _EnD_oF_dEf_TeXt_;
@@ -1724,7 +1729,7 @@ class = {
     ref-virt = non-virtual;
   };
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-  cp-fileline  = '444';
+  cp-fileline  = '459';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -2393,7 +2398,7 @@ Documentation for the function decision()
 _EnD_oF_dEf_TeXt_;
       func-mem-documentation = <<_EnD_oF_dEf_TeXt_
 @verbatim 
- It returns random state between GoTonormal or GoToSleep
+ #return random state between GoTonormal or GoToSleep
 @endverbatim
 _EnD_oF_dEf_TeXt_;
     }; /* func-member */
@@ -2415,10 +2420,11 @@ _EnD_oF_dEf_TeXt_;
       func-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
       func-mem-desc-line = '214';
       func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-
+Callback for the odom datas provided by the topic <strong>odom</strong>
 _EnD_oF_dEf_TeXt_;
       func-mem-documentation = <<_EnD_oF_dEf_TeXt_
-
+@param pos_x: x odometry position of the robot
+@param pos_y: y odometry position of the robot
 _EnD_oF_dEf_TeXt_;
     }; /* func-member */
     func-member = {
@@ -2437,20 +2443,18 @@ _EnD_oF_dEf_TeXt_;
         func-mem-param-defname = 'data';
       }; /*        func-mem-param--param */
       func-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      func-mem-desc-line = '219';
+      func-mem-desc-line = '226';
       func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-Documentation for the function callback_check()
+Callback for the odom datas provided by the topic <strong>BallState</strong>
+        Once the ball has been detected the robot start tracking it.
 _EnD_oF_dEf_TeXt_;
       func-mem-documentation = <<_EnD_oF_dEf_TeXt_
-@verbatim 
-This function subscribes to the topic BallState.
-If the message related to the ball detection is setted to true, the action server for the robot movement is stopped and the state PLAY starts.
-While the ball is detected, the values of the radious is updated and if it exceeds a treshold the head starts to rotate.
+ When the robot is next to the ball,
+        it stores its x and y postion in order to update the room location
 
 @param BallDetected Bool
 @param BallCheck Bool
 @param currentradious Float64
-@endverbatim
 _EnD_oF_dEf_TeXt_;
     }; /* func-member */
     func-member = {
@@ -2469,12 +2473,14 @@ _EnD_oF_dEf_TeXt_;
         func-mem-param-defname = 'data';
       }; /*        func-mem-param--param */
       func-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      func-mem-desc-line = '253';
+      func-mem-desc-line = '259';
       func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-
+Callback for the data provided by the topic <strong>userPlay</strong>
+        If it listens the command play, the FSM cancel all goals of the <em>Nav Stack</em> and it goes to the state Play.
 _EnD_oF_dEf_TeXt_;
       func-mem-documentation = <<_EnD_oF_dEf_TeXt_
-
+@param play: <tt>Bool</tt>, the command play provided by the user 
+@param GoTo_room: <tt>String</tt>, the command <em>GoTo</em> representing the room to reach
 _EnD_oF_dEf_TeXt_;
     }; /* func-member */
     func-member = {
@@ -2487,12 +2493,12 @@ def
 _EnD_oF_dEf_TeXt_;
       func-mem-name = 'main';
       func-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      func-mem-desc-line = '486';
+      func-mem-desc-line = '508';
       func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-
+Main entry of the node.
 _EnD_oF_dEf_TeXt_;
       func-mem-documentation = <<_EnD_oF_dEf_TeXt_
-
+ Initialize the ros node, the severals subscriptions and pubblications.
 _EnD_oF_dEf_TeXt_;
     }; /* func-member */
     };
@@ -2699,9 +2705,9 @@ _EnD_oF_dEf_TeXt_;
 =  blueprint()
 _EnD_oF_dEf_TeXt_;
       var-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      var-mem-desc-line = '539';
+      var-mem-desc-line = '564';
       var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-
+Initialization of the class blueprint.
 _EnD_oF_dEf_TeXt_;
       var-mem-documentation = <<_EnD_oF_dEf_TeXt_
 
@@ -2720,9 +2726,9 @@ _EnD_oF_dEf_TeXt_;
 =  targetPosition()
 _EnD_oF_dEf_TeXt_;
       var-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      var-mem-desc-line = '540';
+      var-mem-desc-line = '566';
       var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-
+Initialization of the class targetPosition.
 _EnD_oF_dEf_TeXt_;
       var-mem-documentation = <<_EnD_oF_dEf_TeXt_
 
@@ -2741,9 +2747,9 @@ _EnD_oF_dEf_TeXt_;
 =  pubHandler()
 _EnD_oF_dEf_TeXt_;
       var-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      var-mem-desc-line = '541';
+      var-mem-desc-line = '568';
       var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-
+Initialization of the class pubHandler.
 _EnD_oF_dEf_TeXt_;
       var-mem-documentation = <<_EnD_oF_dEf_TeXt_
 

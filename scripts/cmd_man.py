@@ -207,25 +207,31 @@ client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
 def decision():
     """!@brief Documentation for the function decision()
      
-     It returns random state between GoTonormal or GoToSleep
+     #return random state between GoTonormal or GoToSleep
     """
     return random.choice(['GoToNormal','GoToSleep'])
 
 def callback_odom(data):
+    """!
+        @brief Callback for the odom datas provided by the topic __odom__
+
+        @param pos_x: x odometry position of the robot
+        @param pos_y: y odometry position of the robot
+
+    """
     global pos_x, pos_y
     pos_x = data.pose.pose.position.x
     pos_y = data.pose.pose.position.y
 
 def callback_check(data):
-    """!@brief Documentation for the function callback_check()
+    """!
+        @brief Callback for the odom datas provided by the topic __BallState__
+        Once the ball has been detected the robot start tracking it. When the robot is next to the ball,
+        it stores its x and y postion in order to update the room location
     
-    This function subscribes to the topic BallState.
-    If the message related to the ball detection is setted to true, the action server for the robot movement is stopped and the state PLAY starts.
-    While the ball is detected, the values of the radious is updated and if it exceeds a treshold the head starts to rotate.
-    
-    @param BallDetected Bool
-    @param BallCheck Bool
-    @param currentradious Float64
+        @param BallDetected Bool
+        @param BallCheck Bool
+        @param currentradious Float64
     """
     global BallDetected, BallCheck, currentRadius, ballColor, pos_x, pos_y
     BallDetected = data.BallDetected
@@ -251,6 +257,13 @@ def callback_check(data):
         print('Name:', room.color[ballColor]['name'], ' Location: ', room.color[ballColor]['location'])
 
 def callback_user(data):
+    """!
+        @brief Callback for the data provided by the topic __userPlay__
+        If it listens the command play, the FSM cancel all goals of the _Nav Stack_ and it goes to the state Play
+
+        @param play: `Bool`, the command play provided by the user 
+        @param GoTo_room: `String`, the command _GoTo_ representing the room to reach
+    """
     global play, GoTo_room, playAvilable
     play = data.play
     GoTo_room = data.color
@@ -264,10 +277,11 @@ def callback_user(data):
 
          
 class Normal(smach.State):
-    """!@brief Define normal state """
+    """!@brief Define normal state 
+    """
 
     def __init__(self):
-        """!@brief Initialization of the functioin        
+        """!@brief  The construct 
         """
         smach.State.__init__(self, 
                              outcomes=['GoToNormal','GoToSleep','GoToPlay'])
@@ -277,9 +291,9 @@ class Normal(smach.State):
     
     def execute(self,userdata):
         """!@brief Normal state execution
-        
-        In the NORMAL state a random position is sent to the Action Server go_to_point_action.
-        If the ball is detected the goal is cancelled
+        In the Normal state a random position is sent as goal for the _Nav Stack_.
+        If the command `play` is recived the FSM changes state to Play. However after some iterations it
+        returns the state Sleep 
         """
 
         global BallDetected, BallCheck, currentRadius, pos_x, pos_y, play, playAvilable
@@ -322,7 +336,7 @@ class Sleep(smach.State):
     """!@brief Define Sleep state """
     
     def __init__(self):
-        """!@brief Initialization of the functioin        
+        """!@brief The construct    
         """
 
         smach.State.__init__(self, 
@@ -331,10 +345,10 @@ class Sleep(smach.State):
         self.rate = rospy.Rate(200)  # Loop at 50 Hz
         
     def execute(self, userdata):
-        """!@brief Sleep state execution 
+        """!@brief Sleep state execution. \n 
         
-        It sends a position to the server Go_to_Point_action in order to back home.
-        After a while it backs to the state NORMAL
+        It sends the home position as goal for the _Nav Stack_.
+        Once it's arrived it sleeps and after a while it backs to the state Normal
 
         @return GoToNormal
         """
@@ -343,7 +357,7 @@ class Sleep(smach.State):
         rospy.loginfo('--------------------- ')
         rospy.loginfo('Executing state SLEEP ')
         pub.pubState('sleep')
-        ## Setting the goal home position
+        # Setting the goal home position
         result = movement.GoTo(movement.x_home,movement.y_home)
         if result: 
             rospy.loginfo('i m arrived at home, now i will take a nap')
@@ -355,7 +369,7 @@ class Play(smach.State):
     """!@brief Define Play state """
 
     def __init__(self):
-        """!@brief Initialization of the functioin        
+        """!@brief The construct        
         """
         
         smach.State.__init__(self, 
@@ -364,20 +378,21 @@ class Play(smach.State):
         self.rate = rospy.Rate(200)  # Loop at 50 Hz
 
     def execute(self, userdata):
-
-        ## Publishin for the user console  
-        pub_goto = rospy.Publisher('/stillGoTo', Bool, queue_size=1)
-        """!@brief Play state execution
-
-        It moves the robots to the ball while it's detected.
-        Once arrived next to the ball, the robort starts to check around.
+        """!
+            @brief Play state execution. \n
+            First though the _Nav Stack_ the robot comes back to the user. There it waits for the _GoTo_ command and
+            if the room is known it reach the desired location. Otherwise it goes to the state Find.
+            Moreover the robot waits for the command only for 30 second, if the time expires it goes to the state Normal.
         """
+        # Publishin for the user console  
+        pub_goto = rospy.Publisher('/stillGoTo', Bool, queue_size=1)
+        
         rospy.loginfo("--------------------")
         rospy.loginfo("Executing state PLAY")
 
         global play, GoTo_room
         self.counter = 0
-        ## While loop to remain in the state until some conditions are missed
+        # While loop to remain in the state until some conditions are missed
         while not rospy.is_shutdown():
             
             
@@ -395,7 +410,7 @@ class Play(smach.State):
                 
                 return 'GoToNormal'
 
-            ## waiting for user command, after 30 second back to normal:
+            # waiting for user command, after 30 second back to normal:
             start = time.time()
             elapsed = 0
             while (not GoTo_room and elapsed < 30):
@@ -407,7 +422,7 @@ class Play(smach.State):
                     
                     return 'GoToNormal'
             
-            ## Now check if the location is known
+            # Now check if the location is known
             if room.color[GoTo_room]['location'] is not None:
                 result = movement.GoTo(room.color[GoTo_room]['location'][0],room.color[GoTo_room]['location'][1])
                 if result:
@@ -425,14 +440,14 @@ class Play(smach.State):
                 return 'GoToFind'
         
         return 'GoToNormal'
-            ## Start moving the head if the robot is near to the ball
+            # Start moving the head if the robot is near to the ball
             # @param currentRadious float passsed
             #if (currentRadius > 90):
                 # rospy.loginfo('muovo la testa')
                 # head_control()
                 # Save ball coordiantes
             
-            ## Back to state normal if the ball is missed
+            #Back to state normal if the ball is missed
             # @param BAllDetected bool 
             #if (BallDetected == False):
             #    BallCheck = False
@@ -442,10 +457,10 @@ class Play(smach.State):
             #time.sleep(3) 
         
 class Find(smach.State):
-    """!@brief Define Sleep state """
+    """!@brief Define Find state """
     
     def __init__(self):
-        """!@brief Initialization of the functioin        
+        """!@brief The construct       
         """
 
         smach.State.__init__(self, 
@@ -454,16 +469,23 @@ class Find(smach.State):
         self.rate = rospy.Rate(200)  # Loop at 50 Hz
         
     def execute(self, userdata):
+        """! 
+            @brief Find state execution. \n
+            If it's the first iteration the follow_wall service is called from the user position.
+            Otherwise the robot first goes to the last known postion and the it starts exploring. \n
+            When it reaches the desired location the robots save the position and it returns the state Play.
+            After a while, if the robot does not find the desired room, it comes however to the state Play. 
+        """
         global GoTo_room, ballColor, srv_client_wall_follower_
         srv_client_wall_follower_ = rospy.ServiceProxy(
         '/wall_follower_switch', SetBool)
         rospy.loginfo('--------------------- ')
         rospy.loginfo('Executing state FIND ')
-        ## first go to the last known position
+        # first go to the last known position
         go = room.preFind()
         result = movement.GoTo(go[0],go[1])
         if result:
-        ## Setting the goal home position
+        # Setting the goal home position
             start = time.time()
             elapsed = 0
             while room.color[GoTo_room]['location'] is None:
@@ -484,7 +506,9 @@ class Find(smach.State):
             
 
 def main():
-
+    """!
+        @brief Main entry of the node. Initialize the ros node, the severals subscriptions and pubblications.
+    """
     ## Initialization of the node
     rospy.init_node('smach_state_machine')
     ## Subscribing to Ball State topic
@@ -536,7 +560,10 @@ def main():
 
 
 if __name__ == '__main__':
+    ## Initialization of the class blueprint
     room = blueprint()
+    ## Initialization of the class targetPosition
     movement = targetPosition()
+    ## Initialization of the class pubHandler
     pub = pubHandler()
     main()

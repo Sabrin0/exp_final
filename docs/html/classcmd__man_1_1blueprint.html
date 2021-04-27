@@ -119,7 +119,7 @@ Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">self.color</td><td><code>dictionary</code>, in which all the info about the rooms are stored </td></tr>
-    <tr><td class="paramname">self.findCounter</td><td><code>int</code>, which count how many time the state <a class="el" href="classcmd__man_1_1_find.html" title="Define Sleep state.">Find</a> is called. </td></tr>
+    <tr><td class="paramname">self.findCounter</td><td><code>int</code>, which count how many time the state <a class="el" href="classcmd__man_1_1_find.html" title="Define Find state.">Find</a> is called. </td></tr>
   </table>
   </dd>
 </dl>
@@ -144,7 +144,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Method of the class blueprint. </p>
-<p>It's called by the state <a class="el" href="classcmd__man_1_1_find.html" title="Define Sleep state.">Find</a>, in this way, since the robot start from the User position it goes first to the last room visited (starting from the first key in the color dictionary) before exporing the enviroment. If the findCounter is equal to 0, however it starts from the user position and it is incremented every cicle. <br  />
+<p>It's called by the state <a class="el" href="classcmd__man_1_1_find.html" title="Define Find state.">Find</a>, in this way, since the robot start from the User position it goes first to the last room visited (starting from the first key in the color dictionary) before exporing the enviroment. If the findCounter is equal to 0, however it starts from the user position and it is incremented every cicle. <br  />
  <b>Please Notice</b>: given that python2 does not ensure the order of the dictionary a simple method is implemeted to do so.</p>
 <dl class="section return"><dt>Returns</dt><dd>x,y position of the last know room of the dictionary color <br  />
  </dd></dl>
