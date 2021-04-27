@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """! 
     @brief Module of the node BallDetection.
     After a pre-processing phase, due to a simple algorithm it recognizes the mean color of the ball detected. This is done by computing 
@@ -21,11 +22,8 @@ class ColorLabeler:
         """!
             @brief The construct. Initialization of the dictionaries and the labeler
 
-            @param self.ball: `dict`, The keys represent the color of the balls and the corresponing value 
-                is a `Bool`: if the specific ball has been detected the flag is set to `True`, otherwise it's ´False´
-            
+            @param self.ball: `dict`, The keys represent the color of the balls and the corresponing value is a Bool and if the specific ball has been detected the flag is set to `True`, otherwise it's `False`
             @param colors: `dict`, it stores all the possible color with the corresponding RGB values 
-
             @param self.lab: `np.array`, memory allocation for the image 
         """
 

@@ -320,7 +320,7 @@ class Normal(smach.State):
                 rospy.loginfo('RITORNO <PLAY>')
                 return 'GoToPlay'
                 
-            elif self.counter == 2: #random.randint(1,3):
+            elif self.counter == random.randint(1,3):
                 return 'GoToSleep'
             else:
                 result = movement.GoTo(x_target,y_target)

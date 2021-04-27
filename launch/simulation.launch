@@ -72,7 +72,7 @@
   <!-- Start the ball detection node-->
   <node pkg="exp_final" type="BallDetection.py" name="ball_detection" />
   <!-- Start the command manager node--> 
-  <node pkg="exp_final" type="cmd_man.py" name="command_manager" output="screen" launch-prefix= "gnome-terminal tt command" /> 
+  <node pkg="exp_final" type="cmd_man.py" name="command_manager" output="screen" launch-prefix= "gnome-terminal --command" /> 
   <!-- Start the user interface node--> 
   <node pkg="exp_final" type="userPlay.py" name="user_interface" output="screen" launch-prefix= "gnome-terminal --command" />
 </launch>
