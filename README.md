@@ -4,7 +4,6 @@
 - [Experimental Final Assignment](#experimental-final-assignment)
     - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
-        - [Map of the enviroment](#map-of-the-enviroment)
   - [Software Architecture](#software-architecture)
     - [Nodes](#nodes)
       - [FSM](#fsm)
@@ -18,57 +17,6 @@
 This project is the further work of the previous [assignment](https://github.com/Sabrin0/Assignment2-Experimental-RoboticS-LAB.git) of *Experimental robotics lab*.
 Due to the [SLAM](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping) and the [ROS Navighation Stack](http://wiki.ros.org/navigation) the  wheeled robot is able to move autonomously.  The main purpose of this project is to implement a FSM which allows the robot to learn the environment and interact with the user in order to reach the desired room. Each colored ball represents a different room (as shown below) and at the beginning of the simulation all the locations are unknown. It’s up to the robot to navigate and store the informations about the environment though a simple exploring algorithm.
 
-<center>
-
-##### Map of the enviroment
-</center>
-
-<style>
-
-.heatMap {
-    text-align: center;
-    align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
-}
-
-
-.heatMap th {
-      
-    background: #f2f2f2;
-    word-wrap: break-word;
-    text-align: center;
-    align: center
-}
-
-
-.heatMap tr:nth-child(1) { background: #99c2ff;}
-.heatMap tr:nth-child(2) { background: #ff9999;}
-.heatMap tr:nth-child(3) { background: #b3e6cc;}
-.heatMap tr:nth-child(4) { background: #ffff80;}
-.heatMap tr:nth-child(5) { background: #ffccff;}
-.heatMap tr:nth-child(6) { background: #a6a6a6;}
-</style>
-
-<center>
-<div class="heatMap">
-
-
-
-Color | Room
---- | ---
-Blue | Entrance
-Red | Closet
-Green | Living Room
-Yellow | Kitchen
-Magenta | Bathroom
-Black | Badroom
-*List of rooms*
-
-</div>
-</center>
 ## Software Architecture
 
 ### Description
