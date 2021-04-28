@@ -372,18 +372,15 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'self';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/colorLabeler.py';
-      sec-mem-desc-line = '20';
+      sec-mem-desc-line = '21';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 The construct.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
  Initialization of the dictionaries and the labeler
 
-@param self.ball: <tt>dict</tt>, The keys represent the color of the balls and the corresponing value 
-                is a <tt>Bool</tt>: if the specific ball has been detected the flag is set to <tt>True</tt>, otherwise it's ´False´
-
+@param self.ball: <tt>dict</tt>, The keys represent the color of the balls and the corresponing value is a Bool and if the specific ball has been detected the flag is set to <tt>True</tt>, otherwise it's <tt>False</tt>
 @param colors: <tt>dict</tt>, it stores all the possible color with the corresponding RGB values 
-
 @param self.lab: <tt>np.array</tt>, memory allocation for the image 
 _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
@@ -421,7 +418,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'radius';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/colorLabeler.py';
-      sec-mem-desc-line = '69';
+      sec-mem-desc-line = '67';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Method of the class colorLabeler.
 _EnD_oF_dEf_TeXt_;
@@ -459,7 +456,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'color';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/colorLabeler.py';
-      sec-mem-desc-line = '100';
+      sec-mem-desc-line = '98';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Method of the class colorLabeler.
 _EnD_oF_dEf_TeXt_;
@@ -485,7 +482,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'ball';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/colorLabeler.py';
-      sec-mem-desc-line = '33';
+      sec-mem-desc-line = '31';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 flag for ball detection, if true the ball is ignored
 _EnD_oF_dEf_TeXt_;
@@ -503,7 +500,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'lab';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/colorLabeler.py';
-      sec-mem-desc-line = '55';
+      sec-mem-desc-line = '53';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Mean Color Dictionary RGB.
 _EnD_oF_dEf_TeXt_;
@@ -521,7 +518,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'colorNames';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/colorLabeler.py';
-      sec-mem-desc-line = '58';
+      sec-mem-desc-line = '56';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -531,7 +528,7 @@ _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/colorLabeler.py';
-  cp-fileline  = '19';
+  cp-fileline  = '20';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
