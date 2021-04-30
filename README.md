@@ -15,6 +15,10 @@
       - [Follow Wall Service (follow_wall.py)](#follow-wall-service-follow_wallpy)
       - [User Interface (userPlay.py)](#user-interface-userplaypy)
   - [Package and File List](#package-and-file-list)
+  - [Installation and Running Procedure](#installation-and-running-procedure)
+  - [System Features](#system-features)
+  - [System Limitation and Possible Solutions](#system-limitation-and-possible-solutions)
+  - [Author & Contact](#author--contact)
 
 
 ## Introduction
@@ -24,9 +28,11 @@
 This project is the further work of the previous [assignment](https://github.com/Sabrin0/Assignment2-Experimental-RoboticS-LAB.git) of *Experimental robotics lab*.
 Due to the [SLAM](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping) and the [ROS Navighation Stack](http://wiki.ros.org/navigation) the  wheeled robot is able to move autonomously.  The main purpose of this project is to implement a FSM which allows the robot to learn the environment and interact with the user in order to reach the desired room. Each colored ball represents a different room (as shown below) and at the beginning of the simulation all the locations are unknown. It’s up to the robot to navigate and store the informations about the environment though a simple exploring algorithm.
 
+
 ## Software Architecture
 
 ### Description
+
  ![rosgraph](/assets/rosgraph.png)
 *Fig.2: Rosgraph*
 
@@ -44,6 +50,7 @@ The navigation, including the global and the local path planning and the obstacl
 
 #### Command Manager ([cmd_man.py](https://github.com/Sabrin0/exp_final/blob/main/scripts/cmd_man.py))
 ![FSM diagram](/assets/FSM.png)
+*Fig.3: FST Diagram*
 
 ##### State Normal
 In this state the robot moves randomly in the environment by sending several positions as goal to the Navigation Server. Here, whenever a ball is detected the robot start tracking it without cancelling the current goal. This is possible due to the fact that the open cv node controls directly the actuators by publishing on the topic *cmd_vel*. Once the robot is close enough to the ball, it saves the current position of the ball by subscribing to the topic *odom*. After some iteration, the robot goes in the state **Normal**.
@@ -66,11 +73,11 @@ For this reason, a simple *pre-find* algorithm has been implemented in order to 
 
 This node manages the ball detection and therefore the tracking by processing the image received from the robot RGB camera. It's characterized by two main phases: 
 
--  *[Pre-processing](https://github.com/Sabrin0/exp_final/blob/main/scripts/colorLabeler.py)* : in which an algorithm performs object and color detection, in order to identify any ball in the environment and recognizes its color. Then it returns the upper and lower masks required in the next phase.
+-  **[Pre-processing](https://github.com/Sabrin0/exp_final/blob/main/scripts/colorLabeler.py)** : in which an algorithm performs object and color detection, in order to identify any ball in the environment and recognizes its color. Then it returns the upper and lower masks required in the next phase.
 
-- *Tracking*: Depending on several conditions, for instances the current state  of the robot (updated by the topic `currentState`) and if one specific ball has been already detected or not, the algorithm in this phase starts tracking the ball.
+- **Tracking**: Depending on several conditions, for instances the current state  of the robot (updated by the topic *currentState*) and if one specific ball has not been already detected, the algorithm in this phase starts tracking the ball.
 
-This node subscribes to two significant topic:
+This node subscribes to two main topics:
 
 - *BallState*: By which the command manager is up to date regarding the position of the robot wrt the tracked ball. Once the robot is sufficiently near to the ball, in the command manager the specific location is stored.
 
@@ -78,7 +85,7 @@ This node subscribes to two significant topic:
 
 #### Follow Wall Service ([follow_wall.py](https://github.com/Sabrin0/exp_final/blob/main/scripts/follow_wall.py))
 ![laser](/assets/laser.jpeg)
-*Laser fov subdivided into 5 regions*
+*Fig.5: Laser fov subdivided into 5 regions*
 
 This node is a ROS server that provides the exploration of the environment and it is activated by the command manager, which acts as a Client, inside the state **Find**.
 It relies on the laser data provided by the topic *Scan*. In particular the *fov* of the sensor is divided into 5 regions, then depending on which of them detect an obstacle (and at what distance) the exploration switches among three different navigation state:
@@ -91,14 +98,14 @@ The navigation is ensured by publishing on the topic *cmd_vel*.
 
 #### User Interface ([userPlay.py](https://github.com/Sabrin0/exp_final/blob/main/scripts/userPlay.py))
 ```
-user@hostname$              |\_/|                  
-                            | @ @   Woof! 
-                            |   <>              _  
-                            |  _/\------____ ((| |))
-                            |               `--' |   
-                        ____|_       ___|   |___.' 
-                    /_/_____/____/_______|
-                                Welcome! 
+user@hostname$          |\_/|                  
+                        | @ @   Woof! 
+                        |   <>              _  
+                        |  _/\------____ ((| |))
+                        |               `--' |   
+                    ____|_       ___|   |___.' 
+                /_/_____/____/_______|
+                            Welcome! 
 
 Please enter 'play' to call the dog:
 ```
@@ -145,3 +152,69 @@ First of all, the user can call back the robot by entering the string `play`. On
     └── house2.world
 ```
 *exp_final directory Tree*
+
+TThe main files are stored inside the following directories:
+
+- **scripts**: where all the nodes are stored
+- **msg**: where the ROS custom msgs are defined. In particular the the following ones:
+	- *BallState.msg*:
+		```
+			bool BallDetected
+			float64 currrentRadious
+			string balColor
+		```
+        Here all the messages related to the ball info are shared via topic *BallState*. 
+	- *user.msg*:
+		```
+			bool play
+			string color
+		```
+        Here all the messages related to the user command are shared via topic *userCommand*.
+- **launch**: ROS launch files for starting the simulation
+- **param**: files .yaml used to configure the gmapping and the Navigation Stack
+- **urdf**: file with the description of the element spawned in the enviroment
+
+The other directories contain file for build the ROS workspaces and the documentation.
+
+## Installation and Running Procedure
+
+As mentioned in the introduction this architecture is based on the ROS Navigation Stack and the gmapping, so please install:
+For the openslam_gmapping:
+
+```
+user@hostanme$ sudo apt-get install ros-<ros_distro>-openslam-gmapping
+```
+For the sparse library:
+
+```
+user@hostanme$ sudo apt-get install libsuitesparse-dev
+```
+For the ROS Navigation Stack:
+```
+user@hostanme$ sudo apt-get install ros-<ros_distro>-navigation
+```
+
+Then in order to configure the ROS environment inside the current workspace the commands `catkin_make` is required as well as the sourcing of the setup.*sh files. So, finally, to start the simulation please run:
+
+```
+user@hostname$ roslaunch exp_final simulation.launch
+```
+
+You’ll notice that two new shell windows will appear after the execution of the launch. One is the output of the node *cmd_man.py* and the other one is the *user interface*.
+
+## System Features
+![robot](/assets/robot.png)
+*Fig.5: Robot Model*
+
+The model of the enviroment is a simple wheeled robot (two actuated wheels and a castor one) equipped with an Hokuyo range finders and a RGB camera. The model itself is described in the xacro file [robot2_laser.xacro](https://github.com/Sabrin0/exp_final/blob/main/urdf/robot2_laser.xacro) while in the [robot2_laser.gazebo](https://github.com/Sabrin0/exp_final/blob/main/urdf/robot2_laser.gazebo) all the parameters related to the configuration of the sensor are defined.
+
+## System Limitation and Possible Solutions
+
+One of the main limitation of the system is the mobility during the state find. I decided to recall and improve the navigation proposed by the bug algorithm despite of using the [explore-lite pakage](https://github.com/Sabrin0/exp_final/blob/main/urdf/robot2_laser.xacro). Unlike this last one the current implementation is not based on a frontier-based exploration but instead the robot simply follows the wall. For this reason the motion is very slow and there is the high-risk that the robot gets stuck when it try to go though a narrow door. Aside from that, in this way there is the certain that the robot will found all the ball in the environment. As said before, a possible solution is implement a frontier-based exploration with the obstacle avoidance asset.
+Another problem is related to the openCV algorithm. Since it detects all the circles in the processed image there is the possibility that there is a false-positive. This problem can be resolved with an update of the dictionary related to the color detection, by enriching it whit more colors. In this way the robot will know in advance which ball track and which do not. Moreover during the track phase, the obstacle avoidance is not very effective since the openCV algorithm directly control the topic *cmd_vel* (responsible of the wheels actuation).
+
+## Author & Contact
+
+Luca Covizzi
+
+luca@francocovizzi.it
