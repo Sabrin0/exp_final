@@ -6,7 +6,14 @@
   - [Introduction](#introduction)
   - [Software Architecture](#software-architecture)
     - [Nodes](#nodes)
-      - [FSM](#fsm)
+      - [Command Manager (cmd_man.py)](#command-manager-cmd_manpy)
+        - [State Normal](#state-normal)
+        - [State Sleep](#state-sleep)
+        - [State Play](#state-play)
+        - [State Find](#state-find)
+      - [OpenCV (BallDetection.py)](#opencv-balldetectionpy)
+      - [Follow Wall Service (follow_wall.py)](#follow-wall-service-follow_wallpy)
+      - [User Interface (userPlay.py)](#user-interface-userplaypy)
   - [Package and File List](#package-and-file-list)
 
 
@@ -34,8 +41,71 @@ Basically the wheeled robot, equipped with an Hokuyo range finders and a RGB cam
 The navigation, including the global and the local path planning and the obstacles avoidance is provided by the package [ROS Navighation Stack](http://wiki.ros.org/navigation) while the [gmapping](http://wiki.ros.org/gmapping) supplies a 2-D occupancy grid map from laser and pose data collected by a mobile robot. In any case, the goal is set by the Command Manager depending on the current situation.
 
 ### Nodes
-#### FSM
+
+#### Command Manager ([cmd_man.py](https://github.com/Sabrin0/exp_final/blob/main/scripts/cmd_man.py))
 ![FSM diagram](/assets/FSM.png)
+
+##### State Normal
+In this state the robot moves randomly in the environment by sending several positions as goal to the Navigation Server. Here, whenever a ball is detected the robot start tracking it without cancelling the current goal. This is possible due to the fact that the open cv node controls directly the actuators by publishing on the topic *cmd_vel*. Once the robot is close enough to the ball, it saves the current position of the ball by subscribing to the topic *odom*. After some iteration, the robot goes in the state **Normal**.
+The command manager also subscribes to the topic *userCommand*, so whenever it receives the command `play` it cancels the current goal and goes into the state **Play**.
+
+##### State Sleep
+In this state the robot simply comes back to the user position located at the coordinates x = -8 and y = 8. Once arrived, after a while it returns the state **Normal**.
+
+##### State Play
+
+Once the command manager receives the input command `play` from the **User Interface**, the robot comes back to the home position and waits for a *GoTo* command. If the location is known the robot will reach it, otherwise it goes to the state **Find**. Moreover, the robots waits for the instructions 30 seconds then if no command is specified the robot goes back to the state **Normal**.
+
+##### State Find
+This state is called from the **Play** one, only if the location proposed by the user is unknown. It acts as a _client_ for the [follow_wall](https://github.com/Sabrin0/exp_final/blob/main/scripts/follow_wall.py) service by which the robot starts to explore the environment, following the walls. 
+The main purpose of this exploration is to find the desired room and store the information about its coordinates. After 5 minutes, if the required room has not be found, the robot goes back to the state **Play**. In any case, the other unknown rooms are tracked (if found).
+Given the fact that the robot always starts exploring from the user position and whereas the robot follows the wall in a *anti-clockwise direction* some room would ever find (for instance the bedroom).
+For this reason, a simple *pre-find* algorithm has been implemented in order to go first at the last known room visited (*always from an anti-clockwise direction pov*). In this phase, the algorithm iterates among the room indexes (*from blue to black*) and set as navigation goal the location that precedes the first unknown one found.
+
+#### OpenCV ([BallDetection.py](https://github.com/Sabrin0/exp_final/blob/main/scripts/BallDetection.py))
+
+This node manages the ball detection and therefore the tracking by processing the image received from the robot RGB camera. It's characterized by two main phases: 
+
+-  *[Pre-processing](https://github.com/Sabrin0/exp_final/blob/main/scripts/colorLabeler.py)* : in which an algorithm performs object and color detection, in order to identify any ball in the environment and recognizes its color. Then it returns the upper and lower masks required in the next phase.
+
+- *Tracking*: Depending on several conditions, for instances the current state  of the robot (updated by the topic `currentState`) and if one specific ball has been already detected or not, the algorithm in this phase starts tracking the ball.
+
+This node subscribes to two significant topic:
+
+- *BallState*: By which the command manager is up to date regarding the position of the robot wrt the tracked ball. Once the robot is sufficiently near to the ball, in the command manager the specific location is stored.
+
+- *cmd_vel*: By which the robot movement is controlled in order to reach the ball. Publishing directly on the aforementioned topic, the Navigation Stack *loses its priority*. 
+
+#### Follow Wall Service ([follow_wall.py](https://github.com/Sabrin0/exp_final/blob/main/scripts/follow_wall.py))
+![laser](/assets/laser.jpeg)
+*Laser fov subdivided into 5 regions*
+
+This node is a ROS server that provides the exploration of the environment and it is activated by the command manager, which acts as a Client, inside the state **Find**.
+It relies on the laser data provided by the topic *Scan*. In particular the *fov* of the sensor is divided into 5 regions, then depending on which of them detect an obstacle (and at what distance) the exploration switches among three different navigation state:
+
+- **find wall**: the robot looks for a near wall with a circular motion
+- **follow wall**: the robot follows the wall detected keeping a certain distance
+- **turn left**: the robot simply turns left (only angular velocity among z) in order to avoid getting stuck.
+
+The navigation is ensured by publishing on the topic *cmd_vel*.
+
+#### User Interface ([userPlay.py](https://github.com/Sabrin0/exp_final/blob/main/scripts/userPlay.py))
+```
+user@hostname$              |\_/|                  
+                            | @ @   Woof! 
+                            |   <>              _  
+                            |  _/\------____ ((| |))
+                            |               `--' |   
+                        ____|_       ___|   |___.' 
+                    /_/_____/____/_______|
+                                Welcome! 
+
+Please enter 'play' to call the dog:
+```
+*Output of the UI*
+
+This node provides the communication between the user and the command manager though the shell by publishing on the topic *userState* and moreover it is available only when the robot is in the state **Normal**.
+First of all, the user can call back the robot by entering the string `play`. Once the robot has reached the user position, it’s possible to enter a new command, in details the color related to a specific room, in order to make the let the robot move to the desired location.
 
 ## Package and File List
 ```
