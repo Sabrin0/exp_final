@@ -31,7 +31,7 @@ Due to the [SLAM](https://en.wikipedia.org/wiki/Simultaneous_localization_and_ma
 
 ## Software Architecture
 
-### Description
+### Description
 
  ![rosgraph](/assets/rosgraph.png)
 *Fig.2: Rosgraph*
