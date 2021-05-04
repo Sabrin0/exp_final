@@ -303,9 +303,7 @@ class Normal(smach.State):
         self.counter = 1
         playAvilable = True
         pub.pubState('normal')
-        #goal = exp_assignment2.msg.PlanningGoal()
-        #goal = MoveBaseGoal()
-        #GoTo = targetPosition()
+        
         
 
         while not rospy.is_shutdown():  
@@ -440,21 +438,7 @@ class Play(smach.State):
                 return 'GoToFind'
         
         return 'GoToNormal'
-            # Start moving the head if the robot is near to the ball
-            # @param currentRadious float passsed
-            #if (currentRadius > 90):
-                # rospy.loginfo('muovo la testa')
-                # head_control()
-                # Save ball coordiantes
-            
-            #Back to state normal if the ball is missed
-            # @param BAllDetected bool 
-            #if (BallDetected == False):
-            #    BallCheck = False
-           #     rospy.loginfo('WOOF! Ball missed :(')
-           #     return 'GoToNormal'
-
-            #time.sleep(3) 
+             
         
 class Find(smach.State):
     """!@brief Define Find state """
@@ -492,6 +476,7 @@ class Find(smach.State):
                 elapsed = time.time() - start
                 if elapsed > 300:
                     GoTo_room = ''
+                    resp = srv_client_wall_follower_(False)
                     return 'GoToPlay'
                 sent = False
                 if not sent:
