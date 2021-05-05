@@ -5,6 +5,7 @@
     - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Software Architecture](#software-architecture)
+    - [Description](#description)
     - [Nodes](#nodes)
       - [Command Manager (cmd_man.py)](#command-manager-cmd_manpy)
         - [State Normal](#state-normal)
@@ -50,7 +51,7 @@ The navigation, including the global and the local path planning and the obstacl
 
 #### Command Manager ([cmd_man.py](https://github.com/Sabrin0/exp_final/blob/main/scripts/cmd_man.py))
 ![FSM diagram](/assets/FSM.png)
-*Fig.3: FST Diagram*
+*Fig.3: FSM Diagram*
 
 ##### State Normal
 In this state the robot moves randomly in the environment by sending several positions as goal to the Navigation Server. Here, whenever a ball is detected the robot start tracking it without cancelling the current goal. This is possible due to the fact that the open cv node controls directly the actuators by publishing on the topic *cmd_vel*. Once the robot is close enough to the ball, it saves the current position of the ball by subscribing to the topic *odom*. After some iteration, the robot goes in the state **Normal**.
@@ -82,6 +83,8 @@ This node subscribes to two main topics:
 - *BallState*: By which the command manager is up to date regarding the position of the robot wrt the tracked ball. Once the robot is sufficiently near to the ball, in the command manager the specific location is stored.
 
 - *cmd_vel*: By which the robot movement is controlled in order to reach the ball. Publishing directly on the aforementioned topic, the Navigation Stack *loses its priority*. 
+
+Moreover by subscribing to the topic */scan*, if an obstacle is detected close to the robot the tracking is interrupted. This prevents getting stuck against the wall.
 
 #### Follow Wall Service ([follow_wall.py](https://github.com/Sabrin0/exp_final/blob/main/scripts/follow_wall.py))
 ![laser](/assets/laser.jpeg)
