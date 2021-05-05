@@ -108,7 +108,9 @@ class console_manager():
          color: type String. 
             Color entered by the user.
         """
-        
+        if self.state == 'normal':
+            return self.backUser()
+            
         print(r"""Please enter a specific color to reach the desired room:
 
                 - blue    -> entrance

@@ -140,7 +140,7 @@ class targetPosition:
         @brief Class that manages the terget position to set as goal for the _Nav Stack_.
         
     """
-
+    playcounter = 0
     ## home x postion 
     x_home = -5
     ## home y positiom
@@ -300,10 +300,10 @@ class Normal(smach.State):
 
         rospy.loginfo('Executing state NORMAL')
         #self.counter = random.randint(1,2)
-        self.counter = 1
+        self.counter = 0
         playAvilable = True
         pub.pubState('normal')
-        
+        movement.playcounter = 0
         
 
         while not rospy.is_shutdown():  
@@ -318,7 +318,7 @@ class Normal(smach.State):
                 rospy.loginfo('RITORNO <PLAY>')
                 return 'GoToPlay'
                 
-            elif self.counter == random.randint(1,3):
+            elif self.counter == random.randint(2,3):
                 return 'GoToSleep'
             else:
                 result = movement.GoTo(x_target,y_target)
@@ -389,24 +389,25 @@ class Play(smach.State):
         rospy.loginfo("Executing state PLAY")
 
         global play, GoTo_room
-        self.counter = 0
+        #self.counter = 0
         # While loop to remain in the state until some conditions are missed
         while not rospy.is_shutdown():
             
             
             #first go back to the user
             result = movement.GoTo(movement.x_home,movement.y_home)
-            if result: 
-                pub.pubState('goto')
+            if result:
                 rospy.loginfo('i m arrived to the user')
+                    ## After some iteration go to state normal
+                if  movement.playcounter  == random.randint(2,3):    
+                    return 'GoToNormal'
+
+                pub.pubState('goto')
                 time.sleep(1)
                 self.rate.sleep()
                 #self.counter += 1
-
-            ## After some iteration go to state normal
-            if self.counter == random.randint(2,4):
-                
-                return 'GoToNormal'
+                movement.playcounter += 1
+            
 
             # waiting for user command, after 30 second back to normal:
             start = time.time()
@@ -429,7 +430,7 @@ class Play(smach.State):
                     # per evitare loop  
                     GoTo_room = "" 
                     time.sleep(1)
-                    self.counter += 1
+                    #self.counter += 1
         
             else:
                 
