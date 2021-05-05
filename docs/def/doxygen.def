@@ -352,6 +352,145 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
 }; /* class */
 class = {
+  cp-id     = 'class_ball_detection_1_1collision';
+  cp-name   = 'BallDetection::collision';
+  cp-section = {
+    sec-kind = 'public-func';
+    sec-member = {
+      sec-mem-kind = 'function';
+      sec-mem-id   = 'class_ball_detection_1_1collision_1a0db2ff6d23e4b3f8e5e76a6ddd2e121e';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = '__init__';
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+self
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'self';
+      }; /*        sec-mem-param--param */
+      sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
+      sec-mem-desc-line = '51';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+The construct.
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+ Initialize the subscriptions to the topic
+            <tt>/scan</tt> in order to check the presence of obstacles close to the robot.            <br>
+@subsection autotoc_md19 Attributes
+
+            self.stop: <tt>Bool</tt>
+                Flag to continue or not with the tracking
+
+            self.laser_sub: <tt>rospy.Subscriber()</tt>
+            It allows the subscription to the topic <tt>/scan</tt>, LaserScan.
+
+            seld.d = <tt>float</tt>
+                Threshold for the distance from the obstacles
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'function';
+      sec-mem-id   = 'class_ball_detection_1_1collision_1a95a09a9dc88525ff9258e4e0e5e5a8f0';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+def
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'clbk_laser';
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+self
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'self';
+      }; /*        sec-mem-param--param */
+      sec-mem-param = {
+        sec-mem-param-type = <<_EnD_oF_dEf_TeXt_
+msg
+_EnD_oF_dEf_TeXt_;
+        sec-mem-param-defname = 'msg';
+      }; /*        sec-mem-param--param */
+      sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
+      sec-mem-desc-line = '70';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+Callback that recives the data from the laser.
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+            If the distance from the obstacles is below the treshold the 
+            flag <strong>stop</strong> is set to <tt>True</tt>.
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-section = {
+    sec-kind = 'public-attrib';
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_ball_detection_1_1collision_1aebe179ce28c0acabcaa31651e80c969d';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'stop';
+      sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
+      sec-mem-desc-line = '66';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_ball_detection_1_1collision_1ade91088cee49b19d22dcc352f6b59c45';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'laser_sub';
+      sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
+      sec-mem-desc-line = '67';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'class_ball_detection_1_1collision_1a69b8e4a08b4fa13645a8ab44af9cbb9f';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'd';
+      sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
+      sec-mem-desc-line = '68';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
+  }; /* cp-section */
+  cp-filename  = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
+  cp-fileline  = '46';
+  cp-briefdesc = <<_EnD_oF_dEf_TeXt_
+This class allows obstacle avoidance by using the laser sensor.
+_EnD_oF_dEf_TeXt_;
+  cp-documentation = <<_EnD_oF_dEf_TeXt_
+        When the laser registers distances from the obstacles below a threshold 
+        the tracking is interrupted.
+_EnD_oF_dEf_TeXt_;
+}; /* class */
+class = {
   cp-id     = 'classcolor_labeler_1_1_color_labeler';
   cp-name   = 'colorLabeler::ColorLabeler';
   cp-section = {
@@ -563,7 +702,7 @@ The construct.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
  It initialize the node and some attributes. It also print a welcome message.
-@subsection autotoc_md5 Attributes
+@subsection autotoc_md24 Attributes
 
         self.color: type <tt>list</tt>
             List of all the possible color related to each specific room
@@ -608,7 +747,7 @@ Callback that receives the messages related to the current state of the robot fr
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
 @param data: message over the topic <strong>currentState</strong> 
-@subsection autotoc_md6 Attributes
+@subsection autotoc_md25 Attributes
 
         self.state: type <tt>String</tt>
             It stores the data from the afromentioned topic  <br>
@@ -638,7 +777,7 @@ _EnD_oF_dEf_TeXt_;
         This is done by sending the string <em>play</em>  over the  topic <strong>currentState</strong> when the command manager recives the command, 
         it sends the user position as <em>Nav Stack goal</em>.
         It also checks if the robot is in the normal state, otherwise it just ignore the input.
-@subsection autotoc_md7 Attributes
+@subsection autotoc_md26 Attributes
 
         self.msg_play: ros message
             It contains:
@@ -672,7 +811,7 @@ _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
  \n
         This message, if available, will be sent to the command manager through the topic <strong>userPlay</strong> .
-@subsection autotoc_md8 Attributes
+@subsection autotoc_md27 Attributes
 
          color: type String. 
             Color entered by the user.
@@ -809,7 +948,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'self';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '462';
+      sec-mem-desc-line = '448';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 The construct       <br>
 _EnD_oF_dEf_TeXt_;
@@ -839,7 +978,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'userdata';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '471';
+      sec-mem-desc-line = '457';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Find state execution.
 _EnD_oF_dEf_TeXt_;
@@ -864,7 +1003,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'rate';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '469';
+      sec-mem-desc-line = '455';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -874,7 +1013,7 @@ _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-  cp-fileline  = '459';
+  cp-fileline  = '445';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
 Define Find state.
 _EnD_oF_dEf_TeXt_;
@@ -939,13 +1078,13 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'self';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      sec-mem-desc-line = '103';
+      sec-mem-desc-line = '138';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 The construct.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
  Initialize the node, ros publisher, ros subscriber.
-@subsection autotoc_md1 Attributes
+@subsection autotoc_md20 Attributes
 
             self.image_pub: <tt>rospy.Publisher()</tt>,
                 It allows the publication to the topic <strong>output/image_raw/compressed</strong>, CompressedImage.
@@ -987,13 +1126,13 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'data';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      sec-mem-desc-line = '139';
+      sec-mem-desc-line = '174';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Callback that receives the messages related to the current state of the robot from the cmd_man.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
 @param data: message over the topic <strong>currentState</strong> 
-@subsection autotoc_md2 Attributes
+@subsection autotoc_md21 Attributes
 
         self.state: type <tt>String</tt>
             It stores the data from the afromentioned topic  <br>
@@ -1021,7 +1160,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'ros_data';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      sec-mem-desc-line = '150';
+      sec-mem-desc-line = '185';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Callback function of subscribed topic.
 _EnD_oF_dEf_TeXt_;
@@ -1045,7 +1184,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'image_pub';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      sec-mem-desc-line = '126';
+      sec-mem-desc-line = '161';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Publisher topic /output/image_raw/compressed.
 _EnD_oF_dEf_TeXt_;
@@ -1063,7 +1202,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'vel_pub';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      sec-mem-desc-line = '129';
+      sec-mem-desc-line = '164';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Publisher topic /cmd_vel.
 _EnD_oF_dEf_TeXt_;
@@ -1081,7 +1220,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'BallDet_pub';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      sec-mem-desc-line = '132';
+      sec-mem-desc-line = '167';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Publisher topic /BallState.
 _EnD_oF_dEf_TeXt_;
@@ -1099,7 +1238,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'subscriber';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      sec-mem-desc-line = '134';
+      sec-mem-desc-line = '169';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Subscriber topic /camera1/image_raw/compressed.
 _EnD_oF_dEf_TeXt_;
@@ -1117,7 +1256,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'state_sub';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      sec-mem-desc-line = '137';
+      sec-mem-desc-line = '172';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Subscriber topic /currentState.
 _EnD_oF_dEf_TeXt_;
@@ -1135,7 +1274,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'state';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      sec-mem-desc-line = '147';
+      sec-mem-desc-line = '182';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -1145,7 +1284,7 @@ _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-  cp-fileline  = '101';
+  cp-fileline  = '136';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -1180,7 +1319,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'self';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '283';
+      sec-mem-desc-line = '284';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 The construct.
 _EnD_oF_dEf_TeXt_;
@@ -1210,7 +1349,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'userdata';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '292';
+      sec-mem-desc-line = '293';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Normal state execution
         In the Normal state a random position is sent as goal for the <em>Nav Stack</em>.
@@ -1233,7 +1372,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'rate';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '289';
+      sec-mem-desc-line = '290';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -1251,7 +1390,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'counter';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '290';
+      sec-mem-desc-line = '291';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 If the Ball is Detcted, go to PLAY.
 _EnD_oF_dEf_TeXt_;
@@ -1265,7 +1404,7 @@ _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-  cp-fileline  = '279';
+  cp-fileline  = '280';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
 Define normal state.
 _EnD_oF_dEf_TeXt_;
@@ -1336,7 +1475,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'self';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '371';
+      sec-mem-desc-line = '370';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 The construct        <br>
 _EnD_oF_dEf_TeXt_;
@@ -1366,7 +1505,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'userdata';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '380';
+      sec-mem-desc-line = '379';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Play state execution.
 _EnD_oF_dEf_TeXt_;
@@ -1390,27 +1529,9 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'rate';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '378';
+      sec-mem-desc-line = '377';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 
-_EnD_oF_dEf_TeXt_;
-      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
-
-_EnD_oF_dEf_TeXt_;
-    }; /* sec-member */
-    sec-member = {
-      sec-mem-kind = 'variable';
-      sec-mem-id   = 'classcmd__man_1_1_play_1a3c466cd6a2bfb0af36269ebce815fd9a';
-      sec-mem-virt = normal;
-      sec-mem-prot = public;
-      sec-mem-type = <<_EnD_oF_dEf_TeXt_
-
-_EnD_oF_dEf_TeXt_;
-      sec-mem-name = 'counter';
-      sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '394';
-      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-After some iteration go to state normal.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
 
@@ -1418,7 +1539,7 @@ _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-  cp-fileline  = '368';
+  cp-fileline  = '367';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
 Define Play state.
 _EnD_oF_dEf_TeXt_;
@@ -1489,7 +1610,7 @@ The construct.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
  Initilize ROS publisher.
-@subsection autotoc_md3 Attributes
+@subsection autotoc_md22 Attributes
 
         self.statePub: <tt>rospy.Publisher</tt>,
             It allows the publication over the topic <strong>currentState</strong>, String. With this it's possible to
@@ -1524,7 +1645,7 @@ Method that provides the pubblication over the topic.
 _EnD_oF_dEf_TeXt_;
       sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
 @param state : <tt>String</tt>, the current state of the robot
-@subsection autotoc_md4 Attributes
+@subsection autotoc_md23 Attributes
 
         self.statePub: it declares that the node is publishing
 _EnD_oF_dEf_TeXt_;
@@ -1587,7 +1708,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'self';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '338';
+      sec-mem-desc-line = '337';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 The construct    <br>
 _EnD_oF_dEf_TeXt_;
@@ -1617,7 +1738,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'userdata';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '347';
+      sec-mem-desc-line = '346';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Sleep state execution.
 _EnD_oF_dEf_TeXt_;
@@ -1644,7 +1765,7 @@ _EnD_oF_dEf_TeXt_;
 _EnD_oF_dEf_TeXt_;
       sec-mem-name = 'rate';
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '345';
+      sec-mem-desc-line = '344';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -1654,7 +1775,7 @@ _EnD_oF_dEf_TeXt_;
     }; /* sec-member */
   }; /* cp-section */
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-  cp-fileline  = '335';
+  cp-fileline  = '334';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
 Define Sleep state.
 _EnD_oF_dEf_TeXt_;
@@ -1726,7 +1847,7 @@ class = {
     ref-virt = non-virtual;
   };
   cp-filename  = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-  cp-fileline  = '459';
+  cp-fileline  = '445';
   cp-briefdesc = <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;
@@ -1806,7 +1927,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'self';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '158';
+      sec-mem-desc-line = '159';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Method that provides random position in the enviroment.
 _EnD_oF_dEf_TeXt_;
@@ -1842,7 +1963,7 @@ _EnD_oF_dEf_TeXt_;
         sec-mem-param-defname = 'y_target';
       }; /*        sec-mem-param--param */
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      sec-mem-desc-line = '168';
+      sec-mem-desc-line = '169';
       sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Methods that creates an action client move_base with action definition file "MoveBaseAction".
 _EnD_oF_dEf_TeXt_;
@@ -1860,6 +1981,27 @@ _EnD_oF_dEf_TeXt_;
   }; /* cp-section */
   cp-section = {
     sec-kind = 'public-static-attrib';
+    sec-member = {
+      sec-mem-kind = 'variable';
+      sec-mem-id   = 'classcmd__man_1_1target_position_1af2f2cda07da202d7b48e8978abf851d9';
+      sec-mem-virt = normal;
+      sec-mem-prot = public;
+      sec-mem-type = <<_EnD_oF_dEf_TeXt_
+int
+_EnD_oF_dEf_TeXt_;
+      sec-mem-name = 'playcounter';
+      sec-mem-initializer = <<_EnD_oF_dEf_TeXt_
+=  0
+_EnD_oF_dEf_TeXt_;
+      sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
+      sec-mem-desc-line = '143';
+      sec-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      sec-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* sec-member */
     sec-member = {
       sec-mem-kind = 'variable';
       sec-mem-id   = 'classcmd__man_1_1target_position_1ae59fc822fd25cf484e3dbc28f29249b2';
@@ -1918,7 +2060,8 @@ _EnD_oF_dEf_TeXt_;
         [3, 2],
         [-6, -3],
         [4, -3],
-        [5, -7]
+        [5, -7],
+        [-1, random.randint(-5,8)]
     ]
 _EnD_oF_dEf_TeXt_;
       sec-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
@@ -2280,7 +2423,7 @@ _EnD_oF_dEf_TeXt_;
         func-mem-param-defname = 'ballFound';
       }; /*        func-mem-param--param */
       func-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      func-mem-desc-line = '46';
+      func-mem-desc-line = '81';
       func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Function that recognize any ball in the enviroment by using th <em>OpenCV</em> function <tt>cv2.HoughCircles(image, method, dp, minDist)</tt>.
 _EnD_oF_dEf_TeXt_;
@@ -2313,7 +2456,7 @@ _EnD_oF_dEf_TeXt_;
         func-mem-param-defname = 'args';
       }; /*        func-mem-param--param */
       func-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      func-mem-desc-line = '247';
+      func-mem-desc-line = '283';
       func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Main program entry, it initializes and cleans up ros node.
 _EnD_oF_dEf_TeXt_;
@@ -2346,6 +2489,27 @@ _EnD_oF_dEf_TeXt_;
     }; /* var-member */
     var-member = {
       var-mem-kind = 'variable';
+      var-mem-id   = 'namespace_ball_detection_1ac6211890fac84d0ca54333384ddea862';
+      var-mem-virt = normal;
+      var-mem-prot = public;
+      var-mem-type = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+      var-mem-name = 'laser';
+      var-mem-initializer = <<_EnD_oF_dEf_TeXt_
+=  collision()
+_EnD_oF_dEf_TeXt_;
+      var-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
+      var-mem-desc-line = '298';
+      var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
+Initiliazation class ColorLabeler.
+_EnD_oF_dEf_TeXt_;
+      var-mem-documentation = <<_EnD_oF_dEf_TeXt_
+
+_EnD_oF_dEf_TeXt_;
+    }; /* var-member */
+    var-member = {
+      var-mem-kind = 'variable';
       var-mem-id   = 'namespace_ball_detection_1a7ffe5ee300fe61c300fe7141981012f9';
       var-mem-virt = normal;
       var-mem-prot = public;
@@ -2357,9 +2521,9 @@ _EnD_oF_dEf_TeXt_;
 =  ColorLabeler()
 _EnD_oF_dEf_TeXt_;
       var-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/BallDetection.py';
-      var-mem-desc-line = '262';
+      var-mem-desc-line = '299';
       var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
-Initiliazation class ColorLabeler.
+
 _EnD_oF_dEf_TeXt_;
       var-mem-documentation = <<_EnD_oF_dEf_TeXt_
 
@@ -2389,7 +2553,7 @@ def
 _EnD_oF_dEf_TeXt_;
       func-mem-name = 'decision';
       func-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      func-mem-desc-line = '207';
+      func-mem-desc-line = '208';
       func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Documentation for the function decision()
 _EnD_oF_dEf_TeXt_;
@@ -2415,7 +2579,7 @@ _EnD_oF_dEf_TeXt_;
         func-mem-param-defname = 'data';
       }; /*        func-mem-param--param */
       func-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      func-mem-desc-line = '214';
+      func-mem-desc-line = '215';
       func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Callback for the odom datas provided by the topic <strong>odom</strong>
 _EnD_oF_dEf_TeXt_;
@@ -2440,7 +2604,7 @@ _EnD_oF_dEf_TeXt_;
         func-mem-param-defname = 'data';
       }; /*        func-mem-param--param */
       func-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      func-mem-desc-line = '226';
+      func-mem-desc-line = '227';
       func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Callback for the odom datas provided by the topic <strong>BallState</strong>
         Once the ball has been detected the robot start tracking it.
@@ -2470,7 +2634,7 @@ _EnD_oF_dEf_TeXt_;
         func-mem-param-defname = 'data';
       }; /*        func-mem-param--param */
       func-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      func-mem-desc-line = '259';
+      func-mem-desc-line = '260';
       func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Callback for the data provided by the topic <strong>userPlay</strong>
         If it listens the command play, the FSM cancel all goals of the <em>Nav Stack</em> and it goes to the state Play.
@@ -2490,7 +2654,7 @@ def
 _EnD_oF_dEf_TeXt_;
       func-mem-name = 'main';
       func-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      func-mem-desc-line = '508';
+      func-mem-desc-line = '496';
       func-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Main entry of the node.
 _EnD_oF_dEf_TeXt_;
@@ -2681,7 +2845,7 @@ _EnD_oF_dEf_TeXt_;
 =  actionlib.SimpleActionClient('move_base', MoveBaseAction)
 _EnD_oF_dEf_TeXt_;
       var-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      var-mem-desc-line = '205';
+      var-mem-desc-line = '206';
       var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Action client for the action server dedicated to the movment.
 _EnD_oF_dEf_TeXt_;
@@ -2702,7 +2866,7 @@ _EnD_oF_dEf_TeXt_;
 =  blueprint()
 _EnD_oF_dEf_TeXt_;
       var-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      var-mem-desc-line = '564';
+      var-mem-desc-line = '552';
       var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Initialization of the class blueprint.
 _EnD_oF_dEf_TeXt_;
@@ -2723,7 +2887,7 @@ _EnD_oF_dEf_TeXt_;
 =  targetPosition()
 _EnD_oF_dEf_TeXt_;
       var-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      var-mem-desc-line = '566';
+      var-mem-desc-line = '554';
       var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Initialization of the class targetPosition.
 _EnD_oF_dEf_TeXt_;
@@ -2744,7 +2908,7 @@ _EnD_oF_dEf_TeXt_;
 =  pubHandler()
 _EnD_oF_dEf_TeXt_;
       var-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/cmd_man.py';
-      var-mem-desc-line = '568';
+      var-mem-desc-line = '556';
       var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 Initialization of the class pubHandler.
 _EnD_oF_dEf_TeXt_;
@@ -3591,7 +3755,7 @@ _EnD_oF_dEf_TeXt_;
 =  console_manager()
 _EnD_oF_dEf_TeXt_;
       var-mem-desc-file = '/Users/luca/Desktop/exp_final/scripts/userPlay.py';
-      var-mem-desc-line = '136';
+      var-mem-desc-line = '138';
       var-mem-briefdesc =    <<_EnD_oF_dEf_TeXt_
 
 _EnD_oF_dEf_TeXt_;

@@ -44,14 +44,35 @@ from exp_final.msg import BallState
 VERBOSE = False
 
 class collision():
-
+    """! @brief This class allows obstacle avoidance by using the laser sensor.
+        When the laser registers distances from the obstacles below a threshold 
+        the tracking is interrupted.
+    """
     def __init__(self):
+        """!@brief The construct. Initialize the subscriptions to the topic
+            `/scan` in order to check the presence of obstacles close to the robot.            
+            Attributes
+            ---
+            self.stop: `Bool`
+                Flag to continue or not with the tracking
+
+            self.laser_sub: `rospy.Subscriber()`
+            It allows the subscription to the topic `/scan`, LaserScan.
+            
+            seld.d = `float`
+                Threshold for the distance from the obstacles
+            
+        """
         self.stop = False
         self.laser_sub = rospy.Subscriber('/scan', LaserScan, self.clbk_laser)
         self.d = 0.4
 
     def clbk_laser(self, msg):
-        print('--------> MIN:', min(min(msg.ranges), 10))
+        """! @brief Callback that recives the data from the laser.
+            If the distance from the obstacles is below the treshold the 
+            flag __stop__ is set to `True`.
+        """
+        #print('--------> MIN:', min(min(msg.ranges), 10))
         if min(min(msg.ranges), 10) < self.d:
             self.stop = True
         else:

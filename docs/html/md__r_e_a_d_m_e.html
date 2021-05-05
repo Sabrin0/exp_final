@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Exprob Final Assignment: exp_final package</title>
+<title>Exprob Final Assignment: README</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,10 +63,181 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">exp_final package </div>  </div>
+<div class="title">README </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><img src="/assets/Unige.png" alt="Unige" class="inline"/> </p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+Experimental Final Assignment</h1>
+<h3><a class="anchor" id="autotoc_md1"></a>
+Table of Contents</h3>
+<ul>
+<li><a href="#experimental-final-assignment">Experimental Final Assignment</a><ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+</ul>
+<p><a href="#introduction">Introduction</a></p><ul>
+<li><a href="#software-architecture">Software Architecture</a><ul>
+<li><a href="#nodes">Nodes</a><ul>
+<li><a href="#command-manager-cmd_manpy">Command Manager (cmd_man.py)</a><ul>
+<li><a href="#state-normal">State Normal</a></li>
+<li><a href="#state-sleep">State Sleep</a></li>
+<li><a href="#state-play">State Play</a></li>
+<li><a href="#state-find">State Find</a></li>
+</ul>
+</li>
+<li><a href="#opencv-balldetectionpy">OpenCV (BallDetection.py)</a></li>
+<li><a href="#follow-wall-service-follow_wallpy">Follow Wall Service (follow_wall.py)</a></li>
+<li><a href="#user-interface-userplaypy">User Interface (userPlay.py)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#package-and-file-list">Package and File List</a></li>
+<li><a href="#installation-and-running-procedure">Installation and Running Procedure</a></li>
+<li><a href="#system-features">System Features</a></li>
+<li><a href="#system-limitation-and-possible-solutions">System Limitation and Possible Solutions</a></li>
+<li><a href="#author--contact">Author &amp; Contact</a></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Introduction</h2>
+<p><img src="/assets/enviroment.png" alt="enviroment" title="Enviromen top view" class="inline"/> <em>Fig. 1: Enviroment Top View</em></p>
+<p>This project is the further work of the previous <a href="https://github.com/Sabrin0/Assignment2-Experimental-RoboticS-LAB.git">assignment</a> of <em>Experimental robotics lab</em>. Due to the <a href="https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping">SLAM</a> and the <a href="http://wiki.ros.org/navigation">ROS Navighation Stack</a> the wheeled robot is able to move autonomously. The main purpose of this project is to implement a FSM which allows the robot to learn the environment and interact with the user in order to reach the desired room. Each colored ball represents a different room (as shown below) and at the beginning of the simulation all the locations are unknown. It’s up to the robot to navigate and store the informations about the environment though a simple exploring algorithm.</p>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Software Architecture</h2>
+<h3><a class="anchor" id="autotoc_md4"></a>
+Description</h3>
+<p>&#160;<img src="/assets/rosgraph.png" alt="rosgraph" class="inline"/> <em>Fig.2: Rosgraph</em></p>
+<p>As mentioned before, the current software architecture takes up the previous one. The main node is still the Command Manger, which implements a FSM. Basically the wheeled robot, equipped with an Hokuyo range finders and a RGB camera, follows four different behaviors:</p>
+<ul>
+<li><b>Normal</b>: in which the robot moves randomly in the environment</li>
+<li><b>Sleep</b>: in which the robot comes back to the user position</li>
+<li><b>Play</b>: in which the robot interacts with the user in order to receive command and reach specific rooms</li>
+<li><b>Find</b>: in which the robot search the unkown rooms and stores their location</li>
+</ul>
+<p>The navigation, including the global and the local path planning and the obstacles avoidance is provided by the package <a href="http://wiki.ros.org/navigation">ROS Navighation Stack</a> while the <a href="http://wiki.ros.org/gmapping">gmapping</a> supplies a 2-D occupancy grid map from laser and pose data collected by a mobile robot. In any case, the goal is set by the Command Manager depending on the current situation.</p>
+<h3><a class="anchor" id="autotoc_md5"></a>
+Nodes</h3>
+<h4><a class="anchor" id="autotoc_md6"></a>
+Command Manager (&lt;a href="https://github.com/Sabrin0/exp_final/blob/main/scripts/cmd_man.py"&gt;cmd_man.py&lt;/a&gt;)</h4>
+<p><img src="/assets/FSM.png" alt="FSM diagram" class="inline"/> <em>Fig.3: FST Diagram</em></p>
+<p><a class="anchor" id="autotoc_md7"></a> </p><h5>State Normal</h5>
+<p>In this state the robot moves randomly in the environment by sending several positions as goal to the Navigation Server. Here, whenever a ball is detected the robot start tracking it without cancelling the current goal. This is possible due to the fact that the open cv node controls directly the actuators by publishing on the topic <em>cmd_vel</em>. Once the robot is close enough to the ball, it saves the current position of the ball by subscribing to the topic <em>odom</em>. After some iteration, the robot goes in the state <b>Normal</b>. The command manager also subscribes to the topic <em>userCommand</em>, so whenever it receives the command <code>play</code> it cancels the current goal and goes into the state <b>Play</b>.</p>
+<p><a class="anchor" id="autotoc_md8"></a> </p><h5>State Sleep</h5>
+<p>In this state the robot simply comes back to the user position located at the coordinates x = -8 and y = 8. Once arrived, after a while it returns the state <b>Normal</b>.</p>
+<p><a class="anchor" id="autotoc_md9"></a> </p><h5>State Play</h5>
+<p>Once the command manager receives the input command <code>play</code> from the <b>User Interface</b>, the robot comes back to the home position and waits for a <em>GoTo</em> command. If the location is known the robot will reach it, otherwise it goes to the state <b>Find</b>. Moreover, the robots waits for the instructions 30 seconds then if no command is specified the robot goes back to the state <b>Normal</b>.</p>
+<p><a class="anchor" id="autotoc_md10"></a> </p><h5>State Find</h5>
+<p>This state is called from the <b>Play</b> one, only if the location proposed by the user is unknown. It acts as a <em>client</em> for the <a href="https://github.com/Sabrin0/exp_final/blob/main/scripts/follow_wall.py">follow_wall</a> service by which the robot starts to explore the environment, following the walls. The main purpose of this exploration is to find the desired room and store the information about its coordinates. After 5 minutes, if the required room has not be found, the robot goes back to the state <b>Play</b>. In any case, the other unknown rooms are tracked (if found). Given the fact that the robot always starts exploring from the user position and whereas the robot follows the wall in a <em>anti-clockwise direction</em> some room would ever find (for instance the bedroom). For this reason, a simple <em>pre-find</em> algorithm has been implemented in order to go first at the last known room visited (<em>always from an anti-clockwise direction pov</em>). In this phase, the algorithm iterates among the room indexes (<em>from blue to black</em>) and set as navigation goal the location that precedes the first unknown one found.</p>
+<h4><a class="anchor" id="autotoc_md11"></a>
+OpenCV (&lt;a href="https://github.com/Sabrin0/exp_final/blob/main/scripts/BallDetection.py"&gt;BallDetection.py&lt;/a&gt;)</h4>
+<p>This node manages the ball detection and therefore the tracking by processing the image received from the robot RGB camera. It's characterized by two main phases:</p>
+<ul>
+<li><b><a href="https://github.com/Sabrin0/exp_final/blob/main/scripts/colorLabeler.py">Pre-processing</a></b> : in which an algorithm performs object and color detection, in order to identify any ball in the environment and recognizes its color. Then it returns the upper and lower masks required in the next phase.</li>
+<li><b>Tracking</b>: Depending on several conditions, for instances the current state of the robot (updated by the topic <em>currentState</em>) and if one specific ball has not been already detected, the algorithm in this phase starts tracking the ball.</li>
+</ul>
+<p>This node subscribes to two main topics:</p>
+<ul>
+<li><em>BallState</em>: By which the command manager is up to date regarding the position of the robot wrt the tracked ball. Once the robot is sufficiently near to the ball, in the command manager the specific location is stored.</li>
+<li><em>cmd_vel</em>: By which the robot movement is controlled in order to reach the ball. Publishing directly on the aforementioned topic, the Navigation Stack <em>loses its priority</em>.</li>
+</ul>
+<h4><a class="anchor" id="autotoc_md12"></a>
+Follow Wall Service (&lt;a href="https://github.com/Sabrin0/exp_final/blob/main/scripts/follow_wall.py"&gt;follow_wall.py&lt;/a&gt;)</h4>
+<p><img src="/assets/laser.jpeg" alt="laser" class="inline"/> <em>Fig.5: Laser fov subdivided into 5 regions</em></p>
+<p>This node is a ROS server that provides the exploration of the environment and it is activated by the command manager, which acts as a Client, inside the state <b>Find</b>. It relies on the laser data provided by the topic <em>Scan</em>. In particular the <em>fov</em> of the sensor is divided into 5 regions, then depending on which of them detect an obstacle (and at what distance) the exploration switches among three different navigation state:</p>
+<ul>
+<li><b>find wall</b>: the robot looks for a near wall with a circular motion</li>
+<li><b>follow wall</b>: the robot follows the wall detected keeping a certain distance</li>
+<li><b>turn left</b>: the robot simply turns left (only angular velocity among z) in order to avoid getting stuck.</li>
+</ul>
+<p>The navigation is ensured by publishing on the topic <em>cmd_vel</em>.</p>
+<h4><a class="anchor" id="autotoc_md13"></a>
+User Interface (&lt;a href="https://github.com/Sabrin0/exp_final/blob/main/scripts/userPlay.py"&gt;userPlay.py&lt;/a&gt;)</h4>
+<div class="fragment"><div class="line">user@hostname$          |\_/|                  </div>
+<div class="line">                        | @ @   Woof! </div>
+<div class="line">                        |   &lt;&gt;              _  </div>
+<div class="line">                        |  _/\------____ ((| |))</div>
+<div class="line">                        |               `--&#39; |   </div>
+<div class="line">                    ____|_       ___|   |___.&#39; </div>
+<div class="line">                /_/_____/____/_______|</div>
+<div class="line">                            Welcome! </div>
+<div class="line"> </div>
+<div class="line">Please enter &#39;play&#39; to call the dog:</div>
+</div><!-- fragment --><p> <em>Output of the UI</em></p>
+<p>This node provides the communication between the user and the command manager though the shell by publishing on the topic <em>userState</em> and moreover it is available only when the robot is in the state <b>Normal</b>. First of all, the user can call back the robot by entering the string <code>play</code>. Once the robot has reached the user position, it’s possible to enter a new command, in details the color related to a specific room, in order to make the let the robot move to the desired location.</p>
+<h2><a class="anchor" id="autotoc_md14"></a>
+Package and File List</h2>
+<div class="fragment"><div class="line">├── CMakeLists.txt</div>
+<div class="line">├── Doxyfile</div>
+<div class="line">├── README.md</div>
+<div class="line">├── assets</div>
+<div class="line">├── config</div>
+<div class="line">│   └── sim2.rviz</div>
+<div class="line">├── docs</div>
+<div class="line">├── launch</div>
+<div class="line">│   ├── gmapping.launch</div>
+<div class="line">│   ├── move_base.launch</div>
+<div class="line">│   └── simulation.launch</div>
+<div class="line">├── msg</div>
+<div class="line">│   ├── BallState.msg</div>
+<div class="line">│   └── user.msg</div>
+<div class="line">├── package.xml</div>
+<div class="line">├── param</div>
+<div class="line">│   ├── base_local_planner_params.yaml</div>
+<div class="line">│   ├── costmap_common_params.yaml</div>
+<div class="line">│   ├── global_costmap_params.yaml</div>
+<div class="line">│   ├── local_costmap_params.yaml</div>
+<div class="line">│   └── move_base_params.yaml</div>
+<div class="line">├── scripts</div>
+<div class="line">│   ├── BallDetection.py</div>
+<div class="line">│   ├── cmd_man.py</div>
+<div class="line">│   ├── colorLabeler.py</div>
+<div class="line">│   ├── follow_wall.py</div>
+<div class="line">│   └── userPlay.py</div>
+<div class="line">├── urdf</div>
+<div class="line">│   ├── human.urdf</div>
+<div class="line">│   ├── robot2_laser.gazebo</div>
+<div class="line">│   ├── robot2_laser.urdf</div>
+<div class="line">│   └── robot2_laser.xacro</div>
+<div class="line">└── worlds</div>
+<div class="line">    └── house2.world</div>
+</div><!-- fragment --><p> <em>exp_final directory Tree</em></p>
+<p>TThe main files are stored inside the following directories:</p>
+<ul>
+<li><b>scripts</b>: where all the nodes are stored</li>
+<li><b>msg</b>: where the ROS custom msgs are defined. In particular the the following ones:<ul>
+<li><em>BallState.msg</em>: ``` bool BallDetected float64 currrentRadious string balColor ``` Here all the messages related to the ball info are shared via topic <em>BallState</em>.</li>
+<li><em>user.msg</em>: ``` bool play string color ``` Here all the messages related to the user command are shared via topic <em>userCommand</em>.</li>
+</ul>
+</li>
+<li><b>launch</b>: ROS launch files for starting the simulation</li>
+<li><b>param</b>: files .yaml used to configure the gmapping and the Navigation Stack</li>
+<li><b>urdf</b>: file with the description of the element spawned in the enviroment</li>
+</ul>
+<p>The other directories contain file for build the ROS workspaces and the documentation.</p>
+<h2><a class="anchor" id="autotoc_md15"></a>
+Installation and Running Procedure</h2>
+<p>As mentioned in the introduction this architecture is based on the ROS Navigation Stack and the gmapping, so please install: For the openslam_gmapping:</p>
+<div class="fragment"><div class="line">user@hostanme$ sudo apt-get install ros-&lt;ros_distro&gt;-openslam-gmapping</div>
+</div><!-- fragment --><p> For the sparse library:</p>
+<div class="fragment"><div class="line">user@hostanme$ sudo apt-get install libsuitesparse-dev</div>
+</div><!-- fragment --><p> For the ROS Navigation Stack: </p><div class="fragment"><div class="line">user@hostanme$ sudo apt-get install ros-&lt;ros_distro&gt;-navigation</div>
+</div><!-- fragment --><p>Then in order to configure the ROS environment inside the current workspace the commands <code>catkin_make</code> is required as well as the sourcing of the setup.*sh files. So, finally, to start the simulation please run:</p>
+<div class="fragment"><div class="line">user@hostname$ roslaunch exp_final simulation.launch</div>
+</div><!-- fragment --><p>You’ll notice that two new shell windows will appear after the execution of the launch. One is the output of the node <em><a class="el" href="cmd__man_8py.html">cmd_man.py</a></em> and the other one is the <em>user interface</em>.</p>
+<h2><a class="anchor" id="autotoc_md16"></a>
+System Features</h2>
+<p><img src="/assets/robot.png" alt="robot" class="inline"/> <em>Fig.5: Robot Model</em></p>
+<p>The model of the enviroment is a simple wheeled robot (two actuated wheels and a castor one) equipped with an Hokuyo range finders and a RGB camera. The model itself is described in the xacro file <a href="https://github.com/Sabrin0/exp_final/blob/main/urdf/robot2_laser.xacro">robot2_laser.xacro</a> while in the <a href="https://github.com/Sabrin0/exp_final/blob/main/urdf/robot2_laser.gazebo">robot2_laser.gazebo</a> all the parameters related to the configuration of the sensor are defined.</p>
+<h2><a class="anchor" id="autotoc_md17"></a>
+System Limitation and Possible Solutions</h2>
+<p>One of the main limitation of the system is the mobility during the state find. I decided to recall and improve the navigation proposed by the bug algorithm despite of using the <a href="https://github.com/Sabrin0/exp_final/blob/main/urdf/robot2_laser.xacro">explore-lite pakage</a>. Unlike this last one the current implementation is not based on a frontier-based exploration but instead the robot simply follows the wall. For this reason the motion is very slow and there is the high-risk that the robot gets stuck when it try to go though a narrow door. Aside from that, in this way there is the certain that the robot will found all the ball in the environment. As said before, a possible solution is implement a frontier-based exploration with the obstacle avoidance asset. Another problem is related to the openCV algorithm. Since it detects all the circles in the processed image there is the possibility that there is a false-positive. This problem can be resolved with an update of the dictionary related to the color detection, by enriching it whit more colors. In this way the robot will know in advance which ball track and which do not. Moreover during the track phase, the obstacle avoidance is not very effective since the openCV algorithm directly control the topic <em>cmd_vel</em> (responsible of the wheels actuation).</p>
+<h2><a class="anchor" id="autotoc_md18"></a>
+Author &amp; Contact</h2>
+<p>Luca Covizzi</p>
+<p><a href="#" onclick="location.href='mai'+'lto:'+'luc'+'a@'+'fra'+'nc'+'oco'+'vi'+'zzi'+'.i'+'t'; return false;">luca@<span style="display: none;">.nosp@m.</span>fran<span style="display: none;">.nosp@m.</span>cocov<span style="display: none;">.nosp@m.</span>izzi<span style="display: none;">.nosp@m.</span>.it</a> </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

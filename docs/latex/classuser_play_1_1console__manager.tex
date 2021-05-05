@@ -47,7 +47,7 @@ It handles the communication between the command manager and the user interface.
 
 The construct. 
 
-It initialize the node and some attributes. It also print a welcome message. \hypertarget{classuser_play_1_1console__manager_autotoc_md5}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md5}
+It initialize the node and some attributes. It also print a welcome message. \hypertarget{classuser_play_1_1console__manager_autotoc_md24}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md24}
 self.\+color\+: type {\ttfamily list} List of all the possible color related to each specific room
 
 self.\+state\+: type {\ttfamily String} It represents the current state of the robot. It\textquotesingle{}s initializated as {\itshape normal}.
@@ -67,7 +67,7 @@ self.\+play\+\_\+sub\+: {\ttfamily rospy.\+Subscriber()} It allows the subscript
 
 Methods that saves the input command {\itshape play} in order to call the robot to the user. 
 
-This is done by sending the string {\itshape play} over the topic {\bfseries{current\+State}} when the command manager recives the command, it sends the user position as {\itshape Nav Stack goal}. It also checks if the robot is in the normal state, otherwise it just ignore the input. \hypertarget{classuser_play_1_1console__manager_autotoc_md7}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md7}
+This is done by sending the string {\itshape play} over the topic {\bfseries{current\+State}} when the command manager recives the command, it sends the user position as {\itshape Nav Stack goal}. It also checks if the robot is in the normal state, otherwise it just ignore the input. \hypertarget{classuser_play_1_1console__manager_autotoc_md26}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md26}
 self.\+msg\+\_\+play\+: ros message It contains\+:
 \begin{DoxyItemize}
 \item play\+: type {\ttfamily Bool}, it checks if the user inputs the correct command
@@ -89,7 +89,7 @@ Callback that receives the messages related to the current state of the robot fr
 {\em data} & message over the topic {\bfseries{current\+State}} \\
 \hline
 \end{DoxyParams}
-\hypertarget{classuser_play_1_1console__manager_autotoc_md6}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md6}
+\hypertarget{classuser_play_1_1console__manager_autotoc_md25}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md25}
 self.\+state\+: type {\ttfamily String} It stores the data from the afromentioned topic ~\newline
  \mbox{\Hypertarget{classuser_play_1_1console__manager_ab893c78c279766a1d241626039e7fb87}\label{classuser_play_1_1console__manager_ab893c78c279766a1d241626039e7fb87}} 
 \index{userPlay.console\_manager@{userPlay.console\_manager}!GoTo@{GoTo}}
@@ -102,7 +102,7 @@ self.\+state\+: type {\ttfamily String} It stores the data from the afromentione
 Methods that saves the {\ttfamily raw\+\_\+input()} data representing the {\itshape Go\+To} command. 
 
 ~\newline
- This message, if available, will be sent to the command manager through the topic {\bfseries{\mbox{\hyperlink{namespaceuser_play}{user\+Play}}}} . \hypertarget{classuser_play_1_1console__manager_autotoc_md8}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md8}
+ This message, if available, will be sent to the command manager through the topic {\bfseries{\mbox{\hyperlink{namespaceuser_play}{user\+Play}}}} . \hypertarget{classuser_play_1_1console__manager_autotoc_md27}{}\doxysubsubsection{Attributes}\label{classuser_play_1_1console__manager_autotoc_md27}
 color\+: type String. Color entered by the user. 
 
 \doxysubsection{Member Data Documentation}

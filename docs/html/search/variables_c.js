@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['x_5fhome_201',['x_home',['../classcmd__man_1_1target_position.html#ae59fc822fd25cf484e3dbc28f29249b2',1,'cmd_man.targetPosition.x_home()'],['../classtestclientwall_1_1target_position.html#aa038df1cdcc1462e4874f3aeb2cac979',1,'testclientwall.targetPosition.x_home()'],['../classtest_nav_1_1target_position.html#acc95c2e436e9ca3f65c515dc07c6fcb3',1,'testNav.targetPosition.x_home()']]]
+  ['vel_5fpub_211',['vel_pub',['../class_ball_detection_1_1image__feature.html#a77847c4e948f3c14a2245c8cb7250107',1,'BallDetection::image_feature']]],
+  ['verbose_212',['VERBOSE',['../namespace_ball_detection.html#abe04396aeba9fba94fee10950196b7e6',1,'BallDetection']]]
 ];

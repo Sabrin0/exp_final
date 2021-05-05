@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['movement_177',['movement',['../namespacecmd__man.html#a7b65238fd30234485d513f74b0bffb5e',1,'cmd_man.movement()'],['../namespacetestclientwall.html#a6ed858bd61c7f6954f64bac9001b5936',1,'testclientwall.movement()'],['../namespacetest_nav.html#a9eb61265be0de278cfd5cbb8346daf2a',1,'testNav.movement()']]],
-  ['msg_5fplay_178',['msg_play',['../classuser_play_1_1console__manager.html#a8cbd7f09a2727df1cfc1d0d28bf0b252',1,'userPlay::console_manager']]]
+  ['lab_183',['lab',['../classcolor_labeler_1_1_color_labeler.html#aa3b7566b6de63e48e4116b8569d03424',1,'colorLabeler::ColorLabeler']]],
+  ['laser_184',['laser',['../namespace_ball_detection.html#ac6211890fac84d0ca54333384ddea862',1,'BallDetection']]],
+  ['laser_5fsub_185',['laser_sub',['../class_ball_detection_1_1collision.html#ade91088cee49b19d22dcc352f6b59c45',1,'BallDetection::collision']]],
+  ['location_186',['location',['../namespacetest.html#a6e9979b593451d1b6e9785f89e597d95',1,'test']]]
 ];

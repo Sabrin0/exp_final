@@ -1,0 +1,86 @@
+\hypertarget{class_ball_detection_1_1collision}{}\doxysection{Ball\+Detection.\+collision Class Reference}
+\label{class_ball_detection_1_1collision}\index{BallDetection.collision@{BallDetection.collision}}
+
+
+This class allows obstacle avoidance by using the laser sensor.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_ball_detection_1_1collision_a0db2ff6d23e4b3f8e5e76a6ddd2e121e}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em The construct. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_ball_detection_1_1collision_a95a09a9dc88525ff9258e4e0e5e5a8f0}{clbk\+\_\+laser}} (self, msg)
+\begin{DoxyCompactList}\small\item\em Callback that recives the data from the laser. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_ball_detection_1_1collision_aebe179ce28c0acabcaa31651e80c969d}{stop}}
+\item 
+\mbox{\hyperlink{class_ball_detection_1_1collision_ade91088cee49b19d22dcc352f6b59c45}{laser\+\_\+sub}}
+\item 
+\mbox{\hyperlink{class_ball_detection_1_1collision_a69b8e4a08b4fa13645a8ab44af9cbb9f}{d}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class allows obstacle avoidance by using the laser sensor. 
+
+When the laser registers distances from the obstacles below a threshold the tracking is interrupted. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_ball_detection_1_1collision_a0db2ff6d23e4b3f8e5e76a6ddd2e121e}\label{class_ball_detection_1_1collision_a0db2ff6d23e4b3f8e5e76a6ddd2e121e}} 
+\index{BallDetection.collision@{BallDetection.collision}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!BallDetection.collision@{BallDetection.collision}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Ball\+Detection.\+collision.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+The construct. 
+
+Initialize the subscriptions to the topic {\ttfamily /scan} in order to check the presence of obstacles close to the robot. ~\newline
+ \hypertarget{class_ball_detection_1_1collision_autotoc_md19}{}\doxysubsubsection{Attributes}\label{class_ball_detection_1_1collision_autotoc_md19}
+self.\+stop\+: {\ttfamily Bool} Flag to continue or not with the tracking
+
+self.\+laser\+\_\+sub\+: {\ttfamily rospy.\+Subscriber()} It allows the subscription to the topic {\ttfamily /scan}, Laser\+Scan.
+
+seld.\+d = {\ttfamily float} Threshold for the distance from the obstacles 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_ball_detection_1_1collision_a95a09a9dc88525ff9258e4e0e5e5a8f0}\label{class_ball_detection_1_1collision_a95a09a9dc88525ff9258e4e0e5e5a8f0}} 
+\index{BallDetection.collision@{BallDetection.collision}!clbk\_laser@{clbk\_laser}}
+\index{clbk\_laser@{clbk\_laser}!BallDetection.collision@{BallDetection.collision}}
+\doxysubsubsection{\texorpdfstring{clbk\_laser()}{clbk\_laser()}}
+{\footnotesize\ttfamily def Ball\+Detection.\+collision.\+clbk\+\_\+laser (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+Callback that recives the data from the laser. 
+
+If the distance from the obstacles is below the treshold the flag {\bfseries{stop}} is set to {\ttfamily True}. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_ball_detection_1_1collision_a69b8e4a08b4fa13645a8ab44af9cbb9f}\label{class_ball_detection_1_1collision_a69b8e4a08b4fa13645a8ab44af9cbb9f}} 
+\index{BallDetection.collision@{BallDetection.collision}!d@{d}}
+\index{d@{d}!BallDetection.collision@{BallDetection.collision}}
+\doxysubsubsection{\texorpdfstring{d}{d}}
+{\footnotesize\ttfamily Ball\+Detection.\+collision.\+d}
+
+\mbox{\Hypertarget{class_ball_detection_1_1collision_ade91088cee49b19d22dcc352f6b59c45}\label{class_ball_detection_1_1collision_ade91088cee49b19d22dcc352f6b59c45}} 
+\index{BallDetection.collision@{BallDetection.collision}!laser\_sub@{laser\_sub}}
+\index{laser\_sub@{laser\_sub}!BallDetection.collision@{BallDetection.collision}}
+\doxysubsubsection{\texorpdfstring{laser\_sub}{laser\_sub}}
+{\footnotesize\ttfamily Ball\+Detection.\+collision.\+laser\+\_\+sub}
+
+\mbox{\Hypertarget{class_ball_detection_1_1collision_aebe179ce28c0acabcaa31651e80c969d}\label{class_ball_detection_1_1collision_aebe179ce28c0acabcaa31651e80c969d}} 
+\index{BallDetection.collision@{BallDetection.collision}!stop@{stop}}
+\index{stop@{stop}!BallDetection.collision@{BallDetection.collision}}
+\doxysubsubsection{\texorpdfstring{stop}{stop}}
+{\footnotesize\ttfamily Ball\+Detection.\+collision.\+stop}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+scripts/\mbox{\hyperlink{_ball_detection_8py}{Ball\+Detection.\+py}}\end{DoxyCompactItemize}

@@ -128,7 +128,7 @@ Public Attributes</h2></td></tr>
 
 <p>The construct. </p>
 <p>It initialize the node and some attributes. It also print a welcome message. </p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md24"></a>
 Attributes</h2>
 <p>self.color: type <code>list</code> List of all the possible color related to each specific room</p>
 <p>self.state: type <code>String</code> It represents the current state of the robot. It's initializated as <em>normal</em>.</p>
@@ -156,7 +156,7 @@ Attributes</h2>
 
 <p>Methods that saves the input command <em>play</em> in order to call the robot to the user. </p>
 <p>This is done by sending the string <em>play</em> over the topic <b>currentState</b> when the command manager recives the command, it sends the user position as <em>Nav Stack goal</em>. It also checks if the robot is in the normal state, otherwise it just ignore the input. </p>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 Attributes</h2>
 <p>self.msg_play: ros message It contains:</p><ul>
 <li>play: type <code>Bool</code>, it checks if the user inputs the correct command</li>
@@ -199,7 +199,7 @@ Attributes</h2>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md25"></a>
 Attributes</h2>
 <p>self.state: type <code>String</code> It stores the data from the afromentioned topic <br  />
  </p>
@@ -225,7 +225,7 @@ Attributes</h2>
 <p>Methods that saves the <code>raw_input()</code> data representing the <em>GoTo</em> command. </p>
 <p><br  />
  This message, if available, will be sent to the command manager through the topic <b><a class="el" href="namespaceuser_play.html">userPlay</a></b> . </p>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md27"></a>
 Attributes</h2>
 <p>color: type String. Color entered by the user. </p>
 

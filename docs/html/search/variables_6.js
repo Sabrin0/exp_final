@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['lab_175',['lab',['../classcolor_labeler_1_1_color_labeler.html#aa3b7566b6de63e48e4116b8569d03424',1,'colorLabeler::ColorLabeler']]],
-  ['location_176',['location',['../namespacetest.html#a6e9979b593451d1b6e9785f89e597d95',1,'test']]]
+  ['image_5fpub_182',['image_pub',['../class_ball_detection_1_1image__feature.html#a86da6fdbd839a4ee5756a2c45f7961e0',1,'BallDetection::image_feature']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['image_5fpub_174',['image_pub',['../class_ball_detection_1_1image__feature.html#a86da6fdbd839a4ee5756a2c45f7961e0',1,'BallDetection::image_feature']]]
+  ['go_180',['go',['../namespacetest.html#a9c71962a080c34c334eb25619c50bbc9',1,'test']]],
+  ['goto_5froom_181',['GoTo_room',['../namespacecmd__man.html#a73895f62bfd8cdb1c8e229f52e6eea13',1,'cmd_man']]]
 ];
