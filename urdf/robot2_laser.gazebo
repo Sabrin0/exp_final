@@ -13,7 +13,7 @@
     <material>Gazebo/DarkGrey</material>
   </gazebo>
 <gazebo reference="neck_link">
-  <material>Gazebo/DarkGrey</material>
+  <material>Gazebo/Grey</material>
 </gazebo>
 
   <gazebo>

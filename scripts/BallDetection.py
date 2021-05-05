@@ -35,13 +35,27 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 
 
 ## Ros Messages
-from sensor_msgs.msg import CompressedImage
+from sensor_msgs.msg import CompressedImage, LaserScan
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64, Bool, String
 #from exp_assignment2.msg import BallState
 from exp_final.msg import BallState
 
 VERBOSE = False
+
+class collision():
+
+    def __init__(self):
+        self.stop = False
+        self.laser_sub = rospy.Subscriber('/scan', LaserScan, self.clbk_laser)
+        self.d = 0.4
+
+    def clbk_laser(self, msg):
+        print('--------> MIN:', min(min(msg.ranges), 10))
+        if min(min(msg.ranges), 10) < self.d:
+            self.stop = True
+        else:
+            self.stop = False 
 
 def BallDetection(gray, hsv, ballFound):
     """!
@@ -176,8 +190,9 @@ class image_feature:
 
         #print('##### lower, upper and found: ', lowerBound, upperBound, ballFound)
         # Se ballFound = true -> caccia la palla
-        # Se ballColor = false -> palla non ancora trovata quinid procedere 
-        if ballFound and not cl.ball[ballColor] and (self.state != 'sleep'):
+        # Se ballColor = false -> palla non ancora trovata quinid procedere
+        rospy.loginfo('---------- Stop: %s' %laser.stop) 
+        if ballFound and not cl.ball[ballColor] and (self.state != 'sleep') and not laser.stop: 
             #rospy.loginfo('GOAL CANCELLED')
             #client.cancel_all_goals()
             mask = cv2.inRange(hsv, lowerBound, upperBound)
@@ -259,5 +274,6 @@ def main(args):
 if __name__ == '__main__':
     #client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
     ## Initiliazation class ColorLabeler
+    laser = collision()
     cl = ColorLabeler()
     main(sys.argv)

@@ -95,7 +95,7 @@ class blueprint:
         known = []
         	
         if self.findCounter == 0:
-            print('FIRST IT START FROM HOME')
+            #print('FIRST IT START FROM HOME')
             self.findCounter +=1
             return [-5, 8]
         
@@ -152,7 +152,8 @@ class targetPosition:
         [3, 2],
         [-6, -3],
         [4, -3],
-        [5, -7]
+        [5, -7],
+        [-1, random.randint(-5,8)]
     ]
 
     def randomPos(self):
@@ -240,13 +241,13 @@ def callback_check(data):
 
     if (BallDetected == True) and (BallCheck == False):
         BallCheck = True
-        #rospy.loginfo("Ball Detected! Start tracking ")
+        
         #client.cancel_all_goals()
-
+    rospy.loginfo("--- Tracking ---")
     #print('### BallDetected: ', BallDetected, "BallCheck: ", BallCheck, 'CurrentR: ', currentRadius )
     if (BallDetected == True) and (BallCheck == True) and currentRadius > 95:
         
-        rospy.loginfo('Tracking the Ball')
+        rospy.loginfo('Ball Reached')
         
         #rospy.loginfo('Save ball postion')
         #rospy.sleep(5)
@@ -315,13 +316,13 @@ class Normal(smach.State):
             ## After some NORMAL state iteration, go to SLEEP mode
             # @return GoToSleep
             if play:
-                rospy.loginfo('RITORNO <PLAY>')
+                #rospy.loginfo('RITORNO <PLAY>')
                 return 'GoToPlay'
                 
             elif self.counter == random.randint(2,3):
                 return 'GoToSleep'
             else:
-                result = movement.GoTo(x_target,y_target)
+                result =   movement.GoTo(3,2)#movement.GoTo(x_target,y_target)
                 if result:
                     
                     rospy.loginfo('I am arrived')
@@ -416,7 +417,7 @@ class Play(smach.State):
                 elapsed = start -time.time()
                 time.sleep(1)
                 print("I am waiting for user command...")
-                if elapsed == 10:
+                if elapsed == 20:
                     rospy.loginfo("Too late, back to state normal")
                     
                     return 'GoToNormal'
@@ -473,13 +474,14 @@ class Find(smach.State):
         # Setting the goal home position
             start = time.time()
             elapsed = 0
+            sent = False
             while room.color[GoTo_room]['location'] is None:
                 elapsed = time.time() - start
                 if elapsed > 300:
                     GoTo_room = ''
                     resp = srv_client_wall_follower_(False)
                     return 'GoToPlay'
-                sent = False
+                
                 if not sent:
                     sent = True
                     print('reaching the room: ', room.color[GoTo_room]['name'] )
