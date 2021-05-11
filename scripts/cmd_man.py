@@ -322,7 +322,7 @@ class Normal(smach.State):
             elif self.counter == random.randint(2,3):
                 return 'GoToSleep'
             else:
-                result =   movement.GoTo(3,2)#movement.GoTo(x_target,y_target)
+                result = movement.GoTo(x_target,y_target)
                 if result:
                     
                     rospy.loginfo('I am arrived')
