@@ -187,10 +187,10 @@ class targetPosition:
         goal.target_pose.pose.position.y = y_target
         goal.target_pose.pose.orientation.w = 2.0
         #goal.target_pose.pose.orientation.w = 1.0
-        if x_target == self.x_home:
-            rospy.loginfo('Back home')
-        else:
-            rospy.loginfo('i m going to x: %d y: %d',goal.target_pose.pose.position.x,goal.target_pose.pose.position.y)
+        #if x_target == self.x_home:
+        #    rospy.loginfo('Back home')
+        #else:
+        #    rospy.loginfo('i m going to x: %d y: %d',goal.target_pose.pose.position.x,goal.target_pose.pose.position.y)
         client.send_goal(goal)
         print('I am moving...')
         wait = client.wait_for_result()           
@@ -243,7 +243,7 @@ def callback_check(data):
         BallCheck = True
         
         #client.cancel_all_goals()
-    rospy.loginfo("--- Tracking ---")
+    rospy.loginfo("--- Tracking %s ---", ballColor)
     #print('### BallDetected: ', BallDetected, "BallCheck: ", BallCheck, 'CurrentR: ', currentRadius )
     if (BallDetected == True) and (BallCheck == True) and currentRadius > 95:
         
@@ -268,7 +268,7 @@ def callback_user(data):
     global play, GoTo_room, playAvilable
     play = data.play
     GoTo_room = data.color
-    print('play:', play, 'color:', GoTo_room)
+    #print('play:', play, 'color:', GoTo_room)
 
     if play and playAvilable:
         playCheck = False
@@ -322,11 +322,14 @@ class Normal(smach.State):
             elif self.counter == random.randint(2,3):
                 return 'GoToSleep'
             else:
+                rospy.loginfo('i m going to x: %d y: %d', x_target, y_target)
                 result = movement.GoTo(x_target,y_target)
                 if result:
-                    
-                    rospy.loginfo('I am arrived')
-                    self.counter += 1
+                    if play:
+                         rospy.loginfo('Goal Aborted')
+                    else: 
+                        rospy.loginfo('I am arrived')
+                        self.counter += 1
 
         #rospy.loginfo('############ finito loop normal ritorno sleep')
         return 'GoToSleep'
@@ -357,6 +360,7 @@ class Sleep(smach.State):
         rospy.loginfo('Executing state SLEEP ')
         pub.pubState('sleep')
         # Setting the goal home position
+        rospy.loginfo('Back Home')
         result = movement.GoTo(movement.x_home,movement.y_home)
         if result: 
             rospy.loginfo('i m arrived at home, now i will take a nap')
@@ -396,6 +400,7 @@ class Play(smach.State):
             
             
             #first go back to the user
+            rospy.loginfo('Back to the user')
             result = movement.GoTo(movement.x_home,movement.y_home)
             if result:
                 rospy.loginfo('i m arrived to the user')
@@ -413,17 +418,18 @@ class Play(smach.State):
             # waiting for user command, after 30 second back to normal:
             start = time.time()
             elapsed = 0
-            while (not GoTo_room and elapsed < 30):
-                elapsed = start -time.time()
+            while not GoTo_room:
+                elapsed = time.time() - start
                 time.sleep(1)
                 print("I am waiting for user command...")
-                if elapsed == 20:
+                if elapsed > 20:
                     rospy.loginfo("Too late, back to state normal")
                     
                     return 'GoToNormal'
             
             # Now check if the location is known
             if room.color[GoTo_room]['location'] is not None:
+                rospy.loginfo('I am going to the room %s', room.color[GoTo_room]['name'])
                 result = movement.GoTo(room.color[GoTo_room]['location'][0],room.color[GoTo_room]['location'][1])
                 if result:
                     

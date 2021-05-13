@@ -1,7 +1,7 @@
 max_obstacle_height: 0.6 
 obstacle_range: 3.0
 raytrace_range: 3.0
-robot_radius: 0.1 #0.07
+robot_radius: 0.09 #0.07
 # voxel map configuration; z-voxels 0 are filled by bumpers and 1 by laser scan (kinect)
 ### new params
 #cost_factor: 0.55
